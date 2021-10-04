@@ -22,7 +22,6 @@
             </tr>
         </table>
 
-
         <div class="row">
             <div class="leftcolumn33">
                 <div class="sidecard"></div>
