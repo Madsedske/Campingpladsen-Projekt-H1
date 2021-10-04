@@ -1,0 +1,196 @@
+﻿body {
+    font-family: Arial;
+    margin: 0px;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+.topnav {
+    width: 100%;
+    background-color: #2f6073;
+    height: 50px;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+}
+
+    .topnav a {
+        display: block;
+        color: white;
+        text-align: center;
+        padding: 14px 10px;
+        text-decoration: none;
+        font-size: 20px;
+    }
+
+        .topnav a:hover {
+            color: black;
+            background-color: #F2AF5C;
+        }
+
+.headline {
+    float: left;
+    color: #F2AF5C;
+    padding: 14px 10px;
+    font-size: 30px;
+    font-family: Constantia;
+}
+
+.pricetable {
+    width: 100%;
+    text-align: left;
+}
+
+.leftcolumn33 {
+    float: left;
+    width: 10%;
+}
+
+.middlecolumn33 {
+    float: left;
+    width: 80%;
+}
+
+.rightcolumn33 {
+    float: left;
+    width: 10%;
+}
+
+.leftcolumn50 {
+    float: left;
+    width: 50%;
+}
+
+.rightcolumn50 {
+    float: left;
+    width: 50%;
+    padding-left: 20px;
+}
+
+.card {
+    padding: 10px;
+    margin-top: 50px;
+    background-color: whitesmoke;
+    box-shadow: 0px 0px 15px 2px #84849d;
+}
+
+.sidecard {
+    padding: 10px;
+    margin-top: 50px;
+}
+
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+h2 {
+    font-size: 30px;
+    font-family: Arial;
+    text-align: center;
+}
+
+h3 {
+    font-family: Arial;
+}
+
+p {
+    font-size: 20px;
+    font-family: Arial;
+}
+
+.lastpicbar {
+    overflow: hidden;
+    margin-top: 50px;
+    position: center;
+}
+
+.imgbar {
+    display: block;
+    position: center;
+}
+
+.imgset {
+    width: 250px;
+    height: 250px;
+    object-fit: cover;
+    margin-left: 50px;
+}
+
+
+footer {
+    background-color: #2f6073;
+    width: 100%;
+    padding: 10px;
+    text-align: center;
+    margin-top: 50px;
+}
+
+
+.link-box__title {
+    font-weight: 700;
+    font-size: 20px;
+    margin-left: 50px;
+    margin-bottom: 10px;
+}
+
+.link-box__link {
+    font-size: 16px;
+    margin-bottom: 10px;
+    margin-left: 50px;
+    cursor: pointer;
+}
+
+.privacy-box,
+.social-media-box {
+    color: #84849d;
+    font-size: 14px;
+    position: center;
+}
+
+#Calendar1 {
+    width: 300px;
+}
+
+#Calendar2 {
+    width: 300px;
+}
+
+.BookingTable {
+    width: 937px;
+    height: 330px
+}
+
+
+@media only screen and (max-width: 700px) {
+    .topnav {
+        height: 20px;
+    }
+}
+
+@media only screen and (max-width: 700px) {
+    .headline {
+        font-size: 20px;
+    }
+}
+
+@media only screen and (max-width: 800px) {
+    #Calendar1 {
+        width: 100%;
+    }
+}
+
+@media only screen and (max-width: 800px) {
+    #Calendar2 {
+        width: 100%;
+    }
+}
+
+@media only screen and (max-width: 1000px) {
+    .BookingTable {
+        width: 100%;
+    }
+}
