@@ -100,7 +100,7 @@
                                 <asp:Label ID="Label6" runat="server" Text="Postnummer"></asp:Label><br />
                                 <asp:TextBox ID="TextBoxPostnummer" runat="server"></asp:TextBox></td>
                             <td>
-                                <asp:Label ID="Label10" runat="server" Text="Vælg Plads: "></asp:Label>
+                                <asp:Label ID="Label10" runat="server" Text="Plads: "></asp:Label>
                                 <asp:DropDownList ID="DropDownListVælgPlads" runat="server">
                                     <asp:ListItem Text="Lille plads" Value="0"></asp:ListItem>
                                     <asp:ListItem Text="Stor plads" Value="1"></asp:ListItem>
@@ -124,6 +124,7 @@
                                 <asp:Label ID="Label5" runat="server" Text="Tlf.nr."></asp:Label><br />
                                 <asp:TextBox ID="TextBoxTlf" runat="server"></asp:TextBox></td>
                         </tr>
+                        <tr><td><p></p></td></tr>
                         <tr><td><asp:Label ID="Label12" runat="server" Text="Start dato"></asp:Label><br />
                      <asp:Calendar ID="Calendar1" runat="server" BackColor="White" BorderColor="Black" Font-Names="Times New Roman" Font-Size="10pt" ForeColor="Black" Height="220px" NextPrevFormat="FullMonth" DayNameFormat="Shortest" TitleFormat="Month">
                         <DayHeaderStyle Font-Bold="True" Font-Size="7pt" BackColor="#CCCCCC" ForeColor="#333333" Height="10pt" />
@@ -134,8 +135,7 @@
                          <SelectorStyle BackColor="#CCCCCC" Font-Bold="True" Font-Names="Verdana" Font-Size="8pt" ForeColor="#333333" Width="1%" />
                         <TitleStyle BackColor="#2f6073" Font-Bold="True" Font-Size="13pt" ForeColor="White" Height="14pt" />
                         <TodayDayStyle BackColor="#F2AF5C" />
-                    </asp:Calendar></td></tr>
-                        <tr>
+                    </asp:Calendar></td>
                             <td><asp:Label ID="Label13" runat="server" Text="Slut dato"></asp:Label><br />
                      <asp:Calendar ID="Calendar2" runat="server" BackColor="White" BorderColor="Black" Font-Names="Times New Roman" Font-Size="10pt" ForeColor="Black" Height="220px" NextPrevFormat="FullMonth" DayNameFormat="Shortest" TitleFormat="Month">
                         <DayHeaderStyle Font-Bold="True" Font-Size="7pt" BackColor="#CCCCCC" ForeColor="#333333" Height="10pt" />
@@ -148,9 +148,9 @@
                         <TodayDayStyle BackColor="#F2AF5C" />
                     </asp:Calendar></td>
                         </tr>
-
                         <tr>
-                            <td><asp:Button ID="ButtonBestil" runat="server" Text="Bestil" /></td>
+                            <td><asp:Button ID="ButtonBestil" runat="server" Text="Bestil" OnClick="ButtonBestil_Click" /></td>
+                            <asp:Label ID="Label14" runat="server"></asp:Label>    
                         </tr>
                     </table>
                 </div>
