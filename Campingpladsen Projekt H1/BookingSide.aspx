@@ -1,16 +1,18 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="BookingSide.aspx.cs" Inherits="Campingpladsen_Projekt_H1.BookingSide" %>
 
 <!DOCTYPE html>
-
 <html xmlns="http://www.w3.org/1999/xhtml">
+
 <head runat="server">
     <link rel="stylesheet" href="StyleSheet.css" />
     <title>Midt Camping - Booking</title>
 </head>
+
 <body>
     <div>
         <img src="/Picture/Banner.png" width="100%">
     </div>
+    
     <form id="form1" runat="server">
         <table class="topnav">
             <tr>
@@ -53,10 +55,12 @@
                                     <asp:ListItem Text="15" Value="15"></asp:ListItem>
                                 </asp:DropDownList></td>   </tr>
                         <tr>
+                            
                             <td>
                                 <asp:Label ID="Label2" runat="server" Text="Efternavn"></asp:Label><br />
                                 <asp:TextBox ID="TextBoxEfternavn" runat="server"></asp:TextBox>
                             </td>
+
                             <td>
                                 <asp:Label ID="Label8" runat="server" Text="Antal Børn: "></asp:Label>
                                 <asp:DropDownList ID="DropDownListBørn" runat="server">
@@ -78,6 +82,7 @@
                                     <asp:ListItem Text="15" Value="15"></asp:ListItem>
                                 </asp:DropDownList></td>
                         </tr>
+                        
                         <tr>
                             <td>
                                 <asp:Label ID="Label3" runat="server" Text="Adresse"></asp:Label><br />
@@ -95,6 +100,7 @@
                                     <asp:ListItem Text="7" Value="7"></asp:ListItem>
                                 </asp:DropDownList></td>
                         </tr>
+                        
                         <tr>
                             <td>
                                 <asp:Label ID="Label6" runat="server" Text="Postnummer"></asp:Label><br />
@@ -135,27 +141,27 @@
                         </tr>
                         <tr><td><p></p></td></tr>
                         <tr><td><asp:Label ID="Label12" runat="server" Text="Start dato"></asp:Label><br />
-                     <asp:Calendar ID="Calendar1" runat="server" BackColor="White" BorderColor="Black" Format="yyyy/MM/dd" Font-Names="Times New Roman" Font-Size="10pt" ForeColor="Black" Height="220px" NextPrevFormat="FullMonth" DayNameFormat="Shortest" TitleFormat="Month">
-                        <DayHeaderStyle Font-Bold="True" Font-Size="7pt" BackColor="#CCCCCC" ForeColor="#333333" Height="10pt" />
-                         <DayStyle Width="14%" />
-                        <NextPrevStyle Font-Size="8pt" ForeColor="White" />
-                        <OtherMonthDayStyle ForeColor="#999999" />
-                        <SelectedDayStyle BackColor="#CC3333" ForeColor="White" />
-                         <SelectorStyle BackColor="#CCCCCC" Font-Bold="True" Font-Names="Verdana" Font-Size="8pt" ForeColor="#333333" Width="1%" />
-                        <TitleStyle BackColor="#2f6073" Font-Bold="True" Font-Size="13pt" ForeColor="White" Height="14pt" />
-                        <TodayDayStyle BackColor="#F2AF5C" />
-                    </asp:Calendar></td>
-                            <td><asp:Label ID="Label13" runat="server" Text="Slut dato"></asp:Label><br />
-                     <asp:Calendar ID="Calendar2" runat="server" BackColor="White" BorderColor="Black" Format="yyyy/MM/dd" Font-Names="Times New Roman" Font-Size="10pt" ForeColor="Black" Height="220px" NextPrevFormat="FullMonth" DayNameFormat="Shortest" TitleFormat="Month">
-                        <DayHeaderStyle Font-Bold="True" Font-Size="7pt" BackColor="#CCCCCC" ForeColor="#333333" Height="10pt" />
-                         <DayStyle Width="14%" />
-                        <NextPrevStyle Font-Size="8pt" ForeColor="White" />
-                        <OtherMonthDayStyle ForeColor="#999999" />
-                        <SelectedDayStyle BackColor="#CC3333" ForeColor="White" />
-                         <SelectorStyle BackColor="#CCCCCC" Font-Bold="True" Font-Names="Verdana" Font-Size="8pt" ForeColor="#333333" Width="1%" />
-                        <TitleStyle BackColor="#2f6073" Font-Bold="True" Font-Size="13pt" ForeColor="White" Height="14pt" />
-                        <TodayDayStyle BackColor="#F2AF5C" />
-                    </asp:Calendar></td>
+                             <asp:Calendar ID="Calendar1" runat="server" BackColor="White" BorderColor="Black" Format="yyyy/MM/dd" Font-Names="Times New Roman" Font-Size="10pt" ForeColor="Black" Height="220px" NextPrevFormat="FullMonth" DayNameFormat="Shortest" TitleFormat="Month">
+                                <DayHeaderStyle Font-Bold="True" Font-Size="7pt" BackColor="#CCCCCC" ForeColor="#333333" Height="10pt" />
+                                <DayStyle Width="14%" />
+                                <NextPrevStyle Font-Size="8pt" ForeColor="White" />
+                                <OtherMonthDayStyle ForeColor="#999999" />
+                                <SelectedDayStyle BackColor="#CC3333" ForeColor="White" />
+                                <SelectorStyle BackColor="#CCCCCC" Font-Bold="True" Font-Names="Verdana" Font-Size="8pt" ForeColor="#333333" Width="1%" />
+                                <TitleStyle BackColor="#2f6073" Font-Bold="True" Font-Size="13pt" ForeColor="White" Height="14pt" />
+                                <TodayDayStyle BackColor="#F2AF5C" />
+                            </asp:Calendar></td>
+                                    <td><asp:Label ID="Label13" runat="server" Text="Slut dato"></asp:Label><br />
+                            <asp:Calendar ID="Calendar2" runat="server" BackColor="White" BorderColor="Black" Format="yyyy/MM/dd" Font-Names="Times New Roman" Font-Size="10pt" ForeColor="Black" Height="220px" NextPrevFormat="FullMonth" DayNameFormat="Shortest" TitleFormat="Month">
+                                <DayHeaderStyle Font-Bold="True" Font-Size="7pt" BackColor="#CCCCCC" ForeColor="#333333" Height="10pt" />
+                                <DayStyle Width="14%" />
+                                <NextPrevStyle Font-Size="8pt" ForeColor="White" />
+                                <OtherMonthDayStyle ForeColor="#999999" />
+                                <SelectedDayStyle BackColor="#CC3333" ForeColor="White" />
+                                <SelectorStyle BackColor="#CCCCCC" Font-Bold="True" Font-Names="Verdana" Font-Size="8pt" ForeColor="#333333" Width="1%" />
+                                <TitleStyle BackColor="#2f6073" Font-Bold="True" Font-Size="13pt" ForeColor="White" Height="14pt" />
+                                <TodayDayStyle BackColor="#F2AF5C" />
+                            </asp:Calendar></td>
                         </tr>
                         <tr>
                             <td><asp:Button ID="ButtonBestil" runat="server" Text="Bestil" OnClick="ButtonBestil_Click" /></td> 
@@ -164,7 +170,6 @@
                 </div>
             </div>
         </div>
-
 
         <footer>
             <div class="link-box__title">Kontakt</div>
