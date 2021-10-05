@@ -104,14 +104,14 @@
                                 <asp:DropDownList ID="DropDownListVælgPlads" runat="server" DataSourceID="SqlDataSource1" DataTextField="SiteNumber" DataValueField="SiteNumber">
                                 </asp:DropDownList>
                                 <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:CampingSite %>" SelectCommand="SELECT [SiteNumber], [SiteType] FROM [CampingSite]"></asp:SqlDataSource>
-                            </td>
-                            <td><ul>
+                                <ul>
                                 <li>Teltplads 1-50</li>
                                 <li>Lille plads 51-217</li>
                                 <li>Stor plads 218-309</li>
                                 <li>Standard hytte 310-317</li>
                                 <li>Luksus hytte 318-324</li>
-                                </ul></td>
+                                </ul>
+                            </td>
                         </tr>
                         <tr>
                             <td>
@@ -127,6 +127,11 @@
                             <td>
                                 <asp:Label ID="Label5" runat="server" Text="Tlf.nr."></asp:Label><br />
                                 <asp:TextBox ID="TextBoxTlf" runat="server"></asp:TextBox></td>
+                            <td>
+                                <asp:Label ID="Label14" runat="server" Text="Sæsonplads?"></asp:Label>
+                                <asp:DropDownList ID="DropDownSæsonPlads" runat="server" DataSourceID="SqlDataSource2" DataTextField="SeasonType" DataValueField="SeasonType"></asp:DropDownList> 
+                                <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:SeasonSite %>" SelectCommand="SELECT [SeasonType], [StartDate], [EndDate], [SeasonPrice] FROM [SeasonSite]"></asp:SqlDataSource>
+                            </td>
                         </tr>
                         <tr><td><p></p></td></tr>
                         <tr><td><asp:Label ID="Label12" runat="server" Text="Start dato"></asp:Label><br />

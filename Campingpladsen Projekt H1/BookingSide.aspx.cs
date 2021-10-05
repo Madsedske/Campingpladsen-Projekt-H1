@@ -45,10 +45,11 @@ namespace Campingpladsen_Projekt_H1
                 DateTime endDate =  Calendar2.SelectedDate;
                 string startdateformatted = startDate.ToString("yyyy-MM-dd");
                 string endDateFormatted = endDate.ToString("yyyy-MM-dd");
+                string seasonSite = DropDownSæsonPlads.SelectedValue;
                 int price = 0;
                 conn.ConnectionString = ConfigurationManager.ConnectionStrings["Reservation"].ToString();
                 conn.Open();
-                SqlCommand insertCommand = new SqlCommand($"insert into Reservation (ReservationNumber, ReservationStartDate, ReservationEndDate, OverallPrice, SiteNumber) values ({randomNumber},'{startdateformatted}','{endDateFormatted}',{price}, {campingSite}) ;", conn);
+                SqlCommand insertCommand = new SqlCommand($"insert into Reservation (ReservationNumber, ReservationStartDate, ReservationEndDate, OverallPrice, SiteNumber, SeasonType) values ({randomNumber},'{startdateformatted}','{endDateFormatted}',{price}, {campingSite}, '{seasonSite}') ;", conn);
                 insertCommand.ExecuteNonQuery();
                 conn.Close();
             }
