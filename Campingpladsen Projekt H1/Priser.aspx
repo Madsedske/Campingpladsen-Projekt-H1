@@ -1,13 +1,12 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Priser.aspx.cs" Inherits="Campingpladsen_Projekt_H1.Priser" %>
 
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
 
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <link rel="stylesheet" href="StyleSheet.css" />
     <title>Midt Camping - Priser</title>
 </head>
-
 <body>
     <div>
         <img src="/Picture/Banner.png" width="100%">
@@ -41,7 +40,7 @@
                         <tr><td>Voksne</td><td>82,- / 87,-</td></tr>
                         <tr><td>Børn</td><td>42,- / 49,-</td></tr>
                         <tr><td>Pladsgebyr pr. døgn m/ strøm</td><td>35,- / 45,-</td></tr>
-                        <tr><th>Hytter</th><th>Højsæson / Lavsæson</th></tr>
+                         <tr><th>Hytter</th><th>Højsæson / Lavsæson</th></tr>
                         <tr><td>Standard hytte (4 pers.) pr. døgn m/ strøm</td><td>500,- / 350,-</td></tr>
                         <tr><td>Luksus hytte (4-6 pers.) pr. døgn m/ strøm</td>
                             <td>850,- / 600,-</td>
@@ -99,9 +98,11 @@
                         </tr>
                         <tr><td>Adgang til badeland (børn)</td><td>15,-</td></tr>
                     </table>
+
                 </div>
             </div>
         </div>
+
 
         <footer>
             <div class="link-box__title">Kontakt</div>
