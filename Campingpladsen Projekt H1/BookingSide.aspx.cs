@@ -57,6 +57,7 @@ namespace Campingpladsen_Projekt_H1
                 conn.Close();
             }
         }
+
         protected void AutomaticDelete()
         {            
             using (SqlConnection conn = new SqlConnection())
