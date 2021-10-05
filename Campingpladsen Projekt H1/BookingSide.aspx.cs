@@ -36,24 +36,35 @@ namespace Campingpladsen_Projekt_H1
                 insertCommand.ExecuteNonQuery();
                 conn.Close();
             }
-            
+
             using (SqlConnection conn = new SqlConnection())
             {
                 int campingSite = Convert.ToInt32(DropDownListVælgPlads.SelectedValue);
-                int randomNumber = r.Next(1,1001);
+                int randomNumber = r.Next(1, 1001);
                 DateTime startDate = Calendar1.SelectedDate;
-                DateTime endDate =  Calendar2.SelectedDate;
+                DateTime endDate = Calendar2.SelectedDate;
                 string startdateformatted = startDate.ToString("yyyy-MM-dd");
                 string endDateFormatted = endDate.ToString("yyyy-MM-dd");
                 string seasonSite = DropDownSæsonPlads.SelectedValue;
                 string CleaningOrNot = "No";
-                if (CheckBoxRengøring.Checked == true)                
+                if (CheckBoxRengøring.Checked == true)
                     CleaningOrNot = "Yes";
-                
                 int price = 0;
                 conn.ConnectionString = ConfigurationManager.ConnectionStrings["Reservation"].ToString();
                 conn.Open();
                 SqlCommand insertCommand = new SqlCommand($"insert into Reservation (ReservationNumber, ReservationStartDate, ReservationEndDate, OverallPrice, SiteNumber, SeasonType, FirstName, Email, PhoneNumber, YesOrNoCleaning) values ({randomNumber},'{startdateformatted}','{endDateFormatted}',{price}, {campingSite}, '{seasonSite}', '{firstName}', '{email}', {phoneNumber}, '{CleaningOrNot}') ;", conn);
+                insertCommand.ExecuteNonQuery();
+                conn.Close();
+            }
+        }
+        protected void AutomaticDelete()
+        {            
+            using (SqlConnection conn = new SqlConnection())
+            {
+                conn.ConnectionString = ConfigurationManager.ConnectionStrings["Customers"].ToString();
+                conn.ConnectionString = ConfigurationManager.ConnectionStrings["Reservation"].ToString();
+                conn.Open();
+                SqlCommand insertCommand = new SqlCommand($"Delete from Customers, Reservation where ReservationEndDate < CONVERT(varchar(10), GETDATE(), 120))) ;", conn);
                 insertCommand.ExecuteNonQuery();
                 conn.Close();
             }

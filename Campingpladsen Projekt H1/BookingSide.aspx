@@ -28,6 +28,13 @@
             <div class="middlecolumn33">
                 <div class="card">
                     <h2>Booking Side </h2>
+                    <ul>
+                                <li>Teltplads 1-50</li>
+                                <li>Lille plads 51-217</li>
+                                <li>Stor plads 218-309</li>
+                                <li>Standard hytte 310-317</li>
+                                <li>Luksus hytte 318-324</li>
+                                </ul>
                     <table class="BookingTable">
                         <tr>
                             <td>
@@ -104,13 +111,6 @@
                                 <asp:DropDownList ID="DropDownListVælgPlads" runat="server" DataSourceID="SqlDataSource1" DataTextField="SiteNumber" DataValueField="SiteNumber">
                                 </asp:DropDownList>
                                 <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:CampingSite %>" SelectCommand="SELECT [SiteNumber], [SiteType] FROM [CampingSite]"></asp:SqlDataSource>
-                                <ul>
-                                <li>Teltplads 1-50</li>
-                                <li>Lille plads 51-217</li>
-                                <li>Stor plads 218-309</li>
-                                <li>Standard hytte 310-317</li>
-                                <li>Luksus hytte 318-324</li>
-                                </ul>
                             </td>
                         </tr>
                         <tr>
@@ -131,6 +131,73 @@
                                 <asp:Label ID="Label14" runat="server" Text="Sæsonplads?"></asp:Label>
                                 <asp:DropDownList ID="DropDownSæsonPlads" runat="server" DataSourceID="SqlDataSource2" DataTextField="SeasonType" DataValueField="SeasonType"></asp:DropDownList> 
                                 <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:SeasonSite %>" SelectCommand="SELECT [SeasonType], [StartDate], [EndDate], [SeasonPrice] FROM [SeasonSite]"></asp:SqlDataSource>
+                            </td>
+                        </tr>
+                         <tr>
+                            <td>
+                                <asp:Label ID="Label17" runat="server" Text="Adgang til Badeland (Børn): "></asp:Label>
+                                <asp:DropDownList ID="DropDownBadelandBørn" runat="server">
+                                    <asp:ListItem Text="0" Value="0"></asp:ListItem>
+                                    <asp:ListItem Text="1" Value="1"></asp:ListItem>
+                                    <asp:ListItem Text="2" Value="2"></asp:ListItem>
+                                    <asp:ListItem Text="3" Value="3"></asp:ListItem>
+                                    <asp:ListItem Text="4" Value="4"></asp:ListItem>
+                                    <asp:ListItem Text="5" Value="5"></asp:ListItem>
+                                    <asp:ListItem Text="6" Value="6"></asp:ListItem>
+                                    <asp:ListItem Text="7" Value="7"></asp:ListItem>
+                                    <asp:ListItem Text="8" Value="8"></asp:ListItem>
+                                    <asp:ListItem Text="9" Value="9"></asp:ListItem>
+                                    <asp:ListItem Text="10" Value="10"></asp:ListItem>
+                                    <asp:ListItem Text="11" Value="11"></asp:ListItem>
+                                    <asp:ListItem Text="12" Value="12"></asp:ListItem>
+                                    <asp:ListItem Text="13" Value="13"></asp:ListItem>
+                                    <asp:ListItem Text="14" Value="14"></asp:ListItem>
+                                    <asp:ListItem Text="15" Value="15"></asp:ListItem></asp:DropDownList></td>
+                            <td>
+                                 <asp:Label ID="Label15" runat="server" Text="Cykelleje: "></asp:Label>
+                                <asp:DropDownList ID="DropDownCykelleje" runat="server">
+                                    <asp:ListItem Text="0" Value="0"></asp:ListItem>
+                                    <asp:ListItem Text="1" Value="1"></asp:ListItem>
+                                    <asp:ListItem Text="2" Value="2"></asp:ListItem>
+                                    <asp:ListItem Text="3" Value="3"></asp:ListItem>
+                                    <asp:ListItem Text="4" Value="4"></asp:ListItem>
+                                    <asp:ListItem Text="5" Value="5"></asp:ListItem>
+                                    <asp:ListItem Text="6" Value="6"></asp:ListItem>
+                                    <asp:ListItem Text="7" Value="7"></asp:ListItem>
+                                    <asp:ListItem Text="8" Value="8"></asp:ListItem>
+                                    <asp:ListItem Text="9" Value="9"></asp:ListItem>
+                                    <asp:ListItem Text="10" Value="10"></asp:ListItem>
+                                    <asp:ListItem Text="11" Value="11"></asp:ListItem>
+                                    <asp:ListItem Text="12" Value="12"></asp:ListItem>
+                                    <asp:ListItem Text="13" Value="13"></asp:ListItem>
+                                    <asp:ListItem Text="14" Value="14"></asp:ListItem>
+                                    <asp:ListItem Text="15" Value="15"></asp:ListItem>
+                                </asp:DropDownList>
+                            </td>
+                        </tr>
+                         <tr>
+                            <td> 
+                                <asp:Label ID="Label16" runat="server" Text="Adgang til Badeland (Voksen): "></asp:Label>
+                                <asp:DropDownList ID="DropDownBadelandVoksen" runat="server">
+                                    <asp:ListItem Text="0" Value="0"></asp:ListItem>
+                                    <asp:ListItem Text="1" Value="1"></asp:ListItem>
+                                    <asp:ListItem Text="2" Value="2"></asp:ListItem>
+                                    <asp:ListItem Text="3" Value="3"></asp:ListItem>
+                                    <asp:ListItem Text="4" Value="4"></asp:ListItem>
+                                    <asp:ListItem Text="5" Value="5"></asp:ListItem>
+                                    <asp:ListItem Text="6" Value="6"></asp:ListItem>
+                                    <asp:ListItem Text="7" Value="7"></asp:ListItem>
+                                    <asp:ListItem Text="8" Value="8"></asp:ListItem>
+                                    <asp:ListItem Text="9" Value="9"></asp:ListItem>
+                                    <asp:ListItem Text="10" Value="10"></asp:ListItem>
+                                    <asp:ListItem Text="11" Value="11"></asp:ListItem>
+                                    <asp:ListItem Text="12" Value="12"></asp:ListItem>
+                                    <asp:ListItem Text="13" Value="13"></asp:ListItem>
+                                    <asp:ListItem Text="14" Value="14"></asp:ListItem>
+                                    <asp:ListItem Text="15" Value="15"></asp:ListItem></asp:DropDownList>   </td>
+                            <td>
+                                <asp:Label ID="Label18" runat="server" Text="Sengelinned"></asp:Label>
+                                <asp:CheckBox ID="CheckBoxSengelinned" runat="server" />
                             </td>
                         </tr>
                         <tr><td><p></p></td></tr>
