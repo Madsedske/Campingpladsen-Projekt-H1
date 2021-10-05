@@ -7,6 +7,11 @@
     box-sizing: border-box;
 }
 
+@font-face {
+    font-family: Pacifico;
+    src: url(Pacifico-Regular.ttf);
+}
+
 .topnav {
     width: 100%;
     background-color: #2f6073;
