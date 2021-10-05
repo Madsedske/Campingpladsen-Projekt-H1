@@ -7,6 +7,11 @@
     box-sizing: border-box;
 }
 
+@font-face {
+    font-family: Pacifico;
+    src: url(./fonts/Pacifico-Regular.ttf);
+}
+
 .topnav {
     width: 100%;
     background-color: #2f6073;
@@ -16,26 +21,26 @@
     top: 0;
 }
 
-    .topnav a {
-        display: block;
-        color: white;
-        text-align: center;
-        padding: 14px 10px;
-        text-decoration: none;
-        font-size: 20px;
-    }
+.topnav a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 10px;
+    text-decoration: none;
+    font-size: 20px;
+}
 
-        .topnav a:hover {
-            color: black;
-            background-color: #F2AF5C;
-        }
+.topnav a:hover {
+    color: black;
+    background-color: #F2AF5C;
+}
 
 .headline {
     float: left;
     color: #F2AF5C;
     padding: 14px 10px;
     font-size: 30px;
-    font-family: Constantia;
+    font-family: Pacifico;
 }
 
 .pricetable {
