@@ -11,6 +11,7 @@ namespace Campingpladsen_Projekt_H1
 {
     public partial class BookingSide : System.Web.UI.Page
     {
+        Random r = new Random();
         protected void Page_Load(object sender, EventArgs e)
         {
 
@@ -32,16 +33,23 @@ namespace Campingpladsen_Projekt_H1
                 conn.ConnectionString = ConfigurationManager.ConnectionStrings["Customers"].ToString();
                 conn.Open();
                 SqlCommand insertCommand = new SqlCommand($"insert into Customers (FirstName, LastName, Address, Email, PhoneNumber, Adult, Children, Dog) values ('{firstName}','{lastName}','{address}','{email}', '{phoneNumber}', {adult}, {children}, {dog}) ;", conn);
-                Label14.Text = Convert.ToString(insertCommand.ExecuteNonQuery());
+                insertCommand.ExecuteNonQuery();
                 conn.Close();
             }
-
+            
             using (SqlConnection conn = new SqlConnection())
             {
+                int campingSite = Convert.ToInt32(DropDownListVælgPlads.SelectedValue);
+                int randomNumber = r.Next(1,1001);
+                DateTime startDate = Calendar1.SelectedDate;
+                DateTime endDate =  Calendar2.SelectedDate;
+                string startdateformatted = startDate.ToString("yyyy-MM-dd");
+                string endDateFormatted = endDate.ToString("yyyy-MM-dd");
+                int price = 0;
                 conn.ConnectionString = ConfigurationManager.ConnectionStrings["Reservation"].ToString();
                 conn.Open();
-                SqlCommand insertCommand = new SqlCommand($"insert into Customers (FirstName, LastName, Address, Email, PhoneNumber, Adult, Children, Dog) values ('{firstName}','{lastName}','{address}','{email}', '{phoneNumber}', {adult}, {children}, {dog}) ;", conn);
-                Label14.Text = Convert.ToString(insertCommand.ExecuteNonQuery());
+                SqlCommand insertCommand = new SqlCommand($"insert into Reservation (ReservationNumber, ReservationStartDate, ReservationEndDate, OverallPrice, SiteNumber) values ({randomNumber},'{startdateformatted}','{endDateFormatted}',{price}, {campingSite}) ;", conn);
+                insertCommand.ExecuteNonQuery();
                 conn.Close();
             }
         }

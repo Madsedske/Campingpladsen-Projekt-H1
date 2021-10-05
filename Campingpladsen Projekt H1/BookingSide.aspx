@@ -101,13 +101,17 @@
                                 <asp:TextBox ID="TextBoxPostnummer" runat="server"></asp:TextBox></td>
                             <td>
                                 <asp:Label ID="Label10" runat="server" Text="Plads: "></asp:Label>
-                                <asp:DropDownList ID="DropDownListVælgPlads" runat="server">
-                                    <asp:ListItem Text="Lille plads" Value="0"></asp:ListItem>
-                                    <asp:ListItem Text="Stor plads" Value="1"></asp:ListItem>
-                                    <asp:ListItem Text="Teltplads" Value="2"></asp:ListItem>
-                                    <asp:ListItem Text="Standard hytte" Value="3"></asp:ListItem>
-                                    <asp:ListItem Text="Lukus hytte" Value="4"></asp:ListItem>
-                                </asp:DropDownList></td>
+                                <asp:DropDownList ID="DropDownListVælgPlads" runat="server" DataSourceID="SqlDataSource1" DataTextField="SiteNumber" DataValueField="SiteNumber">
+                                </asp:DropDownList>
+                                <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:CampingSite %>" SelectCommand="SELECT [SiteNumber], [SiteType] FROM [CampingSite]"></asp:SqlDataSource>
+                            </td>
+                            <td><ul>
+                                <li>Teltplads 1-50</li>
+                                <li>Lille plads 51-217</li>
+                                <li>Stor plads 218-309</li>
+                                <li>Standard hytte 310-317</li>
+                                <li>Luksus hytte 318-324</li>
+                                </ul></td>
                         </tr>
                         <tr>
                             <td>
@@ -126,7 +130,7 @@
                         </tr>
                         <tr><td><p></p></td></tr>
                         <tr><td><asp:Label ID="Label12" runat="server" Text="Start dato"></asp:Label><br />
-                     <asp:Calendar ID="Calendar1" runat="server" BackColor="White" BorderColor="Black" Font-Names="Times New Roman" Font-Size="10pt" ForeColor="Black" Height="220px" NextPrevFormat="FullMonth" DayNameFormat="Shortest" TitleFormat="Month">
+                     <asp:Calendar ID="Calendar1" runat="server" BackColor="White" BorderColor="Black" Format="yyyy/MM/dd" Font-Names="Times New Roman" Font-Size="10pt" ForeColor="Black" Height="220px" NextPrevFormat="FullMonth" DayNameFormat="Shortest" TitleFormat="Month">
                         <DayHeaderStyle Font-Bold="True" Font-Size="7pt" BackColor="#CCCCCC" ForeColor="#333333" Height="10pt" />
                          <DayStyle Width="14%" />
                         <NextPrevStyle Font-Size="8pt" ForeColor="White" />
@@ -137,7 +141,7 @@
                         <TodayDayStyle BackColor="#F2AF5C" />
                     </asp:Calendar></td>
                             <td><asp:Label ID="Label13" runat="server" Text="Slut dato"></asp:Label><br />
-                     <asp:Calendar ID="Calendar2" runat="server" BackColor="White" BorderColor="Black" Font-Names="Times New Roman" Font-Size="10pt" ForeColor="Black" Height="220px" NextPrevFormat="FullMonth" DayNameFormat="Shortest" TitleFormat="Month">
+                     <asp:Calendar ID="Calendar2" runat="server" BackColor="White" BorderColor="Black" Format="yyyy/MM/dd" Font-Names="Times New Roman" Font-Size="10pt" ForeColor="Black" Height="220px" NextPrevFormat="FullMonth" DayNameFormat="Shortest" TitleFormat="Month">
                         <DayHeaderStyle Font-Bold="True" Font-Size="7pt" BackColor="#CCCCCC" ForeColor="#333333" Height="10pt" />
                          <DayStyle Width="14%" />
                         <NextPrevStyle Font-Size="8pt" ForeColor="White" />
@@ -149,8 +153,7 @@
                     </asp:Calendar></td>
                         </tr>
                         <tr>
-                            <td><asp:Button ID="ButtonBestil" runat="server" Text="Bestil" OnClick="ButtonBestil_Click" /></td>
-                            <asp:Label ID="Label14" runat="server"></asp:Label>    
+                            <td><asp:Button ID="ButtonBestil" runat="server" Text="Bestil" OnClick="ButtonBestil_Click" /></td> 
                         </tr>
                     </table>
                 </div>
