@@ -185,18 +185,5 @@ namespace Campingpladsen_Projekt_H1
                 conn.Close();
             }
         }
-
-        protected void AutomaticDelete()
-        {            
-            using (SqlConnection conn = new SqlConnection())
-            {
-                conn.ConnectionString = ConfigurationManager.ConnectionStrings["Customers"].ToString();
-                conn.ConnectionString = ConfigurationManager.ConnectionStrings["Reservation"].ToString();
-                conn.Open();
-                SqlCommand insertCommand = new SqlCommand($"Delete from Customers, Reservation where ReservationEndDate < CONVERT(varchar(10), GETDATE(), 120))) ;", conn);
-                insertCommand.ExecuteNonQuery();
-                conn.Close();
-            }
-        }
     }
 }

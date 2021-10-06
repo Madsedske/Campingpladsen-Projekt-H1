@@ -125,6 +125,16 @@ p {
     margin-left: 50px;
 }
 
+.imgMap {
+    object-fit: cover;
+    width: 400px;
+    height: 400px;
+}
+    .imgMap:hover {
+        width: 700px;
+        height: 700px;
+    }
+
 
 footer {
     background-color: #2f6073;
@@ -183,13 +193,13 @@ footer {
 }
 
 @media only screen and (max-width: 800px) {
-    #Calendar1 {
+    #Calendar1, #Calendar2 {
         width: 100%;
     }
 }
 
 @media only screen and (max-width: 800px) {
-    #Calendar2 {
+    .imgMap {
         width: 100%;
     }
 }
