@@ -30,7 +30,7 @@
                     <h2>Booking Side </h2>                 
                     <table class="BookingTable">
                         <tr>
-                            <td><img class="imgMap" width="100%" src="Picture/kortover.PNG" /></td>
+                            <td><img class="imgMap" src="Picture/kortover.PNG" /></td>
                             <td><ul>
                                 <li>Teltplads 1-50</li>
                                 <li>Lille plads 51-217</li>

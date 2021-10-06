@@ -87,7 +87,7 @@ namespace Campingpladsen_Projekt_H1
                 {
                     case "(Intet)":
                         {
-                            seasonSitePrice;
+                            seasonSitePrice = 0;
                             break;
                         }                        
                     case "Efterår":
