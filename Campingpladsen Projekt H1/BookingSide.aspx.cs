@@ -49,104 +49,142 @@ namespace Campingpladsen_Projekt_H1
                 string CleaningOrNot = "No";
                 if (CheckBoxRengøring.Checked == true)
                     CleaningOrNot = "Yes";
-                int price = 0;
 
                 int allDays = (endDate - startDate).Days;
-
                 DateTime tidligdt2 = new DateTime(2021, 06, 14);
                 DateTime sendt2 = new DateTime(2021, 08, 15);
                 DateTime date = DateTime.Now;
+
                 int cleaningPrice = 0;
-                if (CheckBoxRengøring.Checked == true)
-                { cleaningPrice = 150; }
+                switch (CheckBoxRengøring.Checked)
+                {
+                    case true:
+                        {
+                            cleaningPrice = 150;
+                        }
+                        break;
+                }
                 int sengelinned = 0;
-                if (CheckBoxSengelinned.Checked == true)
-                { cleaningPrice = 30; }
+                switch (CheckBoxSengelinned.Checked)
+                {
+                    case true:
+                        { cleaningPrice = 30; }
+                        break;
+                }                
                 int DaysWithBicycel = Convert.ToInt32(DropDownCykelleje.SelectedValue);
                 int bicycelPrice = DaysWithBicycel * 200;
                 int allDogs = dog * 30;
                 int adultsBadeland = Convert.ToInt32(DropDownBadelandVoksen.SelectedValue);
                 int childrenBadeland = Convert.ToInt32(DropDownBadelandBørn.SelectedValue);
+                int badelandVoksenPrice = 30 * adultsBadeland;
+                int badelandChildrenPrice = 15 * childrenBadeland;
+                int seasonSitePrice = 0;
                 switch (seasonSite)
                 {
                     case "(Intet)":
                         {
-                            int seasonSitePrice = 0;
+                            seasonSitePrice = 0;
                             break;
                         }                        
                     case "Efterår":
                         {
-                            int seasonSitePrice = 2900;
+                            seasonSitePrice = 2900;
                             break;
                         }
                     case "Forår":
                         {
-                            int seasonSitePrice = 4100;
+                            seasonSitePrice = 4100;
                             break;
                         }
                     case "Sommer":
                         {
-                            int seasonSitePrice = 9300;
+                            seasonSitePrice = 9300;
                             break;
                         }
                     case "Vinter":
                         {
-                            int seasonSitePrice = 3500;
+                            seasonSitePrice = 3500;
                             break;
                         }
                 }
-                int badelandVoksenPrice = 30 * adultsBadeland;
-                int badelandChildrenPrice = 15 * childrenBadeland;
+                int overallPriceSeason;
                 if (date > tidligdt2 && date < sendt2)
                 {
                     int allAdultH = adult * 82;
                     int allChildrenH = children * 42;
-                    int sitePriceH;
-                    if (campingSite > 317)
-                    { int sitePriceH = 850 * allDays; }                        
-                    else if (campingSite > 309)
-                    { int sitePriceH = 500 * allDays; }                       
-                    else if (campingSite > 217)
-                    { int sitePriceH = 80 * allDays; }                       
-                    else if (campingSite > 50)
-                    { int sitePriceH = 60 * allDays; }                        
-                    else if (campingSite < 51)
-                    { int sitePriceH = 35 * allDays; }
-
-                    int overallPriceHighSeason = allAdultH + allChildrenH + sitePriceH + cleaningPrice + sengelinned + bicycelPrice + allDogs + seasonSitePrice + badelandChildrenPrice + badelandVoksenPrice;
+                    int sitePriceH = 0;    
+                    switch (campingSite)
+                    {
+                        case int n when (n >= 318):
+                            { sitePriceH = 850 * allDays;
+                                break;
+                            }
+                        case int n when (n >= 310 && n < 318):
+                            {
+                               sitePriceH = 500 * allDays;
+                                break;
+                            }
+                        case int n when (n >= 218 && n < 310):
+                            {
+                                sitePriceH = 80 * allDays;
+                                break;
+                            }
+                        case int n when (n >= 51 && n < 218):
+                            {
+                                sitePriceH = 60 * allDays;
+                                break;
+                            }
+                        case int n when (n < 51):
+                            {
+                                sitePriceH = 35 * allDays;
+                                break;
+                            }
+                    }
+                    overallPriceSeason = allAdultH + allChildrenH + sitePriceH + cleaningPrice + sengelinned + bicycelPrice + allDogs + seasonSitePrice + badelandChildrenPrice + badelandVoksenPrice;
                 }
                 else
                 {
-                    int sitePriceL;
+                    int sitePriceL = 0;
                     int allAdultL = adult * 87;
                     int allChildrenL = children * 49;
-                    if (campingSite > 317)
-                    { int sitePriceL = 600 * allDays; }
-                    else if (campingSite > 309)
-                    { int sitePriceL = 350 * allDays; }
-                    else if (campingSite > 217)
-                    { int sitePriceL = 65 * allDays; }
-                    else if (campingSite > 50)
-                    { int sitePriceL = 50 * allDays; }
-                    else if (campingSite < 51)
-                    { int sitePriceL = 45 * allDays; }
-
-                    int overallPriceLowSeason = 0;
+                    switch (campingSite)
+                    {
+                        case int n when (n >= 318):
+                            {
+                                sitePriceL = 600 * allDays;
+                                break;
+                            }
+                        case int n when (n >= 310 && n < 318):
+                            {
+                                sitePriceL = 350 * allDays;
+                                break;
+                            }
+                        case int n when (n >= 218 && n < 310):
+                            {
+                                sitePriceL = 65 * allDays;
+                                break;
+                            }
+                        case int n when (n >= 51 && n < 218):
+                            {
+                                sitePriceL = 50 * allDays;
+                                break;
+                            }
+                        case int n when (n < 51):
+                            {
+                                sitePriceL = 45 * allDays;
+                                break;
+                            }
+                    }
+                    overallPriceSeason = sitePriceL + allAdultL + allChildrenL + cleaningPrice + sengelinned + bicycelPrice + allDogs + seasonSitePrice + badelandChildrenPrice + badelandVoksenPrice;
                 }
-
-
 
                 conn.ConnectionString = ConfigurationManager.ConnectionStrings["Reservation"].ToString();
                 conn.Open();
-                SqlCommand insertCommand = new SqlCommand($"insert into Reservation (ReservationNumber, ReservationStartDate, ReservationEndDate, OverallPrice, SiteNumber, SeasonType, FirstName, Email, PhoneNumber, YesOrNoCleaning) values ({randomNumber},'{startdateformatted}','{endDateFormatted}',{price}, {campingSite}, '{seasonSite}', '{firstName}', '{email}', {phoneNumber}, '{CleaningOrNot}') ;", conn);
+                SqlCommand insertCommand = new SqlCommand($"insert into Reservation (ReservationNumber, ReservationStartDate, ReservationEndDate, OverallPrice, SiteNumber, SeasonType, FirstName, Email, PhoneNumber, YesOrNoCleaning) values ({randomNumber},'{startdateformatted}','{endDateFormatted}',{overallPriceSeason}, {campingSite}, '{seasonSite}', '{firstName}', '{email}', {phoneNumber}, '{CleaningOrNot}') ;", conn);
                 insertCommand.ExecuteNonQuery();
                 conn.Close();
             }
         }
-
-
-
-
 
         protected void AutomaticDelete()
         {            
