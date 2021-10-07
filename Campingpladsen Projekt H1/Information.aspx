@@ -9,7 +9,7 @@
 </head>
 <body>
     <div>
-        <img src="/Picture/Banner.png" width="100%">
+        <img src="/Picture/Banner.png" width="100%"/>
     </div>
     <form id="form1" runat="server">
         <table class="topnav">
@@ -28,8 +28,7 @@
             <div class="middlecolumn33">
                 <div class="card">
                     <h2>Information </h2>
-                    <h3>Kort over pladsen:</h3>
-                    <img src="Picture/kortover.PNG" />
+                    <h3>Gode ting at vide:</h3>
                     <blockquote></blockquote>
                     <ul> 
                         <li>Billig priser til vandland.</li> 
@@ -39,8 +38,23 @@
                         <li>Legepladser til børnene med hoppepude og svævebaner mv.</li>
                         <li>Stort fælleshus til at spise eller samles.</li>
                         <li>2 køkkener på pladsen.</li>
-                        <li>Bad og vand er indkluderet.</li> 
+                        <li>Bad og vand er indkluderet.</li>
+                        <li>Både legoland og lalandia ligger indefor 5 km!</li>
                     </ul>
+                    <p>Midt Camping minder meget om en Tyrkisk park, det er vi meget glade for, og det er vores intention at videreudvikle pladsen med faciliteter for voksne og børn uden denne stemning går tabt.
+                        Vi ønsker at pladsen skal være et sted hvor campisten kan forvente, at møde andre turister/campister. Dvs. folk der slapper af og holder fri.
+                        Vores plads udbygges til stadighed med faciliteter til børnene så familierne kan lade deres børn færdes frit i trygge forhold. Samtidigt med at der er nogle spændende lege tilbud.</p>
+                        <blockquote></blockquote>
+                    <p>Teltcampisterne vil bemærke, at der også er tænkt på dem med faciliteter der gør livet, lettere specielt når vejret driller.
+                        Vi vil kontinueligt opgradere eksisterende bade og vaskeforhold med fornuftige og praktiske faciliteter.
+                        Vi vil forsøge at undgå mønt/polet/plastikkort indkast i badehuset, så pladsens brugere kan gå ind og bade uden problemer. 
+                    </p> <blockquote></blockquote>
+                    <h3>Information omkring hunde:</h3>
+                    <ul><li>Det er tilladt at have dyr med på camping.</li> 
+                        <li>Man kan evt sætte et dyre-hegn op ved vogn/telt under opholdet.</li>
+                        <li>Hunde skal være under kontrol til alle tider.</li>
+                        <li>Hunde må ikke efterlades på pladsen eller i campingvognen.</li>
+                        <li>Der er gode muligheder for at lufte hunde ved siden af campingpladsen.</li></ul>
                 </div>
             </div>
         </div>

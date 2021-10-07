@@ -1,5 +1,4 @@
 ﻿body {
-    font-family: Arial;
     margin: 0px;
 }
 
@@ -8,8 +7,8 @@
 }
 
 @font-face {
-    font-family: Pacifico;
-    src: url(Pacifico-Regular.ttf);
+    font-family: 'Pacifico-Regular';
+    src: url('file:///C:\Users\zbcmber\source\repos\Campingpladsen Projekt H1\Campingpladsen Projekt H1\fonts\Pacifico-Regular.ttf') format('truetype');
 }
 
 .topnav {
@@ -20,7 +19,6 @@
     position: sticky;
     top: 0;
 }
-
     .topnav a {
         display: block;
         color: white;
@@ -29,7 +27,6 @@
         text-decoration: none;
         font-size: 20px;
     }
-
         .topnav a:hover {
             color: black;
             background-color: #F2AF5C;
@@ -40,7 +37,7 @@
     color: #F2AF5C;
     padding: 14px 10px;
     font-size: 30px;
-    font-family: Constantia;
+    font-family: Pacifico;
 }
 
 .pricetable {
@@ -94,17 +91,17 @@
 
 h2 {
     font-size: 30px;
-    font-family: Arial;
+    font-family: Pacifico;
     text-align: center;
 }
 
 h3 {
-    font-family: Arial;
+    font-family: Pacifico;
 }
 
 p {
     font-size: 20px;
-    font-family: Arial;
+    font-family: sans-serif;
 }
 
 .lastpicbar {
@@ -164,18 +161,16 @@ footer {
 
 .BookingTable {
     width: 100%;
-    height: 330px;
 }
 
 .imgMap { 
-    max-width: 300px;
-    max-height: 400px;
-    display:block;
+    width: 50%;
 }
-        .imgMap:hover {
-            width: 600px;
-            height: 700px;
-        }
+    .imgMap:hover {
+        width: 600px;
+        height: 700px;
+        box-shadow: 0px 0px 15px 2px #84849d;
+    }
 
 @media only screen and (max-width: 700px) {
     .topnav {
@@ -204,5 +199,11 @@ footer {
 @media only screen and (max-width: 1000px) {
     .BookingTable {
         width: 100%;
+    }
+}
+
+@media only screen and (max-width: 1000px) {
+    p {
+        font-size:15px;
     }
 }

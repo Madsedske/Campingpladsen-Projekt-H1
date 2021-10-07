@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="StyleSheet.css" />
     <title>Midt Camping</title>
 </head>
-
 <body>
     <div>
         <img src="/Picture/Banner.png" width="100%" />

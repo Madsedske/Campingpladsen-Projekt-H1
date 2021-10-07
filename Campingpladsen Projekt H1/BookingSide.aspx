@@ -9,7 +9,7 @@
 </head>
 <body>
     <div>
-        <img src="/Picture/Banner.png" width="100%">
+        <img src="/Picture/Banner.png" width="100%"/>
     </div>
     <form id="form1" runat="server">
         <table class="topnav">
@@ -30,14 +30,15 @@
                     <h2>Booking Side </h2>                 
                     <table class="BookingTable">
                         <tr>
-                            <td><img class="imgMap" src="Picture/kortover.PNG" /></td>
-                            <td><ul>
+                            <td><img class="imgMap" src="Picture/kortover.PNG" />
+                                <ul>
                                 <li>Teltplads 1-50</li>
                                 <li>Lille plads 51-217</li>
                                 <li>Stor plads 218-309</li>
                                 <li>Standard hytte 310-317</li>
                                 <li>Luksus hytte 318-324</li>
-                                </ul></td>                            
+                                </ul>
+                            </td>                          
                         </tr><tr>
                             <td>
                                 <asp:Label ID="Label1" runat="server" Text="Fornavn"></asp:Label><br />
@@ -235,6 +236,8 @@
                     </table>
                 </div>
             </div>
+             <div class="rightcolumn33"></div>
+            <div class="sidecard"></div>
         </div>
 
 

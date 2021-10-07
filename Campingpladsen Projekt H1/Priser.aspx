@@ -9,7 +9,7 @@
 </head>
 <body>
     <div>
-        <img src="/Picture/Banner.png" width="100%">
+        <img src="/Picture/Banner.png" width="100%"/>
     </div>
     <form id="form1" runat="server">
         <table class="topnav">
@@ -29,7 +29,7 @@
                 <div class="card">
                     <h2>Priser</h2>
                     <h3>Her er en oversigt over vores priser:</h3>
-                    <table class="pricetable">
+                    <table class="pricetable" border="1" frame="void" rules="rows">
                         <tr><th>Campingplads (campingvogn / autocamper)</th><th>Højsæson / Lavsæson</th>
                         </tr><tr><td>Pladsgebyr (lille plads) pr. døgn m/ strøm</td><td>60,- / 50,-</td></tr>
                         <tr><td>Pladsgebyr (stor plads) pr. døgn m/ strøm</td><td>80,- / 65,-</td></tr>
