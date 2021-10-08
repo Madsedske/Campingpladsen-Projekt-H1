@@ -14,7 +14,7 @@
     <form id="form1" runat="server">
         <table class="topnav">
             <tr>
-                <td class="headline">Midt Camping</td>
+                <td class="headline"><a href="Main.aspx">Midt Camping</a></td>
                 <td><a href="BookingSide.aspx">Booking</a></td>
                 <td><a href="Priser.aspx">Priser</a></td>
                 <td><a href="Information.aspx">Information</a></td>
@@ -73,7 +73,6 @@
                 </div>
             </div>
         </div>
-
 
         <footer>
             <div class="link-box__title">Kontakt</div>
