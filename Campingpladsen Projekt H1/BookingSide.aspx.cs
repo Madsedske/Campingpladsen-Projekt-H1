@@ -29,6 +29,8 @@ namespace Campingpladsen_Projekt_H1
                 conn.ConnectionString = ConfigurationManager.ConnectionStrings["Customers"].ConnectionString;
                 using (SqlCommand cmd = new SqlCommand("Insert_Customers", conn))
                 {
+                    // A stored procedure that finds the column shown as a string with an @, the type
+                    // and sets it to the input value of the user - Customers
                     conn.Open();
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.AddWithValue("@FirstName", SqlDbType.VarChar).Value = TextBoxFornavn.Text;
@@ -113,13 +115,16 @@ namespace Campingpladsen_Projekt_H1
                         break;
                     }
             }
-
+            
+            // Calculate total price depending on season - High Season
             int overallPriceSeason;
             if (date > tidligdt2 && date < sendt2)
             {
                 int allAdultH = adult * 82;
                 int allChildrenH = children * 42;
                 int sitePriceH = 0;
+                
+                // Calculate price
                 switch (campingSite)
                 {
                     case int n when (n >= 318):
@@ -148,6 +153,8 @@ namespace Campingpladsen_Projekt_H1
                             break;
                         }
                 }
+
+                // Set variable to total price
                 overallPriceSeason = allAdultH + allChildrenH + sitePriceH + cleaningPrice + sengelinned + bicycelPrice + allDogs + seasonSitePrice + badelandChildrenPrice + badelandVoksenPrice;
             }
             else
@@ -191,6 +198,7 @@ namespace Campingpladsen_Projekt_H1
                 conn.ConnectionString = ConfigurationManager.ConnectionStrings["Reservation"].ConnectionString;
                 using (SqlCommand cmd = new SqlCommand("Insert_Reservation", conn))
                 {
+                    // Stored procedure - Reservation
                     conn.Open();
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.AddWithValue("@ReservationNumber", SqlDbType.Int).Value = randomNumber;
