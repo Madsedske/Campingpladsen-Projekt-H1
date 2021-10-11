@@ -1,0 +1,1610 @@
+USE [MidtCampingDatabase]
+GO
+/****** Object:  Table [dbo].[CampingSite]    Script Date: 08-10-2021 09:05:13 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[CampingSite](
+	[SiteNumber] [int] NOT NULL,
+	[SiteType] [varchar](255) NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[SiteNumber] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Reservation]    Script Date: 08-10-2021 09:05:13 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Reservation](
+	[ReservationNumber] [int] NULL,
+	[ReservationStartDate] [date] NULL,
+	[ReservationEndDate] [date] NULL,
+	[OverallPrice] [int] NULL,
+	[SiteNumber] [int] NULL,
+	[SeasonType] [varchar](255) NULL,
+	[FirstName] [varchar](255) NULL,
+	[Email] [varchar](255) NULL,
+	[PhoneNumber] [varchar](255) NULL,
+	[YesOrNoCleaning] [nchar](10) NULL
+) ON [PRIMARY]
+GO
+/****** Object:  View [dbo].[Rengøring af hytter]    Script Date: 08-10-2021 09:05:13 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE VIEW [dbo].[Rengøring af hytter]
+AS
+SELECT        dbo.CampingSite.SiteNumber, dbo.CampingSite.SiteType, dbo.Reservation.ReservationEndDate, dbo.Reservation.YesOrNoCleaning
+FROM            dbo.Reservation INNER JOIN
+                         dbo.CampingSite ON dbo.Reservation.SiteNumber = dbo.CampingSite.SiteNumber
+WHERE        (dbo.Reservation.YesOrNoCleaning = 'Yes') AND (dbo.Reservation.ReservationEndDate = CONVERT(varchar(10), GETDATE(), 120))
+GO
+/****** Object:  Table [dbo].[Customers]    Script Date: 08-10-2021 09:05:13 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Customers](
+	[FirstName] [varchar](255) NOT NULL,
+	[LastName] [text] NULL,
+	[Address] [text] NULL,
+	[Email] [varchar](255) NOT NULL,
+	[PhoneNumber] [varchar](255) NOT NULL,
+	[Adult] [int] NULL,
+	[Children] [int] NULL,
+	[Dog] [int] NULL,
+ CONSTRAINT [PK_Customers] PRIMARY KEY CLUSTERED 
+(
+	[FirstName] ASC,
+	[Email] ASC,
+	[PhoneNumber] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  View [dbo].[Kunder der kommer i dag]    Script Date: 08-10-2021 09:05:13 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE VIEW [dbo].[Kunder der kommer i dag]
+AS
+SELECT        dbo.Reservation.ReservationStartDate, dbo.Customers.*
+FROM            dbo.Customers INNER JOIN
+                         dbo.Reservation ON dbo.Customers.FirstName = dbo.Reservation.FirstName AND dbo.Customers.Email = dbo.Reservation.Email AND dbo.Customers.PhoneNumber = dbo.Reservation.PhoneNumber
+WHERE        (dbo.Reservation.ReservationStartDate = CONVERT(varchar(10), GETDATE(), 120))
+GO
+/****** Object:  View [dbo].[Oversigt over reservationer]    Script Date: 08-10-2021 09:05:13 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE VIEW [dbo].[Oversigt over reservationer]
+AS
+SELECT        dbo.Reservation.*
+FROM            dbo.Reservation
+GO
+/****** Object:  View [dbo].[Oversigt over kunder]    Script Date: 08-10-2021 09:05:13 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE VIEW [dbo].[Oversigt over kunder]
+AS
+SELECT        dbo.Customers.*
+FROM            dbo.Customers
+GO
+/****** Object:  View [dbo].[Oversigt over booket pladser]    Script Date: 08-10-2021 09:05:13 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE VIEW [dbo].[Oversigt over booket pladser]
+AS
+SELECT        dbo.CampingSite.SiteNumber, dbo.CampingSite.SiteType, dbo.Customers.FirstName, dbo.Customers.Email, dbo.Customers.PhoneNumber
+FROM            dbo.CampingSite INNER JOIN
+                         dbo.Reservation ON dbo.CampingSite.SiteNumber = dbo.Reservation.SiteNumber INNER JOIN
+                         dbo.Customers ON dbo.Reservation.FirstName = dbo.Customers.FirstName AND dbo.Reservation.Email = dbo.Customers.Email AND dbo.Reservation.PhoneNumber = dbo.Customers.PhoneNumber
+GO
+/****** Object:  Table [dbo].[Additions]    Script Date: 08-10-2021 09:05:13 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Additions](
+	[TillægsID] [int] NULL,
+	[TillægsType] [nvarchar](50) NULL,
+	[Pris] [int] NULL
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[FinalCleaning]    Script Date: 08-10-2021 09:05:13 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[FinalCleaning](
+	[YesOrNoCleaning] [nchar](10) NOT NULL,
+	[Price] [int] NULL,
+ CONSTRAINT [PK_FinalCleaning] PRIMARY KEY CLUSTERED 
+(
+	[YesOrNoCleaning] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[PeoplePrice]    Script Date: 08-10-2021 09:05:13 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[PeoplePrice](
+	[PersonType] [varchar](255) NOT NULL,
+	[HighSeasonPeoplePrice] [int] NULL,
+	[LowSeasonPeoplePrice] [int] NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[PersonType] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[SeasonSite]    Script Date: 08-10-2021 09:05:13 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[SeasonSite](
+	[SeasonType] [varchar](255) NOT NULL,
+	[SeasonPrice] [int] NULL,
+	[StartDate] [date] NULL,
+	[EndDate] [date] NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[SeasonType] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[SitePrice]    Script Date: 08-10-2021 09:05:13 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[SitePrice](
+	[SiteType] [varchar](255) NOT NULL,
+	[HighSeasonSitePrice] [int] NULL,
+	[LowSeasonSitePrice] [int] NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[SiteType] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (1, N'Teltplads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (2, N'Teltplads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (3, N'Teltplads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (4, N'Teltplads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (5, N'Teltplads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (6, N'Teltplads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (7, N'Teltplads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (8, N'Teltplads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (9, N'Teltplads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (10, N'Teltplads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (11, N'Teltplads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (12, N'Teltplads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (13, N'Teltplads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (14, N'Teltplads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (15, N'Teltplads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (16, N'Teltplads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (17, N'Teltplads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (18, N'Teltplads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (19, N'Teltplads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (20, N'Teltplads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (21, N'Teltplads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (22, N'Teltplads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (23, N'Teltplads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (24, N'Teltplads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (25, N'Teltplads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (26, N'Teltplads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (27, N'Teltplads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (28, N'Teltplads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (29, N'Teltplads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (30, N'Teltplads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (31, N'Teltplads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (32, N'Teltplads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (33, N'Teltplads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (34, N'Teltplads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (35, N'Teltplads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (36, N'Teltplads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (37, N'Teltplads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (38, N'Teltplads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (39, N'Teltplads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (40, N'Teltplads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (41, N'Teltplads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (42, N'Teltplads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (43, N'Teltplads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (44, N'Teltplads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (45, N'Teltplads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (46, N'Teltplads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (47, N'Teltplads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (48, N'Teltplads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (49, N'Teltplads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (50, N'Teltplads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (51, N'Lille plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (52, N'Lille plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (53, N'Lille plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (54, N'Lille plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (55, N'Lille plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (56, N'Lille plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (57, N'Lille plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (58, N'Lille plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (59, N'Lille plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (60, N'Lille plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (61, N'Lille plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (62, N'Lille plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (63, N'Lille plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (64, N'Lille plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (65, N'Lille plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (66, N'Lille plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (67, N'Lille plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (68, N'Lille plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (69, N'Lille plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (70, N'Lille plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (71, N'Lille plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (72, N'Lille plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (73, N'Lille plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (74, N'Lille plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (75, N'Lille plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (76, N'Lille plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (77, N'Lille plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (78, N'Lille plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (79, N'Lille plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (80, N'Lille plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (81, N'Lille plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (82, N'Lille plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (83, N'Lille plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (84, N'Lille plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (85, N'Lille plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (86, N'Lille plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (87, N'Lille plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (88, N'Lille plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (89, N'Lille plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (90, N'Lille plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (91, N'Lille plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (92, N'Lille plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (93, N'Lille plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (94, N'Lille plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (95, N'Lille plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (96, N'Lille plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (97, N'Lille plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (98, N'Lille plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (99, N'Lille plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (100, N'Lille plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (101, N'Lille plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (102, N'Lille plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (103, N'Lille plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (104, N'Lille plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (105, N'Lille plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (106, N'Lille plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (107, N'Lille plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (108, N'Lille plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (109, N'Lille plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (110, N'Lille plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (111, N'Lille plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (112, N'Lille plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (113, N'Lille plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (114, N'Lille plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (115, N'Lille plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (116, N'Lille plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (117, N'Lille plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (118, N'Lille plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (119, N'Lille plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (120, N'Lille plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (121, N'Lille plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (122, N'Lille plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (123, N'Lille plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (124, N'Lille plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (125, N'Lille plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (126, N'Lille plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (127, N'Lille plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (128, N'Lille plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (129, N'Lille plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (130, N'Lille plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (131, N'Lille plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (132, N'Lille plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (133, N'Lille plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (134, N'Lille plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (135, N'Lille plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (136, N'Lille plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (137, N'Lille plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (138, N'Lille plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (139, N'Lille plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (140, N'Lille plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (141, N'Lille plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (142, N'Lille plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (143, N'Lille plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (144, N'Lille plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (145, N'Lille plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (146, N'Lille plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (147, N'Lille plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (148, N'Lille plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (149, N'Lille plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (150, N'Lille plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (151, N'Lille plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (152, N'Lille plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (153, N'Lille plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (154, N'Lille plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (155, N'Lille plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (156, N'Lille plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (157, N'Lille plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (158, N'Lille plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (159, N'Lille plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (160, N'Lille plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (161, N'Lille plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (162, N'Lille plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (163, N'Lille plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (164, N'Lille plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (165, N'Lille plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (166, N'Lille plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (167, N'Lille plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (168, N'Lille plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (169, N'Lille plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (170, N'Lille plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (171, N'Lille plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (172, N'Lille plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (173, N'Lille plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (174, N'Lille plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (175, N'Lille plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (176, N'Lille plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (177, N'Lille plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (178, N'Lille plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (179, N'Lille plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (180, N'Lille plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (181, N'Lille plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (182, N'Lille plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (183, N'Lille plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (184, N'Lille plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (185, N'Lille plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (186, N'Lille plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (187, N'Lille plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (188, N'Lille plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (189, N'Lille plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (190, N'Lille plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (191, N'Lille plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (192, N'Lille plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (193, N'Lille plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (194, N'Lille plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (195, N'Lille plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (196, N'Lille plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (197, N'Lille plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (198, N'Lille plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (199, N'Lille plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (200, N'Lille plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (201, N'Lille plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (202, N'Lille plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (203, N'Lille plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (204, N'Lille plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (205, N'Lille plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (206, N'Lille plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (207, N'Lille plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (208, N'Lille plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (209, N'Lille plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (210, N'Lille plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (211, N'Lille plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (212, N'Lille plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (213, N'Lille plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (214, N'Lille plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (215, N'Lille plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (216, N'Lille plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (217, N'Lille plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (218, N'Stor plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (219, N'Stor plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (220, N'Stor plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (221, N'Stor plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (222, N'Stor plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (223, N'Stor plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (224, N'Stor plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (225, N'Stor plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (226, N'Stor plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (227, N'Stor plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (228, N'Stor plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (229, N'Stor plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (230, N'Stor plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (231, N'Stor plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (232, N'Stor plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (233, N'Stor plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (234, N'Stor plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (235, N'Stor plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (236, N'Stor plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (237, N'Stor plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (238, N'Stor plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (239, N'Stor plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (240, N'Stor plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (241, N'Stor plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (242, N'Stor plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (243, N'Stor plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (244, N'Stor plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (245, N'Stor plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (246, N'Stor plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (247, N'Stor plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (248, N'Stor plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (249, N'Stor plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (250, N'Stor plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (251, N'Stor plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (252, N'Stor plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (253, N'Stor plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (254, N'Stor plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (255, N'Stor plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (256, N'Stor plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (257, N'Stor plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (258, N'Stor plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (259, N'Stor plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (260, N'Stor plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (261, N'Stor plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (262, N'Stor plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (263, N'Stor plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (264, N'Stor plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (265, N'Stor plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (266, N'Stor plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (267, N'Stor plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (268, N'Stor plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (269, N'Stor plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (270, N'Stor plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (271, N'Stor plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (272, N'Stor plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (273, N'Stor plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (274, N'Stor plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (275, N'Stor plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (276, N'Stor plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (277, N'Stor plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (278, N'Stor plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (279, N'Stor plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (280, N'Stor plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (281, N'Stor plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (282, N'Stor plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (283, N'Stor plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (284, N'Stor plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (285, N'Stor plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (286, N'Stor plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (287, N'Stor plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (288, N'Stor plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (289, N'Stor plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (290, N'Stor plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (291, N'Stor plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (292, N'Stor plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (293, N'Stor plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (294, N'Stor plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (295, N'Stor plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (296, N'Stor plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (297, N'Stor plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (298, N'Stor plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (299, N'Stor plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (300, N'Stor plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (301, N'Stor plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (302, N'Stor plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (303, N'Stor plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (304, N'Stor plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (305, N'Stor plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (306, N'Stor plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (307, N'Stor plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (308, N'Stor plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (309, N'Stor plads')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (310, N'Standard hytte')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (311, N'Standard hytte')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (312, N'Standard hytte')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (313, N'Standard hytte')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (314, N'Standard hytte')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (315, N'Standard hytte')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (316, N'Standard hytte')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (317, N'Standard hytte')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (318, N'Luksus hytte')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (319, N'Luksus hytte')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (320, N'Luksus hytte')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (321, N'Luksus hytte')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (322, N'Luksus hytte')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (323, N'Luksus hytte')
+GO
+INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (324, N'Luksus hytte')
+GO
+INSERT [dbo].[Customers] ([FirstName], [LastName], [Address], [Email], [PhoneNumber], [Adult], [Children], [Dog]) VALUES (N'Mads', N'Rasmussen', N'Jernbanegade', N'mail2mads.rasmussen@gmail.com', N'51151051', 2, 1, 1)
+GO
+INSERT [dbo].[PeoplePrice] ([PersonType], [HighSeasonPeoplePrice], [LowSeasonPeoplePrice]) VALUES (N'Børn', 42, 49)
+GO
+INSERT [dbo].[PeoplePrice] ([PersonType], [HighSeasonPeoplePrice], [LowSeasonPeoplePrice]) VALUES (N'Hund', 30, 30)
+GO
+INSERT [dbo].[PeoplePrice] ([PersonType], [HighSeasonPeoplePrice], [LowSeasonPeoplePrice]) VALUES (N'Voksen', 82, 87)
+GO
+INSERT [dbo].[Reservation] ([ReservationNumber], [ReservationStartDate], [ReservationEndDate], [OverallPrice], [SiteNumber], [SeasonType], [FirstName], [Email], [PhoneNumber], [YesOrNoCleaning]) VALUES (40, CAST(N'2021-10-08' AS Date), CAST(N'2021-10-15' AS Date), 10283, 222, N'Sommer', N'Mads', N'mail2mads.rasmussen@gmail.com', N'51151051', N'No        ')
+GO
+INSERT [dbo].[SeasonSite] ([SeasonType], [SeasonPrice], [StartDate], [EndDate]) VALUES (N'(Intet)', 0, NULL, NULL)
+GO
+INSERT [dbo].[SeasonSite] ([SeasonType], [SeasonPrice], [StartDate], [EndDate]) VALUES (N'Efterår', 2900, CAST(N'2021-08-15' AS Date), CAST(N'2021-10-31' AS Date))
+GO
+INSERT [dbo].[SeasonSite] ([SeasonType], [SeasonPrice], [StartDate], [EndDate]) VALUES (N'Forår', 4100, CAST(N'2021-04-01' AS Date), CAST(N'2021-06-30' AS Date))
+GO
+INSERT [dbo].[SeasonSite] ([SeasonType], [SeasonPrice], [StartDate], [EndDate]) VALUES (N'Sommer', 9300, CAST(N'2021-04-01' AS Date), CAST(N'2021-09-30' AS Date))
+GO
+INSERT [dbo].[SeasonSite] ([SeasonType], [SeasonPrice], [StartDate], [EndDate]) VALUES (N'Vinter', 3500, CAST(N'2021-10-01' AS Date), CAST(N'2021-03-31' AS Date))
+GO
+INSERT [dbo].[SitePrice] ([SiteType], [HighSeasonSitePrice], [LowSeasonSitePrice]) VALUES (N'Lille plads', 60, 50)
+GO
+INSERT [dbo].[SitePrice] ([SiteType], [HighSeasonSitePrice], [LowSeasonSitePrice]) VALUES (N'Luksus hytte', 850, 600)
+GO
+INSERT [dbo].[SitePrice] ([SiteType], [HighSeasonSitePrice], [LowSeasonSitePrice]) VALUES (N'Standard hytte', 500, 350)
+GO
+INSERT [dbo].[SitePrice] ([SiteType], [HighSeasonSitePrice], [LowSeasonSitePrice]) VALUES (N'Stor plads', 80, 65)
+GO
+INSERT [dbo].[SitePrice] ([SiteType], [HighSeasonSitePrice], [LowSeasonSitePrice]) VALUES (N'Teltplads', 35, 45)
+GO
+ALTER TABLE [dbo].[CampingSite]  WITH CHECK ADD FOREIGN KEY([SiteType])
+REFERENCES [dbo].[SitePrice] ([SiteType])
+GO
+ALTER TABLE [dbo].[Reservation]  WITH CHECK ADD FOREIGN KEY([SeasonType])
+REFERENCES [dbo].[SeasonSite] ([SeasonType])
+GO
+ALTER TABLE [dbo].[Reservation]  WITH CHECK ADD FOREIGN KEY([SiteNumber])
+REFERENCES [dbo].[CampingSite] ([SiteNumber])
+GO
+ALTER TABLE [dbo].[Reservation]  WITH CHECK ADD  CONSTRAINT [FK_Reservation_Customers] FOREIGN KEY([FirstName], [Email], [PhoneNumber])
+REFERENCES [dbo].[Customers] ([FirstName], [Email], [PhoneNumber])
+GO
+ALTER TABLE [dbo].[Reservation] CHECK CONSTRAINT [FK_Reservation_Customers]
+GO
+/****** Object:  StoredProcedure [dbo].[Automatic_Reservation_delete]    Script Date: 08-10-2021 09:05:14 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[Automatic_Reservation_delete]
+AS
+Delete from Reservation where ReservationEndDate < CONVERT(varchar(255), GETDATE(), 120);
+GO
+/****** Object:  StoredProcedure [dbo].[Insert_Customers]    Script Date: 08-10-2021 09:05:14 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[Insert_Customers] (@FirstName varchar(255), @LastName text, @Address text, @Email varchar(255), @PhoneNumber varchar(255), @Adult integer, @Children integer, @Dog integer)
+AS
+BEGIN
+INSERT INTO  Customers (
+FirstName, 
+LastName, 
+Address, 
+Email, 
+PhoneNumber, 
+Adult, 
+Children, 
+Dog) 
+VALUES (
+    @FirstName,
+    @LastName,
+    @Address,
+    @Email,
+    @PhoneNumber,
+    @Adult,
+    @Children,
+    @Dog)
+END
+GO
+/****** Object:  StoredProcedure [dbo].[Insert_Reservation]    Script Date: 08-10-2021 09:05:14 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[Insert_Reservation](
+                    @ReservationNumber INT,
+                    @ReservationStartDate Date,
+                    @ReservationEndDate Date, 
+                    @OverallPrice int,
+                    @SiteNumber int,
+                    @SeasonType varchar(255),
+					@FirstName varchar(255),
+					@Email varchar(255),
+					@PhoneNumber varchar(255),
+					@YesOrNoCleaning nchar(10))
+AS
+BEGIN
+INSERT INTO Reservation(
+    ReservationNumber,
+    ReservationStartDate,
+    ReservationEndDate,
+    OverallPrice,
+    SiteNumber,
+    SeasonType,
+    FirstName,
+    Email,
+	PhoneNumber,
+	YesOrNoCleaning)
+VALUES (
+    @ReservationNumber,
+    @ReservationStartDate,
+    @ReservationEndDate,
+    @OverallPrice,
+    @SiteNumber,
+    @SeasonType,
+    @FirstName,
+    @Email,
+	@PhoneNumber,
+	@YesOrNoCleaning)
+END
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_DiagramPane1', @value=N'[0E232FF0-B466-11cf-A24F-00AA00A3EFFF, 1.00]
+Begin DesignProperties = 
+   Begin PaneConfigurations = 
+      Begin PaneConfiguration = 0
+         NumPanes = 4
+         Configuration = "(H (1[40] 4[20] 2[20] 3) )"
+      End
+      Begin PaneConfiguration = 1
+         NumPanes = 3
+         Configuration = "(H (1 [50] 4 [25] 3))"
+      End
+      Begin PaneConfiguration = 2
+         NumPanes = 3
+         Configuration = "(H (1 [50] 2 [25] 3))"
+      End
+      Begin PaneConfiguration = 3
+         NumPanes = 3
+         Configuration = "(H (4 [30] 2 [40] 3))"
+      End
+      Begin PaneConfiguration = 4
+         NumPanes = 2
+         Configuration = "(H (1 [56] 3))"
+      End
+      Begin PaneConfiguration = 5
+         NumPanes = 2
+         Configuration = "(H (2 [66] 3))"
+      End
+      Begin PaneConfiguration = 6
+         NumPanes = 2
+         Configuration = "(H (4 [50] 3))"
+      End
+      Begin PaneConfiguration = 7
+         NumPanes = 1
+         Configuration = "(V (3))"
+      End
+      Begin PaneConfiguration = 8
+         NumPanes = 3
+         Configuration = "(H (1[56] 4[18] 2) )"
+      End
+      Begin PaneConfiguration = 9
+         NumPanes = 2
+         Configuration = "(H (1 [75] 4))"
+      End
+      Begin PaneConfiguration = 10
+         NumPanes = 2
+         Configuration = "(H (1[66] 2) )"
+      End
+      Begin PaneConfiguration = 11
+         NumPanes = 2
+         Configuration = "(H (4 [60] 2))"
+      End
+      Begin PaneConfiguration = 12
+         NumPanes = 1
+         Configuration = "(H (1) )"
+      End
+      Begin PaneConfiguration = 13
+         NumPanes = 1
+         Configuration = "(V (4))"
+      End
+      Begin PaneConfiguration = 14
+         NumPanes = 1
+         Configuration = "(V (2))"
+      End
+      ActivePaneConfig = 0
+   End
+   Begin DiagramPane = 
+      Begin Origin = 
+         Top = 0
+         Left = 0
+      End
+      Begin Tables = 
+         Begin Table = "Customers"
+            Begin Extent = 
+               Top = 6
+               Left = 38
+               Bottom = 136
+               Right = 208
+            End
+            DisplayFlags = 280
+            TopColumn = 4
+         End
+         Begin Table = "Reservation"
+            Begin Extent = 
+               Top = 6
+               Left = 246
+               Bottom = 136
+               Right = 444
+            End
+            DisplayFlags = 280
+            TopColumn = 2
+         End
+      End
+   End
+   Begin SQLPane = 
+   End
+   Begin DataPane = 
+      Begin ParameterDefaults = ""
+      End
+      Begin ColumnWidths = 9
+         Width = 284
+         Width = 1500
+         Width = 1500
+         Width = 1500
+         Width = 1500
+         Width = 1500
+         Width = 1500
+         Width = 1500
+         Width = 1500
+      End
+   End
+   Begin CriteriaPane = 
+      Begin ColumnWidths = 11
+         Column = 1440
+         Alias = 900
+         Table = 1170
+         Output = 720
+         Append = 1400
+         NewValue = 1170
+         SortType = 1350
+         SortOrder = 1410
+         GroupBy = 1350
+         Filter = 1350
+         Or = 1350
+         Or = 1350
+         Or = 1350
+      End
+   End
+End
+' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'VIEW',@level1name=N'Kunder der kommer i dag'
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_DiagramPaneCount', @value=1 , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'VIEW',@level1name=N'Kunder der kommer i dag'
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_DiagramPane1', @value=N'[0E232FF0-B466-11cf-A24F-00AA00A3EFFF, 1.00]
+Begin DesignProperties = 
+   Begin PaneConfigurations = 
+      Begin PaneConfiguration = 0
+         NumPanes = 4
+         Configuration = "(H (1[41] 4[20] 2[13] 3) )"
+      End
+      Begin PaneConfiguration = 1
+         NumPanes = 3
+         Configuration = "(H (1 [50] 4 [25] 3))"
+      End
+      Begin PaneConfiguration = 2
+         NumPanes = 3
+         Configuration = "(H (1 [50] 2 [25] 3))"
+      End
+      Begin PaneConfiguration = 3
+         NumPanes = 3
+         Configuration = "(H (4 [30] 2 [40] 3))"
+      End
+      Begin PaneConfiguration = 4
+         NumPanes = 2
+         Configuration = "(H (1 [56] 3))"
+      End
+      Begin PaneConfiguration = 5
+         NumPanes = 2
+         Configuration = "(H (2 [66] 3))"
+      End
+      Begin PaneConfiguration = 6
+         NumPanes = 2
+         Configuration = "(H (4 [50] 3))"
+      End
+      Begin PaneConfiguration = 7
+         NumPanes = 1
+         Configuration = "(V (3))"
+      End
+      Begin PaneConfiguration = 8
+         NumPanes = 3
+         Configuration = "(H (1[56] 4[18] 2) )"
+      End
+      Begin PaneConfiguration = 9
+         NumPanes = 2
+         Configuration = "(H (1 [75] 4))"
+      End
+      Begin PaneConfiguration = 10
+         NumPanes = 2
+         Configuration = "(H (1[66] 2) )"
+      End
+      Begin PaneConfiguration = 11
+         NumPanes = 2
+         Configuration = "(H (4 [60] 2))"
+      End
+      Begin PaneConfiguration = 12
+         NumPanes = 1
+         Configuration = "(H (1) )"
+      End
+      Begin PaneConfiguration = 13
+         NumPanes = 1
+         Configuration = "(V (4))"
+      End
+      Begin PaneConfiguration = 14
+         NumPanes = 1
+         Configuration = "(V (2))"
+      End
+      ActivePaneConfig = 0
+   End
+   Begin DiagramPane = 
+      Begin Origin = 
+         Top = 0
+         Left = 0
+      End
+      Begin Tables = 
+         Begin Table = "CampingSite"
+            Begin Extent = 
+               Top = 6
+               Left = 38
+               Bottom = 102
+               Right = 208
+            End
+            DisplayFlags = 280
+            TopColumn = 0
+         End
+         Begin Table = "Customers"
+            Begin Extent = 
+               Top = 14
+               Left = 620
+               Bottom = 144
+               Right = 790
+            End
+            DisplayFlags = 280
+            TopColumn = 4
+         End
+         Begin Table = "Reservation"
+            Begin Extent = 
+               Top = 13
+               Left = 297
+               Bottom = 143
+               Right = 495
+            End
+            DisplayFlags = 280
+            TopColumn = 0
+         End
+      End
+   End
+   Begin SQLPane = 
+   End
+   Begin DataPane = 
+      Begin ParameterDefaults = ""
+      End
+      Begin ColumnWidths = 9
+         Width = 284
+         Width = 1500
+         Width = 1500
+         Width = 1500
+         Width = 1500
+         Width = 1500
+         Width = 1500
+         Width = 1500
+         Width = 1500
+      End
+   End
+   Begin CriteriaPane = 
+      Begin ColumnWidths = 11
+         Column = 1440
+         Alias = 900
+         Table = 1170
+         Output = 2235
+         Append = 1400
+         NewValue = 1170
+         SortType = 1350
+         SortOrder = 1410
+         GroupBy = 1350
+         Filter = 1350
+         Or = 1350
+         Or = 1350
+         Or = 1350
+      End
+   End
+End
+' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'VIEW',@level1name=N'Oversigt over booket pladser'
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_DiagramPaneCount', @value=1 , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'VIEW',@level1name=N'Oversigt over booket pladser'
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_DiagramPane1', @value=N'[0E232FF0-B466-11cf-A24F-00AA00A3EFFF, 1.00]
+Begin DesignProperties = 
+   Begin PaneConfigurations = 
+      Begin PaneConfiguration = 0
+         NumPanes = 4
+         Configuration = "(H (1[40] 4[20] 2[20] 3) )"
+      End
+      Begin PaneConfiguration = 1
+         NumPanes = 3
+         Configuration = "(H (1 [50] 4 [25] 3))"
+      End
+      Begin PaneConfiguration = 2
+         NumPanes = 3
+         Configuration = "(H (1 [50] 2 [25] 3))"
+      End
+      Begin PaneConfiguration = 3
+         NumPanes = 3
+         Configuration = "(H (4 [30] 2 [40] 3))"
+      End
+      Begin PaneConfiguration = 4
+         NumPanes = 2
+         Configuration = "(H (1 [56] 3))"
+      End
+      Begin PaneConfiguration = 5
+         NumPanes = 2
+         Configuration = "(H (2 [66] 3))"
+      End
+      Begin PaneConfiguration = 6
+         NumPanes = 2
+         Configuration = "(H (4 [50] 3))"
+      End
+      Begin PaneConfiguration = 7
+         NumPanes = 1
+         Configuration = "(V (3))"
+      End
+      Begin PaneConfiguration = 8
+         NumPanes = 3
+         Configuration = "(H (1[56] 4[18] 2) )"
+      End
+      Begin PaneConfiguration = 9
+         NumPanes = 2
+         Configuration = "(H (1 [75] 4))"
+      End
+      Begin PaneConfiguration = 10
+         NumPanes = 2
+         Configuration = "(H (1[66] 2) )"
+      End
+      Begin PaneConfiguration = 11
+         NumPanes = 2
+         Configuration = "(H (4 [60] 2))"
+      End
+      Begin PaneConfiguration = 12
+         NumPanes = 1
+         Configuration = "(H (1) )"
+      End
+      Begin PaneConfiguration = 13
+         NumPanes = 1
+         Configuration = "(V (4))"
+      End
+      Begin PaneConfiguration = 14
+         NumPanes = 1
+         Configuration = "(V (2))"
+      End
+      ActivePaneConfig = 0
+   End
+   Begin DiagramPane = 
+      Begin Origin = 
+         Top = 0
+         Left = 0
+      End
+      Begin Tables = 
+         Begin Table = "Customers"
+            Begin Extent = 
+               Top = 6
+               Left = 38
+               Bottom = 136
+               Right = 208
+            End
+            DisplayFlags = 280
+            TopColumn = 0
+         End
+      End
+   End
+   Begin SQLPane = 
+   End
+   Begin DataPane = 
+      Begin ParameterDefaults = ""
+      End
+      Begin ColumnWidths = 9
+         Width = 284
+         Width = 1500
+         Width = 1500
+         Width = 1500
+         Width = 1500
+         Width = 1500
+         Width = 1500
+         Width = 1500
+         Width = 1500
+      End
+   End
+   Begin CriteriaPane = 
+      Begin ColumnWidths = 11
+         Column = 1440
+         Alias = 900
+         Table = 1170
+         Output = 720
+         Append = 1400
+         NewValue = 1170
+         SortType = 1350
+         SortOrder = 1410
+         GroupBy = 1350
+         Filter = 1350
+         Or = 1350
+         Or = 1350
+         Or = 1350
+      End
+   End
+End
+' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'VIEW',@level1name=N'Oversigt over kunder'
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_DiagramPaneCount', @value=1 , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'VIEW',@level1name=N'Oversigt over kunder'
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_DiagramPane1', @value=N'[0E232FF0-B466-11cf-A24F-00AA00A3EFFF, 1.00]
+Begin DesignProperties = 
+   Begin PaneConfigurations = 
+      Begin PaneConfiguration = 0
+         NumPanes = 4
+         Configuration = "(H (1[40] 4[20] 2[20] 3) )"
+      End
+      Begin PaneConfiguration = 1
+         NumPanes = 3
+         Configuration = "(H (1 [50] 4 [25] 3))"
+      End
+      Begin PaneConfiguration = 2
+         NumPanes = 3
+         Configuration = "(H (1 [50] 2 [25] 3))"
+      End
+      Begin PaneConfiguration = 3
+         NumPanes = 3
+         Configuration = "(H (4 [30] 2 [40] 3))"
+      End
+      Begin PaneConfiguration = 4
+         NumPanes = 2
+         Configuration = "(H (1 [56] 3))"
+      End
+      Begin PaneConfiguration = 5
+         NumPanes = 2
+         Configuration = "(H (2 [66] 3))"
+      End
+      Begin PaneConfiguration = 6
+         NumPanes = 2
+         Configuration = "(H (4 [50] 3))"
+      End
+      Begin PaneConfiguration = 7
+         NumPanes = 1
+         Configuration = "(V (3))"
+      End
+      Begin PaneConfiguration = 8
+         NumPanes = 3
+         Configuration = "(H (1[56] 4[18] 2) )"
+      End
+      Begin PaneConfiguration = 9
+         NumPanes = 2
+         Configuration = "(H (1 [75] 4))"
+      End
+      Begin PaneConfiguration = 10
+         NumPanes = 2
+         Configuration = "(H (1[66] 2) )"
+      End
+      Begin PaneConfiguration = 11
+         NumPanes = 2
+         Configuration = "(H (4 [60] 2))"
+      End
+      Begin PaneConfiguration = 12
+         NumPanes = 1
+         Configuration = "(H (1) )"
+      End
+      Begin PaneConfiguration = 13
+         NumPanes = 1
+         Configuration = "(V (4))"
+      End
+      Begin PaneConfiguration = 14
+         NumPanes = 1
+         Configuration = "(V (2))"
+      End
+      ActivePaneConfig = 0
+   End
+   Begin DiagramPane = 
+      Begin Origin = 
+         Top = 0
+         Left = 0
+      End
+      Begin Tables = 
+         Begin Table = "Reservation"
+            Begin Extent = 
+               Top = 6
+               Left = 38
+               Bottom = 136
+               Right = 236
+            End
+            DisplayFlags = 280
+            TopColumn = 0
+         End
+      End
+   End
+   Begin SQLPane = 
+   End
+   Begin DataPane = 
+      Begin ParameterDefaults = ""
+      End
+      Begin ColumnWidths = 9
+         Width = 284
+         Width = 1500
+         Width = 1500
+         Width = 1500
+         Width = 1500
+         Width = 1500
+         Width = 1500
+         Width = 1500
+         Width = 1500
+      End
+   End
+   Begin CriteriaPane = 
+      Begin ColumnWidths = 11
+         Column = 1440
+         Alias = 900
+         Table = 1170
+         Output = 720
+         Append = 1400
+         NewValue = 1170
+         SortType = 1350
+         SortOrder = 1410
+         GroupBy = 1350
+         Filter = 1350
+         Or = 1350
+         Or = 1350
+         Or = 1350
+      End
+   End
+End
+' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'VIEW',@level1name=N'Oversigt over reservationer'
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_DiagramPaneCount', @value=1 , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'VIEW',@level1name=N'Oversigt over reservationer'
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_DiagramPane1', @value=N'[0E232FF0-B466-11cf-A24F-00AA00A3EFFF, 1.00]
+Begin DesignProperties = 
+   Begin PaneConfigurations = 
+      Begin PaneConfiguration = 0
+         NumPanes = 4
+         Configuration = "(H (1[40] 4[20] 2[20] 3) )"
+      End
+      Begin PaneConfiguration = 1
+         NumPanes = 3
+         Configuration = "(H (1 [50] 4 [25] 3))"
+      End
+      Begin PaneConfiguration = 2
+         NumPanes = 3
+         Configuration = "(H (1 [50] 2 [25] 3))"
+      End
+      Begin PaneConfiguration = 3
+         NumPanes = 3
+         Configuration = "(H (4 [30] 2 [40] 3))"
+      End
+      Begin PaneConfiguration = 4
+         NumPanes = 2
+         Configuration = "(H (1 [56] 3))"
+      End
+      Begin PaneConfiguration = 5
+         NumPanes = 2
+         Configuration = "(H (2 [66] 3))"
+      End
+      Begin PaneConfiguration = 6
+         NumPanes = 2
+         Configuration = "(H (4 [50] 3))"
+      End
+      Begin PaneConfiguration = 7
+         NumPanes = 1
+         Configuration = "(V (3))"
+      End
+      Begin PaneConfiguration = 8
+         NumPanes = 3
+         Configuration = "(H (1[56] 4[18] 2) )"
+      End
+      Begin PaneConfiguration = 9
+         NumPanes = 2
+         Configuration = "(H (1 [75] 4))"
+      End
+      Begin PaneConfiguration = 10
+         NumPanes = 2
+         Configuration = "(H (1[66] 2) )"
+      End
+      Begin PaneConfiguration = 11
+         NumPanes = 2
+         Configuration = "(H (4 [60] 2))"
+      End
+      Begin PaneConfiguration = 12
+         NumPanes = 1
+         Configuration = "(H (1) )"
+      End
+      Begin PaneConfiguration = 13
+         NumPanes = 1
+         Configuration = "(V (4))"
+      End
+      Begin PaneConfiguration = 14
+         NumPanes = 1
+         Configuration = "(V (2))"
+      End
+      ActivePaneConfig = 0
+   End
+   Begin DiagramPane = 
+      Begin Origin = 
+         Top = 0
+         Left = 0
+      End
+      Begin Tables = 
+         Begin Table = "Reservation"
+            Begin Extent = 
+               Top = 6
+               Left = 38
+               Bottom = 136
+               Right = 236
+            End
+            DisplayFlags = 280
+            TopColumn = 0
+         End
+         Begin Table = "CampingSite"
+            Begin Extent = 
+               Top = 6
+               Left = 274
+               Bottom = 102
+               Right = 444
+            End
+            DisplayFlags = 280
+            TopColumn = 0
+         End
+      End
+   End
+   Begin SQLPane = 
+   End
+   Begin DataPane = 
+      Begin ParameterDefaults = ""
+      End
+      Begin ColumnWidths = 15
+         Width = 284
+         Width = 1500
+         Width = 1500
+         Width = 2505
+         Width = 3060
+         Width = 1500
+         Width = 1500
+         Width = 1500
+         Width = 1500
+         Width = 1500
+         Width = 2430
+         Width = 1500
+         Width = 1500
+         Width = 1500
+         Width = 1500
+      End
+   End
+   Begin CriteriaPane = 
+      Begin ColumnWidths = 11
+         Column = 1440
+         Alias = 900
+         Table = 1170
+         Output = 720
+         Append = 1400
+         NewValue = 1170
+         SortType = 1350
+         SortOrder = 1410
+         GroupBy = 1350
+         Filter = 1350
+         Or = 1350
+         Or = 1350
+         Or = 1350
+      End
+   End
+End
+' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'VIEW',@level1name=N'Rengøring af hytter'
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_DiagramPaneCount', @value=1 , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'VIEW',@level1name=N'Rengøring af hytter'
+GO
