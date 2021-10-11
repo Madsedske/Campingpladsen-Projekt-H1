@@ -46,8 +46,8 @@
                         Teltcampisterne vil bemærke, at der også er tænkt på dem med faciliteter, der gør livet, lettere specielt når vejret driller.
                     </p>
                     <blockquote></blockquote>
-                    <p>Her hos midt Camping går vi op i at alle har det godt</p>
-                    <p>Her hos midt Camping går vi op i at alle har det godt</p>
+                    <p>På vores campingplads er græsset selvfølgelig grønnere end alle andre steder. Vandet er varmere, renere og smukkere, men vi har også Danmarks bedste service! Hytterne er af besdste kvalitet. De er flotte og rummelige. Pladserne er flotte og velplejet.</p>
+                    <p>Hos os får du altid lige præcis det du bestiller og det er alle pengene værd. Vi svigter ikke, vi fejler ikke, vi er ikke arrogante, vi er bare bedre.</p>
                 </div>
             </div>
             <div class="rightcolumn33">
