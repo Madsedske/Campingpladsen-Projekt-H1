@@ -158,7 +158,7 @@ footer {
 }
 
 .BookingTable {
-    display:inline-block;
+    width: 100%
 }
 
 .imgMap {
