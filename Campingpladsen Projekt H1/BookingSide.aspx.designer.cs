@@ -60,13 +60,13 @@ namespace Campingpladsen_Projekt_H1
         protected global::System.Web.UI.WebControls.DropDownList DropDownSæsonPlads;
 
         /// <summary>
-        /// SqlDataSource2 control.
+        /// SqlDataSource3 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.SqlDataSource SqlDataSource2;
+        protected global::System.Web.UI.WebControls.SqlDataSource SqlDataSource3;
 
         /// <summary>
         /// Label2 control.

@@ -90,28 +90,23 @@ namespace Campingpladsen_Projekt_H1
             switch (seasonSite)
             {
                 case "(Intet)":
-                    {
-                        seasonSitePrice = 0;
+                    {   seasonSitePrice = 0;
                         break;
                     }
                 case "Efterår":
-                    {
-                        seasonSitePrice = 2900;
+                    {   seasonSitePrice = 2900;
                         break;
                     }
                 case "Forår":
-                    {
-                        seasonSitePrice = 4100;
+                    {   seasonSitePrice = 4100;
                         break;
                     }
                 case "Sommer":
-                    {
-                        seasonSitePrice = 9300;
+                    {   seasonSitePrice = 9300;
                         break;
                     }
                 case "Vinter":
-                    {
-                        seasonSitePrice = 3500;
+                    {   seasonSitePrice = 3500;
                         break;
                     }
             }

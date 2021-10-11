@@ -45,8 +45,8 @@
                                 <asp:TextBox ID="TextBoxFornavn" runat="server"></asp:TextBox></td>
                             <td>
                                 <asp:Label ID="Label14" runat="server" Text="Sæsonplads: "></asp:Label>
-                                <asp:DropDownList ID="DropDownSæsonPlads" runat="server" DataSourceID="SqlDataSource2" DataTextField="SeasonType" DataValueField="SeasonType"></asp:DropDownList> 
-                                <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:SeasonSite %>" SelectCommand="SELECT [SeasonType], [StartDate], [EndDate], [SeasonPrice] FROM [SeasonSite]"></asp:SqlDataSource>
+                                <asp:DropDownList ID="DropDownSæsonPlads" runat="server" DataSourceID="SqlDataSource3" DataTextField="SeasonType" DataValueField="SeasonType"></asp:DropDownList> 
+                                <asp:SqlDataSource ID="SqlDataSource3" runat="server" ConnectionString="<%$ ConnectionStrings:SeasonSite %>" SelectCommand="SELECT * FROM [SeasonSite]"></asp:SqlDataSource>
                                 </td>   </tr>
                         <tr>
                             <td>
@@ -127,7 +127,7 @@
                                 <asp:Label ID="Label10" runat="server" Text="Plads: "></asp:Label>
                                 <asp:DropDownList ID="DropDownListVælgPlads" runat="server" DataSourceID="SqlDataSource1" DataTextField="SiteNumber" DataValueField="SiteNumber">
                                 </asp:DropDownList>
-                                <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:CampingSite %>" SelectCommand="SELECT [SiteNumber], [SiteType] FROM [CampingSite]"></asp:SqlDataSource>
+                                <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:CampingSite %>" SelectCommand="SELECT [SiteNumber] FROM [CampingSite]"></asp:SqlDataSource>
                             </td>
                         </tr>
                         <tr>
@@ -246,7 +246,6 @@
             <div class="link-box__link">Email</div>
             <div class="link-box__link">Telefon</div>
             <div class="link-box__link">noget andet</div>
-
             <div class="privacy-box">Privacy Policy . Terms and conditions</div>
             <div class="social-media-box">Facebook . Instagram</div>
         </footer>
