@@ -4,7 +4,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <link rel="stylesheet" href="StyleSheet.css" />
+    <link rel="styleSheet" href="StyleSheet.css" />
     <title>Midt Camping - Priser</title>
 </head>
 <body>
@@ -14,7 +14,7 @@
     <form id="form1" runat="server">
         <table class="topnav">
             <tr>
-                <td class="headline"><a href="Main.aspx">Midt Camping</a></td>
+                <td class="headline">Midt Camping</td>
                 <td><a href="BookingSide.aspx">Booking</a></td>
                 <td><a href="Priser.aspx">Priser</a></td>
                 <td><a href="Information.aspx">Information</a></td>
@@ -105,13 +105,12 @@
 
 
         <footer>
-            <div class="link-box__title">Kontakt</div>
-            <div class="link-box__link">Email</div>
-            <div class="link-box__link">Telefon</div>
-            <div class="link-box__link">noget andet</div>
+            <div class="Footer__title">Kontakt</div>
+            <div class="Footer__link">Email</div>
+            <div class="Footer__link">Telefon</div>
 
-            <div class="privacy-box">Privacy Policy . Terms and conditions</div>
-            <div class="social-media-box">Facebook . Instagram</div>
+            <div class="privacy-box">Privacy Policy - Terms and conditions</div>
+            <div class="social-media-box">Facebook - Instagram</div>
         </footer>
     </form>
 </body>

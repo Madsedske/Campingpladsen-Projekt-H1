@@ -4,7 +4,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <link rel="stylesheet" href="StyleSheet.css" />
+    <link rel="styleSheet" href="StyleSheet.css" />
     <title>Midt Camping - Booking</title>
 </head>
 <body>
@@ -27,27 +27,17 @@
             </div>
             <div class="middlecolumn33">
                 <div class="card">
-                    <h2>Booking Side </h2>                 
-                    <table class="BookingTable">
-                        <tr>
-                            <td><img class="imgMap" src="Picture/kortover.PNG" />
-                                <ul>
-                                <li>Teltplads 1-50</li>
-                                <li>Lille plads 51-217</li>
-                                <li>Stor plads 218-309</li>
-                                <li>Standard hytte 310-317</li>
-                                <li>Luksus hytte 318-324</li>
-                                </ul>
-                            </td>                          
-                        </tr><tr>
-                            <td>
+                    <h2>Booking din næste campingtur her</h2>   
+                    <table class="BookingTable">           
+                            <tr colspan="2"> <td>
                                 <asp:Label ID="Label1" runat="server" Text="Fornavn"></asp:Label><br />
                                 <asp:TextBox ID="TextBoxFornavn" runat="server"></asp:TextBox></td>
                             <td>
                                 <asp:Label ID="Label14" runat="server" Text="Sæsonplads: "></asp:Label>
                                 <asp:DropDownList ID="DropDownSæsonPlads" runat="server" DataSourceID="SqlDataSource3" DataTextField="SeasonType" DataValueField="SeasonType"></asp:DropDownList> 
                                 <asp:SqlDataSource ID="SqlDataSource3" runat="server" ConnectionString="<%$ ConnectionStrings:SeasonSite %>" SelectCommand="SELECT * FROM [SeasonSite]"></asp:SqlDataSource>
-                                </td>   </tr>
+                                </td>
+                            </tr>
                         <tr>
                             <td>
                                 <asp:Label ID="Label2" runat="server" Text="Efternavn"></asp:Label><br />
@@ -206,7 +196,7 @@
                                 <asp:CheckBox ID="CheckBoxSengelinned" runat="server" />
                             </td>
                         </tr>
-                        <tr><td><p></p></td></tr>
+                        <tr><td><p></p></td><td><p></p></td></tr>
                         <tr><td><asp:Label ID="Label12" runat="server" Text="Start dato"></asp:Label><br />
                      <asp:Calendar ID="Calendar1" runat="server" BackColor="White" BorderColor="Black" Format="yyyy/MM/dd" Font-Names="Times New Roman" Font-Size="10pt" ForeColor="Black" Height="220px" NextPrevFormat="FullMonth" DayNameFormat="Shortest" TitleFormat="Month">
                         <DayHeaderStyle Font-Bold="True" Font-Size="7pt" BackColor="#CCCCCC" ForeColor="#333333" Height="10pt" />
@@ -234,6 +224,25 @@
                             <td><asp:Button ID="ButtonBestil" runat="server" Text="Bestil" OnClick="ButtonBestil_Click" /></td> 
                         </tr>
                     </table>
+
+                    <table class="BookingTable">
+                        <tr>
+                            <td>
+                                <img class="imgMap" src="Picture/kortover.PNG" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <ul>
+                                    <li>Teltplads 1-50</li>
+                                    <li>Lille plads 51-217</li>
+                                    <li>Stor plads 218-309</li>
+                                    <li>Standard hytte 310-317</li>
+                                    <li>Luksus hytte 318-324</li>
+                                </ul>
+                            </td>
+                        </tr>
+                    </table>
                 </div>
             </div>
              <div class="rightcolumn33"></div>
@@ -242,12 +251,12 @@
 
 
         <footer>
-            <div class="link-box__title">Kontakt</div>
-            <div class="link-box__link">Email</div>
-            <div class="link-box__link">Telefon</div>
-            <div class="link-box__link">noget andet</div>
-            <div class="privacy-box">Privacy Policy . Terms and conditions</div>
-            <div class="social-media-box">Facebook . Instagram</div>
+            <div class="Footer__title">Kontakt</div>
+            <div class="Footer__link">Email</div>
+            <div class="Footer__link">Telefon</div>
+
+            <div class="privacy-box">Privacy Policy - Terms and conditions</div>
+            <div class="social-media-box">Facebook - Instagram</div>
         </footer>
     </form>
 </body>

@@ -6,11 +6,6 @@
     box-sizing: border-box;
 }
 
-@font-face {
-    font-family: 'Pacifico-Regular';
-    src: url('file:///C:\Users\zbcmber\source\repos\Campingpladsen Projekt H1\Campingpladsen Projekt H1\fonts\Pacifico-Regular.ttf') format('truetype');
-}
-
 .topnav {
     width: 100%;
     background-color: #2f6073;
@@ -100,48 +95,44 @@ h3 {
 }
 
 p {
-    font-size: 20px;
+    font-size: 19px;
     font-family: sans-serif;
 }
 
 .lastpicbar {
     overflow: hidden;
     margin-top: 50px;
-    position: center;
 }
 
 .imgbar {
     display: block;
-    position: center;
 }
 
 .imgset {
     width: 250px;
-    height: 250px;
+    height: 260px;
     object-fit: cover;
-    margin-left: 50px;
 }
 
 footer {
     background-color: #2f6073;
     width: 100%;
     padding: 10px;
-    text-align: center;
     margin-top: 50px;
 }
 
-.link-box__title {
+.Footer__title {
     font-weight: 700;
     font-size: 20px;
-    margin-left: 50px;
     margin-bottom: 10px;
+    text-align:center;
 }
 
-.link-box__link {
+.Footer__link {
     font-size: 16px;
     margin-bottom: 10px;
-    margin-left: 50px;
     cursor: pointer;
+    text-align: center;
 }
 
 .privacy-box,
@@ -149,6 +140,7 @@ footer {
     color: #84849d;
     font-size: 14px;
     position: center;
+    text-align:center;
 }
 
 #Calendar1 {
@@ -160,17 +152,14 @@ footer {
 }
 
 .BookingTable {
-    width: 100%;
+    display:inline-block;
+    border: solid 1px black;
 }
 
-.imgMap { 
-    width: 50%;
+.imgMap {
+    width: 400px;
+    height: 400px;
 }
-    .imgMap:hover {
-        width: 600px;
-        height: 700px;
-        box-shadow: 0px 0px 15px 2px #84849d;
-    }
 
 @media only screen and (max-width: 700px) {
     .topnav {
