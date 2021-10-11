@@ -15,6 +15,7 @@
         <table class="topnav">
             <tr>
                 <td class="headline">Midt Camping</td>
+                <td><a href="Main.aspx">Home</a></td>
                 <td><a href="BookingSide.aspx">Booking</a></td>
                 <td><a href="Priser.aspx">Priser</a></td>
                 <td><a href="Information.aspx">Information</a></td>
@@ -254,9 +255,7 @@
             <div class="Footer__title">Kontakt</div>
             <div class="Footer__link">Email</div>
             <div class="Footer__link">Telefon</div>
-
             <div class="privacy-box">Privacy Policy - Terms and conditions</div>
-            <div class="social-media-box">Facebook - Instagram</div>
         </footer>
     </form>
 </body>

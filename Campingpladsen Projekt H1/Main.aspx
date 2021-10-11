@@ -3,28 +3,39 @@
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
+
 <head runat="server">
     <link rel="styleSheet" href="StyleSheet.css" />
     <title>Midt Camping</title>
 </head>
+
 <body>
+    <%-- Banner --%>
     <div>
         <img src="/Picture/Banner.png" width="100%" />
     </div>
+    <%-- Banner --%>
+
     <form id="form1" runat="server">
+
+        <%-- Navbar --%>
         <table class="topnav">
             <tr>
                 <td class="headline">Midt Camping</td>
+                <td><a href="Main.aspx">Home</a></td>
                 <td><a href="BookingSide.aspx">Booking</a></td>
                 <td><a href="Priser.aspx">Priser</a></td>
                 <td><a href="Information.aspx">Information</a></td>
             </tr>
         </table>
+        <%-- Navbar --%>
 
+        <%-- Info text --%>
         <div class="row">
             <div class="leftcolumn33">
                 <div class="sidecard"></div>
             </div>
+
             <div class="middlecolumn33">
                 <div class="card">
                     <h2>Velkommen til Midt Camping.</h2>
@@ -43,7 +54,9 @@
                 <div class="sidecard"></div>
             </div>
         </div>
-
+        <%-- Info text --%>
+        
+        <%-- Images --%>
         <div class="row">
             <div class="leftcolumn50">
                 <div class="card">
@@ -53,7 +66,6 @@
                             <img class="imgset" src="/Picture/dronebillede.jpg" />
                         </div>
                     </div>
-
                 </div>
             </div>
             <div class="rightcolumn50">
@@ -67,16 +79,15 @@
                 </div>
             </div>
         </div>
+        <%-- Images --%>
+
 
         <footer>
             <div class="Footer__title">Kontakt</div>
             <div class="Footer__link">Email</div>
             <div class="Footer__link">Telefon</div>
-
             <div class="privacy-box">Privacy Policy - Terms and conditions</div>
-            <div class="social-media-box">Facebook - Instagram</div>
         </footer>
     </form>
 </body>
 </html>
-
