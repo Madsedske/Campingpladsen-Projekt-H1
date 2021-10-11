@@ -45,39 +45,25 @@
         </div>
 
         <div class="row">
-            <div class="leftcolumn33">
-                <div class="sidecard"></div>
-            </div>
-            <div class="middlecolumn33">
+            <div class="leftcolumn50">
+                <div class="card">
                     <div class="lastpicbar">
                         <div class="imgbar">
                             <img class="imgset" src="/Picture/badeland.jpg" />
                             <img class="imgset" src="/Picture/dronebillede.jpg" />
-                            <img class="imgset" src="/Picture/laveredronebillede.jpg" />
-                            <img class="imgset" src="/Picture/legeplads.jpg" />
                         </div>
                     </div>
-            </div>
-            <div class="rightcolumn33">
-                <div class="sidecard"></div>
-            </div>
-        </div>
 
-        <div class="row">
-            <div class="leftcolumn50">
-                <div class="card">
-                    <p>Sektion</p>
-                </div>
-                <div class="card">
-                    <p>Sektion</p>
                 </div>
             </div>
             <div class="rightcolumn50">
                 <div class="card">
-                    <p>Sektion</p>
-                </div>
-                <div class="card">
-                    <p>Sektion</p>
+                    <div class="lastpicbar">
+                        <div class="imgbar">
+                            <img class="imgset" src="/Picture/laveredronebillede.jpg" />
+                            <img class="imgset" src="/Picture/legeplads.jpg" />
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

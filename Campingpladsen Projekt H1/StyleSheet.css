@@ -101,16 +101,16 @@ p {
 
 .lastpicbar {
     overflow: hidden;
-    margin-top: 50px;
 }
 
 .imgbar {
     display: block;
+    position: center;
 }
 
 .imgset {
-    width: 250px;
-    height: 260px;
+    width: 400px;
+    height: 400px;
     object-fit: cover;
 }
 
@@ -153,7 +153,6 @@ footer {
 
 .BookingTable {
     display:inline-block;
-    border: solid 1px black;
 }
 
 .imgMap {
