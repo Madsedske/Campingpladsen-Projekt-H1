@@ -90,27 +90,32 @@ namespace Campingpladsen_Projekt_H1
             switch (seasonSite)
             {
                 case "(Intet)":
-                    {   seasonSitePrice = 0;
+                    {
+                        seasonSitePrice = 0;
                         break;
                     }
                 case "Efterår":
-                    {   seasonSitePrice = 2900;
+                    {
+                        seasonSitePrice = 2900;
                         break;
                     }
                 case "Forår":
-                    {   seasonSitePrice = 4100;
+                    {
+                        seasonSitePrice = 4100;
                         break;
                     }
                 case "Sommer":
-                    {   seasonSitePrice = 9300;
+                    {
+                        seasonSitePrice = 9300;
                         break;
                     }
                 case "Vinter":
-                    {   seasonSitePrice = 3500;
+                    {
+                        seasonSitePrice = 3500;
                         break;
                     }
             }
-            
+
             // Calculate total price depending on season - High Season
             int overallPriceSeason;
             if (date > tidligdt2 && date < sendt2)
@@ -118,7 +123,7 @@ namespace Campingpladsen_Projekt_H1
                 int allAdultH = adult * 82;
                 int allChildrenH = children * 42;
                 int sitePriceH = 0;
-                
+
                 // Calculate price
                 switch (campingSite)
                 {
