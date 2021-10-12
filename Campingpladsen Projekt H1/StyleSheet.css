@@ -170,6 +170,7 @@ footer {
     font-size: 20px;
     margin-bottom: 10px;
     text-align:center;
+    color: white;
 }
 
 .Footer__link {
@@ -177,11 +178,12 @@ footer {
     margin-bottom: 10px;
     cursor: pointer;
     text-align: center;
+    color: white;
 }
 
 .privacy-box,
 .social-media-box {
-    color: #84849d;
+    color: #F2AF5C;
     font-size: 14px;
     position: center;
     text-align:center;
