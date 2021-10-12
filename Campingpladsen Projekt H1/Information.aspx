@@ -75,6 +75,15 @@
                         <li>Hunde må ikke efterlades på pladsen eller i campingvognen.</li>
                         <li>Der er gode muligheder for at lufte hunde ved siden af campingpladsen.</li>
                     </ul>
+
+                    <h3>Plads fordeling:</h3>
+                    <ul>
+                        <li>Teltplads 1-50</li>
+                        <li>Lille plads 51-217</li>
+                        <li>Stor plads 218-309</li>
+                        <li>Standard hytte 310-317</li>
+                        <li>Luksus hytte 318-324</li>
+                    </ul>
                 </div>
             </div>
         </div>
