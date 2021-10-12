@@ -275,24 +275,16 @@
 
                     <table class="BookingTable">
                         <tr class="TableChange">
-                            <td class="TableChange">
-                                <img class="imgMap" src="Picture/kortover.PNG" />
-                            </td>
+                            <ul>
+                                <li>Teltplads 1-50</li>
+                                <li>Lille plads 51-217</li>
+                                <li>Stor plads 218-309</li>
+                                <li>Standard hytte 310-317</li>
+                                <li>Luksus hytte 318-324</li>
+                            </ul>
                         </tr>
-                        <tr class="TableChange">
-                            <td class="TableChange">
-                                <ul>
-                                    <li>Teltplads 1-50</li>
-                                    <li>Lille plads 51-217</li>
-                                    <li>Stor plads 218-309</li>
-                                    <li>Standard hytte 310-317</li>
-                                    <li>Luksus hytte 318-324</li>
-                                </ul>
-                            </td>
-                        </tr>
-                        <%-- Space types --%>
-                   
-                   </table>
+                    </table>
+                
                 </div>
             </div>
             <div class="rightcolumn33"></div>
