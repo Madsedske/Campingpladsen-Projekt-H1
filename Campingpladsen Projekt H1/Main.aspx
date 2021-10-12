@@ -10,6 +10,7 @@
     <title>Midt Camping</title>
 </head>
 
+
 <body>
     <%-- Banner --%>
     <div class="Hey">
