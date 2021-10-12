@@ -14,7 +14,17 @@ namespace Campingpladsen_Projekt_H1
     {
         // Generates random number for reservation
         Random r = new Random();
-        protected void Page_Load(object sender, EventArgs e) { }
+        protected void Page_Load(object sender, EventArgs e) 
+        {
+            string onlySeasonBuy = DropDownSæsonPlads.SelectedValue;
+            if (onlySeasonBuy == "Efterår" || onlySeasonBuy == "Forår" || onlySeasonBuy ==  "Sommer" || onlySeasonBuy == "Vinter ")
+            {
+                Calendar1.Visible = false;
+                Calendar2.Visible = false;
+                CheckBoxRengøring.Visible = false;
+                DropDownListVælgPlads.Visible = false;
+            }
+        }
 
         protected void ButtonBestil_Click(object sender, EventArgs e)
         {

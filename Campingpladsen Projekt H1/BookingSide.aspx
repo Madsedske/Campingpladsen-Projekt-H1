@@ -129,7 +129,7 @@
                                 <asp:Label ID="Label5" runat="server" Text="Tlf.nr."></asp:Label><br />
                                 <asp:TextBox ID="TextBoxTlf" runat="server"></asp:TextBox></td>
                             <td>
-                                <asp:Label ID="Label15" runat="server" Text="Cykelleje: "></asp:Label>
+                                <asp:Label ID="Label15" runat="server" Text="Cykelleje: (Pr. dag)"></asp:Label>
                                 <asp:DropDownList ID="DropDownCykelleje" runat="server">
                                     <asp:ListItem Text="0" Value="0"></asp:ListItem>
                                     <asp:ListItem Text="1" Value="1"></asp:ListItem>
