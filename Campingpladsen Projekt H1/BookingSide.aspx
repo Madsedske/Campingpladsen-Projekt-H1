@@ -294,9 +294,9 @@
 
 
         <footer>
-            <div class="Footer__title">Kontakt</div>
-            <div class="Footer__link">Email</div>
-            <div class="Footer__link">Telefon</div>
+            <div class="Footer__title">Kontakt os!</div>
+            <div class="Footer__link">Email: Midtcamping@campingemail.dk</div>
+            <div class="Footer__link">Telefon: +45 12 34 56 78</div>
             <div class="privacy-box">Privacy Policy - Terms and conditions</div>
         </footer>
     </form>
