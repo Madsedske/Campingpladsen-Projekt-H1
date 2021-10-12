@@ -48,6 +48,10 @@ src:url('BreeSerif-Regular.ttf');
     font-family: Pacifico;
 }
 
+.Hey {
+    height: 200px;
+}
+
 .pricetable {
     width: 100%;
     text-align: left;
@@ -110,6 +114,7 @@ h3 {
 p {
     font-size: 19px;
     font-family: sans-serif;
+    padding: 20px;
 }
 
 .lastpicbar {
@@ -165,13 +170,33 @@ footer {
 }
 
 .BookingTable {
-    display:inline-block;
+    width: 100%
 }
 
 .imgMap {
     width: 400px;
     height: 400px;
 }
+
+@media only screen and (max-width: 1400px) {
+    .Hey {
+        height:150px;
+    }
+}
+
+@media only screen and (max-width:1000px) {
+    .Hey {
+        height: 100px;
+    }
+}
+
+
+@media only screen and (max-width:700px) {
+    .Hey {
+        height: 50px;
+    }
+}
+
 
 @media only screen and (max-width: 700px) {
     .topnav {

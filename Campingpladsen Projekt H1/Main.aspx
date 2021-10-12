@@ -5,7 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 
 <head runat="server">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="styleSheet" href="StyleSheet.css" />
     <title>Midt Camping</title>
 </head>
@@ -13,8 +13,8 @@
 
 <body>
     <%-- Banner --%>
-    <div>
-        <img src="/Picture/Banner.png" width="100%" />
+    <div class="Hey">
+        <img src="/Picture/Banner.png" width="100%" height="100%" />
     </div>
     <%-- Banner --%>
 
@@ -48,7 +48,7 @@
                         Teltcampisterne vil bemærke, at der også er tænkt på dem med faciliteter, der gør livet, lettere specielt når vejret driller.
                     </p>
                     <blockquote></blockquote>
-                    <p>På vores campingplads er græsset selvfølgelig grønnere end alle andre steder. Vandet er varmere, renere og smukkere, men vi har også Danmarks bedste service! Hytterne er af besdste kvalitet. De er flotte og rummelige. Pladserne er flotte og velplejet.</p>
+                    <p>På vores campingplads er græsset selvfølgelig grønnere end alle andre steder. Vandet er varmere, renere og smukkere, men vi har også Danmarks bedste service! Hytterne er af den bedste kvalitet. De er flotte og rummelige. Pladserne er flotte og velplejet.</p>
                     <p>Hos os får du altid lige præcis det du bestiller og det er alle pengene værd. Vi svigter ikke, vi fejler ikke, vi er ikke arrogante, vi er bare bedre.</p>
                 </div>
             </div>
@@ -57,7 +57,7 @@
             </div>
         </div>
         <%-- Info text --%>
-        
+
         <%-- Images --%>
         <div class="row">
             <div class="leftcolumn50">
