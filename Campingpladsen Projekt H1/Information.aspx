@@ -8,7 +8,6 @@
     <link rel="styleSheet" href="StyleSheet.css" />
     <title>Midt Camping - Information</title>
 </head>
-
 <body>
     <%-- Banner --%>
     <div class="Banner">

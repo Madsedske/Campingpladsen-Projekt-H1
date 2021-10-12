@@ -218,6 +218,8 @@ namespace Campingpladsen_Projekt_H1
                     conn.Close();
                 }
             }
+            Response.Redirect("FakturaSide.aspx");
+
         }
     }
 }

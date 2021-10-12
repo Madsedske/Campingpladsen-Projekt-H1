@@ -273,7 +273,7 @@
                         </tr>
                         <tr class="TableChange">
                             <td class="TableChange">
-                                <asp:Button href="FakturaSide.aspx" ID="ButtonBestil" runat="server" Text="Bestil" OnClick="ButtonBestil_Click" />
+                               <asp:Button  ID="ButtonBestil" runat="server" Text="Bestil" OnClick="ButtonBestil_Click"/>
                             </td>
                         </tr>
                         <%-- Order --%>
