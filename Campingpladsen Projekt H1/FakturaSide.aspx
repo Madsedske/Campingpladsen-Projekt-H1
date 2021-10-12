@@ -31,6 +31,7 @@
             <div class="middlecolumn33">
                 <div class="card">
                     <h2>FAKTURA</h2>
+                    <p>Tillykke med dit køb på verdens bedste campingplads. Din endelige faktura er ikke lavet endnu, men trust us, vi hæver ikke flere penge end du har betalt. ;)</p>
                 </div>
             </div>
             <div class="rightcolumn33"></div>
