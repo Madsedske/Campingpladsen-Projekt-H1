@@ -38,6 +38,13 @@
             <div class="middlecolumn33">
                 <div class="card">
                     <h2>Booking din næste campingtur her</h2>
+                    <ul>
+                                <li>Teltplads 1-50</li>
+                                <li>Lille plads 51-217</li>
+                                <li>Stor plads 218-309</li>
+                                <li>Standard hytte 310-317</li>
+                                <li>Luksus hytte 318-324</li>
+                            </ul>
                     <table class="BookingTable">
                         <tr class="TableChange">
                             <td class="TableChange">
@@ -271,20 +278,7 @@
                         </tr>
                         <%-- Order --%>
                     
-                    </table>
-
-                    <table class="BookingTable">
-                        <tr class="TableChange">
-                            <ul>
-                                <li>Teltplads 1-50</li>
-                                <li>Lille plads 51-217</li>
-                                <li>Stor plads 218-309</li>
-                                <li>Standard hytte 310-317</li>
-                                <li>Luksus hytte 318-324</li>
-                            </ul>
-                        </tr>
-                    </table>
-                
+                    </table>                
                 </div>
             </div>
             <div class="rightcolumn33"></div>
