@@ -110,12 +110,14 @@ h3 {
     padding: 20px;
 }
 
+ul,
 p {
     font-size: 20px;
     font-family: sans-serif;
     padding:10px;
     line-height: 2;
 }
+
 
 .lastpicbar {
     margin-top:50px;
