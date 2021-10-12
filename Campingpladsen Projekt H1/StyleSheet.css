@@ -82,7 +82,7 @@ src:url('BreeSerif-Regular.ttf');
 }
 
 .card {
-    padding: 20px;
+    padding: 50px;
     margin-top: 50px;
     background-color: whitesmoke;
     box-shadow: 0px 0px 15px 2px #84849d;
@@ -111,9 +111,10 @@ h3 {
 }
 
 p {
-    font-size: 19px;
+    font-size: 20px;
     font-family: sans-serif;
-    padding: 20px;
+    padding:10px;
+    line-height: 2;
 }
 
 .lastpicbar {
@@ -123,36 +124,38 @@ p {
 
 @keyframes imgbar {
     0% {
-        left: -1500px;
+        left: -1050px;
         top: 0px;
     }
 
     50% {
-        left: 1500px;
+        left: 1200px;
         top: 0px;
     }
 
     100% {
-        left: -1500px;
+        left: -1050px;
         top: 0px;
     }
 }
 
 .imgbar {
-    display: block;
-    animation: imgbar 30s linear infinite;
+    display:block;
+    animation: imgbar 40s linear infinite;
     position: relative;
+    border-radius: 5px;
 }
     .imgbar:hover {
         animation-play-state: paused;
     }
 
 .imgset {
-    width: 300px;
-    height: 300px;
+    width: 200px;
+    height: 200px;
     object-fit: cover;
     margin-left:25px;
     margin-right:25px;
+    border-radius: 5px;
 }
 
 footer {

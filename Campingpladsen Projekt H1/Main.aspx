@@ -65,6 +65,9 @@
                 <img class="imgset" src="/Picture/dronebillede.jpg" />
                 <img class="imgset" src="/Picture/laveredronebillede.jpg" />
                 <img class="imgset" src="/Picture/legeplads.jpg" />
+                <img class="imgset" src="/Picture/215681_Tisvildeleje_Camping_pool.jpg" />
+                <img class="imgset" src="/Picture/campingplads-gaasevig-1024x576.jpg" />
+                <img class="imgset" src="/Picture/269961_campingareal-nfj.png" />
             </div>
         </div>
         <%-- Images --%>
