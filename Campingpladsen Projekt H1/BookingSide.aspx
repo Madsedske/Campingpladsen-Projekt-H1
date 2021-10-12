@@ -13,7 +13,7 @@
     <div class="Banner">
         <img src="/Picture/Banner.png" width="100%" height="100%" />
     </div>
-    ½<%-- Banner --%>
+    <%-- Banner --%>
 
     <form id="form1" runat="server">
         

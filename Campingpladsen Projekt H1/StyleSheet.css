@@ -117,18 +117,42 @@ p {
 }
 
 .lastpicbar {
+    margin-top:50px;
     overflow: hidden;
+}
+
+@keyframes imgbar {
+    0% {
+        left: -1500px;
+        top: 0px;
+    }
+
+    50% {
+        left: 1500px;
+        top: 0px;
+    }
+
+    100% {
+        left: -1500px;
+        top: 0px;
+    }
 }
 
 .imgbar {
     display: block;
-    position: center;
+    animation: imgbar 30s linear infinite;
+    position: relative;
 }
+    .imgbar:hover {
+        animation-play-state: paused;
+    }
 
 .imgset {
-    width: 400px;
-    height: 400px;
+    width: 300px;
+    height: 300px;
     object-fit: cover;
+    margin-left:25px;
+    margin-right:25px;
 }
 
 footer {
