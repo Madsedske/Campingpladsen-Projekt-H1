@@ -42,19 +42,20 @@
                 <div class="card">
                     <h2>Velkommen til Midt Camping.</h2>
                     <h3>Kort info:</h3>
-                    <p>
-                        Campingpladsen ligger kun 10 min fra Danmarks bedste park, nemlig legoland og byder på masser af gode oplevelser. Vores placering midt i smukke Jylland, giver adgang
+                    <div>
+                        <p>Campingpladsen ligger kun 10 min fra Danmarks bedste park, nemlig legoland og byder på masser af gode oplevelser. Vores placering midt i smukke Jylland, giver adgang
                         til utallige af forskellige oplevelser, der vil med sikkerhed underholde hele din familie, i foreholdt til alle andre mere kedelige og deprimerende campingpladser
-                        her i danmark. 
+                        her i danmark. </p>
 
-                        Som man siger:
+                        <p>Som man siger:</p>
 
-                        <blockquote>"'"Alle veje fører til Rom, og Rom er Midt campingplads"'"</blockquote>
+                        <blockquote>"Alle veje fører til Rom, og Rom er Midt campingplads"</blockquote>
+
                         <p>- Midt campingplads ejer, 2021</p>
 
                        <p> Vi tilbyder trope vandland til billige priser, stort fælleshus med TV og internet, legepladser for store og små børn og ikke mindst gode pladsforhold til store vogne.
                         Teltcampisterne vil bemærke, at der også er tænkt på dem med faciliteter, der gør livet, lettere specielt når vejret driller.</p>
-                    </p>
+                    </div>
                     <blockquote></blockquote>
                     <p>På vores campingplads er græsset selvfølgelig grønnere end alle andre steder. Vandet er varmere, renere og smukkere, men vi har også Danmarks bedste service! Hytterne er af den bedste kvalitet. De er flotte og rummelige. Pladserne er flotte og velplejet.</p>
                     <p>Hos os får du altid lige præcis det du bestiller og det er alle pengene værd. Vi svigter ikke, vi fejler ikke, vi er ikke arrogante, vi er bare bedre.</p>
