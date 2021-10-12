@@ -12,7 +12,7 @@
 
 <body>
     <%-- Banner --%>
-    <div class="Hey">
+    <div class="Banner">
         <img src="/Picture/Banner.png" width="100%" height="100%" />
     </div>
     <%-- Banner --%>

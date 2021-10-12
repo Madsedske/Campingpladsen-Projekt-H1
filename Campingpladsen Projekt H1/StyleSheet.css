@@ -6,14 +6,12 @@
     box-sizing: border-box;
 }
 
-@font-face
-{
+@font-face {
 font-family:"Pacifico";
 src:url('Pacifico-Regular.ttf');
 }
 
-@font-face
-{
+@font-face {
 font-family:"BreeSerif";
 src:url('BreeSerif-Regular.ttf');
 }
@@ -48,7 +46,7 @@ src:url('BreeSerif-Regular.ttf');
     font-family: Pacifico;
 }
 
-.Hey {
+.Banner {
     height: 200px;
 }
 
@@ -109,6 +107,7 @@ h2 {
 
 h3 {
     font-family: Pacifico;
+    padding: 20px;
 }
 
 p {
@@ -178,25 +177,25 @@ footer {
     height: 400px;
 }
 
+
+
 @media only screen and (max-width: 1400px) {
-    .Hey {
+    .Banner {
         height:150px;
     }
 }
 
 @media only screen and (max-width:1000px) {
-    .Hey {
+    .Banner {
         height: 100px;
     }
 }
 
-
 @media only screen and (max-width:700px) {
-    .Hey {
+    .Banner {
         height: 50px;
     }
 }
-
 
 @media only screen and (max-width: 700px) {
     .topnav {
@@ -207,6 +206,11 @@ footer {
 @media only screen and (max-width: 1000px) {
     .topnav a{
         width: 100%;
+    }
+}
+@media only screen and (max-width: 500px) {
+    .topnav a {
+        font-size: 10px;
     }
 }
 
@@ -237,5 +241,11 @@ footer {
 @media only screen and (max-width: 1000px) {
     p {
         font-size:15px;
+    }
+}
+
+@media only screen and (max-width: 485px) {
+    .BookingTable, .TableChange {
+        display: block;
     }
 }
