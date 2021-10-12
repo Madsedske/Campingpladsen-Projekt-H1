@@ -13,7 +13,11 @@
     <div class="Banner">
         <img src="/Picture/Banner.png" width="100%" height="100%" />
     </div>
+    ½<%-- Banner --%>
+
     <form id="form1" runat="server">
+        
+        <%-- Navbar --%>
         <table class="topnav">
             <tr>
                 <td class="headline">Midt Camping</td>
@@ -23,11 +27,14 @@
                 <td><a href="Information.aspx">Information</a></td>
             </tr>
         </table>
-
+        <%-- Navbar --%>
+        
+        <%-- Booking --%>
         <div class="row">
             <div class="leftcolumn33">
                 <div class="sidecard"></div>
             </div>
+
             <div class="middlecolumn33">
                 <div class="card">
                     <h2>Booking din næste campingtur her</h2>
@@ -41,6 +48,8 @@
                                 <asp:DropDownList ID="DropDownSæsonPlads" runat="server" DataSourceID="SqlDataSource3" DataTextField="SeasonType" DataValueField="SeasonType"></asp:DropDownList>
                                 <asp:SqlDataSource ID="SqlDataSource3" runat="server" ConnectionString="<%$ ConnectionStrings:SeasonSite %>" SelectCommand="SELECT * FROM [SeasonSite]"></asp:SqlDataSource>
                             </td>
+                            <%-- Season renting --%>
+
                         </tr>
                         <tr class="TableChange">
                             <td class="TableChange">
@@ -67,6 +76,8 @@
                                     <asp:ListItem Text="15" Value="15"></asp:ListItem>
                                 </asp:DropDownList>
                             </td>
+                            <%-- Adult amount --%>
+                        
                         </tr>
                         <tr class="TableChange">
                             <td class="TableChange">
@@ -92,6 +103,8 @@
                                     <asp:ListItem Text="14" Value="14"></asp:ListItem>
                                     <asp:ListItem Text="15" Value="15"></asp:ListItem>
                                 </asp:DropDownList>
+                            <%-- Children amount --%>
+                            
                             </td>
                         </tr>
                         <tr class="TableChange">
@@ -110,6 +123,8 @@
                                     <asp:ListItem Text="6" Value="6"></asp:ListItem>
                                     <asp:ListItem Text="7" Value="7"></asp:ListItem>
                                 </asp:DropDownList>
+                                <%-- Dog amount --%>
+                            
                             </td>
                         </tr>
                         <tr class="TableChange">
@@ -123,6 +138,8 @@
                                 </asp:DropDownList>
                                 <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:CampingSite %>" SelectCommand="Sites_Not_Taken" SelectCommandType="StoredProcedure"></asp:SqlDataSource>
                             </td>
+                            <%-- Select price --%>
+                        
                         </tr>
                         <tr class="TableChange">
                             <td class="TableChange">
@@ -148,6 +165,8 @@
                                     <asp:ListItem Text="14" Value="14"></asp:ListItem>
                                     <asp:ListItem Text="15" Value="15"></asp:ListItem>
                                 </asp:DropDownList>
+                                <%-- Bike renting --%>
+                            
                             </td>
                         </tr>
                         <tr class="TableChange">
@@ -175,6 +194,8 @@
                                 <asp:Label ID="Label11" runat="server" Text="Rengøring? (Hytter)"></asp:Label>
                                 <asp:CheckBox ID="CheckBoxRengøring" runat="server" />
                             </td>
+                            <%-- Cleaning --%>
+
                         </tr>
                         <tr class="TableChange">
                             <td class="TableChange">
@@ -202,6 +223,8 @@
                                 <asp:Label ID="Label18" runat="server" Text="Sengelinned"></asp:Label>
                                 <asp:CheckBox ID="CheckBoxSengelinned" runat="server" />
                             </td>
+                            <%-- Bed covers --%>
+                        
                         </tr>
                         <tr class="TableChange">
                             <td class="TableChange">
@@ -238,12 +261,16 @@
                                     <TodayDayStyle BackColor="#F2AF5C" />
                                 </asp:Calendar>
                             </td>
+                            <%-- Calendar2 --%>
+                        
                         </tr>
                         <tr class="TableChange">
                             <td class="TableChange">
                                 <asp:Button href="FakturaSide.aspx" ID="ButtonBestil" runat="server" Text="Bestil" OnClick="ButtonBestil_Click" />
                             </td>
                         </tr>
+                        <%-- Order --%>
+                    
                     </table>
 
                     <table class="BookingTable">
@@ -263,12 +290,15 @@
                                 </ul>
                             </td>
                         </tr>
-                    </table>
+                        <%-- Space types --%>
+                   
+                   </table>
                 </div>
             </div>
             <div class="rightcolumn33"></div>
             <div class="sidecard"></div>
         </div>
+        <%-- Booking --%>
 
 
         <footer>
