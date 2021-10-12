@@ -43,7 +43,15 @@
                     <h2>Velkommen til Midt Camping.</h2>
                     <h3>Kort info:</h3>
                     <p>
-                        Campingpladsen ligger kun 10 min fra Danmarks bedste park, nemlig legoland og byder på masser af gode oplevelser. 
+                        Campingpladsen ligger kun 10 min fra Danmarks bedste park, nemlig legoland og byder på masser af gode oplevelser. Vores placering midt i smukke Jylland, giver adgang
+                        til utallige af forskellige oplevelser, der vil med sikkerhed underholde hele din familie, i foreholdt til alle andre mere kedelige og deprimerende campingpladser
+                        her i danmark. 
+
+                        Som man siger:
+
+                        <blockquote>"'"Alle veje fører til Rom, og Rom er Midt campingplads"'"</blockquote>
+                        <p>- Midt campingplads ejer, 2021</p>
+
                         Vi tilbyder trope vandland til billige priser, stort fælleshus med TV og internet, legepladser for store og små børn og ikke mindst gode pladsforhold til store vogne.
                         Teltcampisterne vil bemærke, at der også er tænkt på dem med faciliteter, der gør livet, lettere specielt når vejret driller.
                     </p>
