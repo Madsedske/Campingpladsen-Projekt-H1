@@ -66,7 +66,23 @@
                             </td>
                             <td class="TableChange">
                                 <asp:Label ID="Label7" runat="server" Text="Antal Voksne: "></asp:Label>
-                                <asp:DropDownList ID="DropDownListVoksne" runat="server"></asp:DropDownList>
+                                <asp:DropDownList ID="DropDownListVoksne" runat="server">
+                                    <asp:ListItem Text="1" Value="1"></asp:ListItem>
+                                    <asp:ListItem Text="2" Value="2"></asp:ListItem>
+                                    <asp:ListItem Text="3" Value="3"></asp:ListItem>
+                                    <asp:ListItem Text="4" Value="4"></asp:ListItem>
+                                    <asp:ListItem Text="5" Value="5"></asp:ListItem>
+                                    <asp:ListItem Text="6" Value="6"></asp:ListItem>
+                                    <asp:ListItem Text="7" Value="7"></asp:ListItem>
+                                    <asp:ListItem Text="8" Value="8"></asp:ListItem>
+                                    <asp:ListItem Text="9" Value="9"></asp:ListItem>
+                                    <asp:ListItem Text="10" Value="10"></asp:ListItem>
+                                    <asp:ListItem Text="11" Value="11"></asp:ListItem>
+                                    <asp:ListItem Text="12" Value="12"></asp:ListItem>
+                                    <asp:ListItem Text="13" Value="13"></asp:ListItem>
+                                    <asp:ListItem Text="14" Value="14"></asp:ListItem>
+                                    <asp:ListItem Text="15" Value="15"></asp:ListItem>
+                                </asp:DropDownList>
                             </td>
                             <%-- Adult amount --%>
                         
@@ -276,7 +292,7 @@
             <div class="Footer__title">Kontakt os!</div>
             <div class="Footer__link">Email: Midtcamping@campingemail.dk</div>
             <div class="Footer__link">Telefon: +45 12 34 56 78</div>
-            <div class="privacy-box">Privacy Policy - Terms and conditions</div> 
+            <div class="privacy-box">Privacy Policy - Terms and conditions</div>
         </footer>
     </form>
 </body>
