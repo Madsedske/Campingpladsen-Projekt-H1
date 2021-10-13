@@ -35,29 +35,30 @@
                     <asp:DetailsView ID="DetailsView1" runat="server" Height="50px" Width="125px" AutoGenerateRows="False" BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="3" DataSourceID="Faktura">
                         <EditRowStyle BackColor="#669999" Font-Bold="True" ForeColor="White" />
                         <Fields>
-                            <asp:BoundField DataField="ReservationsNumber" HeaderText="ReservationsNumber" SortExpression="ReservationsNumber" />
-                            <asp:BoundField DataField="ReservationStartDate" HeaderText="ReservationStartDate" SortExpression="ReservationStartDate" />
-                            <asp:BoundField DataField="ReservationEndDate" HeaderText="ReservationEndDate" SortExpression="ReservationEndDate" />
-                            <asp:BoundField DataField="FirstName" HeaderText="FirstName" SortExpression="FirstName" />
-                            <asp:BoundField DataField="LastName" HeaderText="LastName" SortExpression="LastName" />
-                            <asp:BoundField DataField="Address" HeaderText="Address" SortExpression="Address" />
+                            <asp:BoundField DataField="ReservationNumber" HeaderText="Reservationummer" SortExpression="ReservationNumber" />
+                            <asp:BoundField DataField="ReservationStartDate" HeaderText="Ankomst" SortExpression="ReservationStartDate" />
+                            <asp:BoundField DataField="ReservationEndDate" HeaderText="Afrejse" SortExpression="ReservationEndDate" />
+                            <asp:BoundField DataField="FirstName" HeaderText="Fornavn" SortExpression="FirstName" />
+                            <asp:BoundField DataField="LastName" HeaderText="Efternavn" SortExpression="LastName" />
+                            <asp:BoundField DataField="Address" HeaderText="Adresse" SortExpression="Address" />
                             <asp:BoundField DataField="Email" HeaderText="Email" SortExpression="Email" />
-                            <asp:BoundField DataField="PhoneNumber" HeaderText="PhoneNumber" SortExpression="PhoneNumber" />
-                            <asp:BoundField DataField="Adult" HeaderText="Adult" SortExpression="Adult" />
-                            <asp:BoundField DataField="Children" HeaderText="Children" SortExpression="Children" />
-                            <asp:BoundField DataField="Dog" HeaderText="Dog" SortExpression="Dog" />
-                            <asp:BoundField DataField="SiteNumber" HeaderText="SiteNumber" SortExpression="SiteNumber" />
-                            <asp:BoundField DataField="SeasonType" HeaderText="SeasonType" SortExpression="SeasonType" />
-                            <asp:BoundField DataField="YesOrNoCleaning" HeaderText="YesOrNoCleaning" SortExpression="YesOrNoCleaning" />
-                            <asp:BoundField DataField="OverallPrice" HeaderText="OverallPrice" SortExpression="OverallPrice" />
-                            <asp:BoundField DataField="SenesteFaktura" HeaderText="SenesteFaktura" SortExpression="SenesteFaktura" />
+                            <asp:BoundField DataField="PhoneNumber" HeaderText="Tlf.nr." SortExpression="PhoneNumber" />
+                            <asp:BoundField DataField="Adult" HeaderText="Antal voksne" SortExpression="Adult" />
+                            <asp:BoundField DataField="Children" HeaderText="Antal børn" SortExpression="Children" />
+                            <asp:BoundField DataField="Dog" HeaderText="Antal hunde" SortExpression="Dog" />
+                            <asp:BoundField DataField="SiteNumber" HeaderText="Plads nr." SortExpression="SiteNumber" />
+                            <asp:BoundField DataField="SeasonType" HeaderText="Sæsonplads" SortExpression="SeasonType" />
+                            <asp:BoundField DataField="YesOrNoCleaning" HeaderText="Rengøring" SortExpression="YesOrNoCleaning" />
+                            <asp:BoundField DataField="OverallPrice" HeaderText="Samlet pris" SortExpression="OverallPrice" />
+                            <asp:BoundField DataField="SenesteFaktura" HeaderText="Tid på bestilling" SortExpression="SenesteFaktura" />
                         </Fields>
                         <FooterStyle BackColor="White" ForeColor="#000066" />
                         <HeaderStyle BackColor="#006699" Font-Bold="True" ForeColor="White" />
                         <PagerStyle BackColor="White" ForeColor="#000066" HorizontalAlign="Left" />
                         <RowStyle ForeColor="#000066" />
                     </asp:DetailsView>
-                    <asp:SqlDataSource ID="Faktura" runat="server" ConnectionString="<%$ ConnectionStrings:MidlertidigFaktura %>" SelectCommand="FakturaLookUp" SelectCommandType="StoredProcedure"></asp:SqlDataSource>
+                    <asp:SqlDataSource ID="Faktura" runat="server" ConnectionString="<%$ ConnectionStrings:Reservation %>" SelectCommand="FakturaLookUp" SelectCommandType="StoredProcedure"></asp:SqlDataSource>
+                    <asp:SqlDataSource ID="FakturaVisning" runat="server" ConnectionString="<%$ ConnectionStrings:Reservation %>" SelectCommand="FakturaLookUp" SelectCommandType="StoredProcedure"></asp:SqlDataSource>
                     <div>
                         <h3>Forglem ej at anmelde os, blandt vores mange andre fine anmeldelser</h3>
                         <div>Reviews 1,713  •  Bad</div>
