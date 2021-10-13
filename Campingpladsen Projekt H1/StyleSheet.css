@@ -6,15 +6,7 @@
     box-sizing: border-box;
 }
 
-@font-face {
-font-family:"Pacifico";
-src:url('Pacifico-Regular.ttf');
-}
-
-@font-face {
-font-family:"BreeSerif";
-src:url('BreeSerif-Regular.ttf');
-}
+@import url('https://fonts.googleapis.com/css2?family=Bree+Serif&display=swap');
 
 .topnav {
     width: 100%;
@@ -113,7 +105,7 @@ h3 {
 ul,
 p {
     font-size: 20px;
-    font-family: sans-serif;
+    font-family: 'Bree Serif', serif;
     padding:10px;
     line-height: 2;
 }
