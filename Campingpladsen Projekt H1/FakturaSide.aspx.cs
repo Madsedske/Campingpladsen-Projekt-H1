@@ -11,7 +11,6 @@ namespace Campingpladsen_Projekt_H1
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
         }
     }
 }
