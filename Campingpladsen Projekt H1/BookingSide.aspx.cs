@@ -220,6 +220,34 @@ namespace Campingpladsen_Projekt_H1
                     conn.Close();
                 }
             }
+            using (SqlConnection conn = new SqlConnection())
+            {
+                conn.ConnectionString = ConfigurationManager.ConnectionStrings["Faktura"].ConnectionString;
+                using (SqlCommand cmd = new SqlCommand("Insert_Faktura", conn))
+                {
+                    // A stored procedure that finds the column shown as a string with an @, the type
+                    // and sets it to the input value of the user - Faktura
+                    conn.Open();
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@ReservationNumber", SqlDbType.Int).Value = randomNumber;
+                    cmd.Parameters.AddWithValue("@ReservationStartDate", SqlDbType.DateTime).Value = startdateformatted;
+                    cmd.Parameters.AddWithValue("@ReservationEndDate", SqlDbType.DateTime).Value = endDateFormatted;
+                    cmd.Parameters.AddWithValue("@FirstName", SqlDbType.VarChar).Value = TextBoxFornavn.Text;
+                    cmd.Parameters.AddWithValue("@LastName", SqlDbType.Text).Value = TextBoxEfternavn.Text;
+                    cmd.Parameters.AddWithValue("@Address", SqlDbType.Text).Value = TextBoxAdresse.Text;
+                    cmd.Parameters.AddWithValue("@Email", SqlDbType.VarChar).Value = TextBoxEmail.Text;
+                    cmd.Parameters.AddWithValue("@PhoneNumber", SqlDbType.VarChar).Value = Convert.ToInt32(TextBoxTlf.Text);
+                    cmd.Parameters.AddWithValue("@Adult", SqlDbType.Int).Value = Convert.ToInt32(DropDownListVoksne.SelectedValue);
+                    cmd.Parameters.AddWithValue("@Children", SqlDbType.Int).Value = Convert.ToInt32(DropDownListBørn.SelectedValue);
+                    cmd.Parameters.AddWithValue("@Dog", SqlDbType.Int).Value = Convert.ToInt32(DropDownListHunde.SelectedValue);
+                    cmd.Parameters.AddWithValue("@SiteNumber", SqlDbType.Int).Value = Convert.ToInt32(DropDownListVælgPlads.SelectedValue);
+                    cmd.Parameters.AddWithValue("@SeasonType", SqlDbType.VarChar).Value = DropDownSæsonPlads.SelectedValue;                   
+                    cmd.Parameters.AddWithValue("@YesOrNoCleaning", SqlDbType.NChar).Value = CleaningOrNot;
+                    cmd.Parameters.AddWithValue("@OverallPrice", SqlDbType.Int).Value = overallPriceSeason;
+                    cmd.ExecuteNonQuery();
+                    conn.Close();
+                }
+            }
             Response.Redirect("FakturaSide.aspx");
 
         }
