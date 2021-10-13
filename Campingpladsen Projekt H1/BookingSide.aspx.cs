@@ -13,9 +13,6 @@ namespace Campingpladsen_Projekt_H1
     public partial class BookingSide : System.Web.UI.Page
     {
         // Insert numbers for dropdown lists
-        For i As Integer = 1 To 15
-            dropDownListVoksne.Items.Add(new ListItem(i.ToString(), i.ToString()))
-        Next i
 
         // Generates random number for reservation
         Random r = new Random();
