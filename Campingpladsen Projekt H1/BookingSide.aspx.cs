@@ -217,7 +217,7 @@ namespace Campingpladsen_Projekt_H1
             }
             using (SqlConnection conn = new SqlConnection())
             {
-                conn.ConnectionString = ConfigurationManager.ConnectionStrings["Faktura"].ConnectionString;
+                conn.ConnectionString = ConfigurationManager.ConnectionStrings["MidlertidigFaktura"].ConnectionString;
                 using (SqlCommand cmd = new SqlCommand("Insert_Faktura", conn))
                 {
                     // A stored procedure that finds the column shown as a string with an @, the type
@@ -239,6 +239,7 @@ namespace Campingpladsen_Projekt_H1
                     cmd.Parameters.AddWithValue("@SeasonType", SqlDbType.VarChar).Value = DropDownSæsonPlads.SelectedValue;                   
                     cmd.Parameters.AddWithValue("@YesOrNoCleaning", SqlDbType.NChar).Value = CleaningOrNot;
                     cmd.Parameters.AddWithValue("@OverallPrice", SqlDbType.Int).Value = overallPriceSeason;
+                    cmd.Parameters.AddWithValue("@SenesteFaktura", SqlDbType.DateTime).Value = date;
                     cmd.ExecuteNonQuery();
                     conn.Close();
                 }
