@@ -3,17 +3,24 @@
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
+
 <head runat="server">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="styleSheet" href="StyleSheet.css" />
     <title>Midt Camping - Faktura</title>
 </head>
+
+
 <body>
     <%-- Banner --%>
     <div class="Banner">
         <img src="/Picture/Banner.png" width="100%" height="100%" />
     </div>
+    <%-- Banner --%>
+    
     <form id="form1" runat="server">
+        
+        <%-- Navbar --%>
         <table class="topnav">
             <tr>
                 <td class="headline">Midt Camping</td>
@@ -23,6 +30,7 @@
                 <td><a href="Information.aspx">Information</a></td>
             </tr>
         </table>
+        <%-- Navbar --%>
 
         <div class="row">
             <div class="leftcolumn33">
@@ -30,6 +38,8 @@
             </div>
             <div class="middlecolumn33">
                 <div class="card">
+                    
+                    <%-- Invoice --%>
                     <h2>FAKTURA</h2>
                     <p>Tillykke med dit køb på verdens bedste campingplads. Din endelige faktura er ikke lavet endnu, men trust us, vi hæver ikke flere penge end du har betalt. ;)</p>
                     <asp:DetailsView ID="DetailsView1" runat="server" Height="50px" Width="125px" AutoGenerateRows="False" BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="3" DataSourceID="Faktura">
@@ -59,11 +69,16 @@
                     </asp:DetailsView>
                     <asp:SqlDataSource ID="Faktura" runat="server" ConnectionString="<%$ ConnectionStrings:Reservation %>" SelectCommand="FakturaLookUp" SelectCommandType="StoredProcedure"></asp:SqlDataSource>
                     <asp:SqlDataSource ID="FakturaVisning" runat="server" ConnectionString="<%$ ConnectionStrings:Reservation %>" SelectCommand="FakturaLookUp" SelectCommandType="StoredProcedure"></asp:SqlDataSource>
+                    <%-- Invoice --%>
+                    
+                    <%-- Reviews --%>
                     <div>
                         <h3>Forglem ej at anmelde os, blandt vores mange andre fine anmeldelser</h3>
                         <div>Reviews 1,713  •  Bad</div>
                         <img src="https://cdn.trustpilot.net/brand-assets/4.1.0/stars/stars-1.svg" width="10%" height="10%" alt="1 star: Bad">
                     </div>
+                    <%-- Reviews --%>
+                
                 </div>
             </div>
             <div class="rightcolumn33"></div>
