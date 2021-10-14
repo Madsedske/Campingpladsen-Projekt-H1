@@ -7,16 +7,13 @@ using System.Web.UI.WebControls;
 using System.Data.SqlClient;
 using System.Configuration;
 using System.Data;
-
 namespace Campingpladsen_Projekt_H1
 {
     public partial class BookingSide : System.Web.UI.Page
     {
-        // Insert numbers for dropdown lists
-
         // Generates random number for reservation
         Random r = new Random();
-        protected void Page_Load(object sender, EventArgs e) {}
+        protected void Page_Load(object sender, EventArgs e) { }
 
         protected void ButtonBestil_Click(object sender, EventArgs e)
         {
@@ -213,7 +210,7 @@ namespace Campingpladsen_Projekt_H1
                     cmd.Parameters.AddWithValue("@Email", SqlDbType.VarChar).Value = TextBoxEmail.Text;
                     cmd.Parameters.AddWithValue("@PhoneNumber", SqlDbType.VarChar).Value = Convert.ToInt32(TextBoxTlf.Text);
                     cmd.Parameters.AddWithValue("@YesOrNoCleaning", SqlDbType.NChar).Value = CleaningOrNot;
-                    cmd.Parameters.AddWithValue("@SenesteFaktura", SqlDbType.DateTime).Value = date;
+                    cmd.Parameters.AddWithValue("@Faktura", SqlDbType.DateTime).Value = date;
 
                     cmd.ExecuteNonQuery();
                     conn.Close();
