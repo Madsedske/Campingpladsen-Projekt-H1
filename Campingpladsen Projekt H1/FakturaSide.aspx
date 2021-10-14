@@ -41,18 +41,17 @@
                     
                     <%-- Invoice --%>
                     <h2>FAKTURA</h2>
-                    <p>Tillykke med dit køb på verdens bedste campingplads. Din endelige faktura er ikke lavet endnu, men trust us, vi hæver ikke flere penge end du har betalt. ;)</p>
-                    <asp:DetailsView ID="DetailsView1" runat="server" Height="50px" Width="125px" AutoGenerateRows="False" BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="3" DataSourceID="Faktura">
+                    <p>Tillykke med dit køb på verdens bedste campingplads. Din endelige faktura er ikke lavet endnu, men trust us, vi hæver ikke flere penge end du har betalt. ;)<asp:DetailsView ID="DetailsView1" runat="server" Height="50px" Width="125px" AutoGenerateRows="False" BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="3" DataSourceID="SqlDataSource1">
                         <EditRowStyle BackColor="#669999" Font-Bold="True" ForeColor="White" />
                         <Fields>
-                            <asp:BoundField DataField="ReservationNumber" HeaderText="Reservationummer" SortExpression="ReservationNumber" />
+                            <asp:BoundField DataField="ReservationNumber" HeaderText="Reservationsnummer" SortExpression="ReservationNumber" />
                             <asp:BoundField DataField="ReservationStartDate" HeaderText="Ankomst" SortExpression="ReservationStartDate" />
                             <asp:BoundField DataField="ReservationEndDate" HeaderText="Afrejse" SortExpression="ReservationEndDate" />
                             <asp:BoundField DataField="FirstName" HeaderText="Fornavn" SortExpression="FirstName" />
                             <asp:BoundField DataField="LastName" HeaderText="Efternavn" SortExpression="LastName" />
                             <asp:BoundField DataField="Address" HeaderText="Adresse" SortExpression="Address" />
                             <asp:BoundField DataField="Email" HeaderText="Email" SortExpression="Email" />
-                            <asp:BoundField DataField="PhoneNumber" HeaderText="Tlf.nr." SortExpression="PhoneNumber" />
+                            <asp:BoundField DataField="PhoneNumber" HeaderText="Tlf. nr." SortExpression="PhoneNumber" />
                             <asp:BoundField DataField="Adult" HeaderText="Antal voksne" SortExpression="Adult" />
                             <asp:BoundField DataField="Children" HeaderText="Antal børn" SortExpression="Children" />
                             <asp:BoundField DataField="Dog" HeaderText="Antal hunde" SortExpression="Dog" />
@@ -60,15 +59,15 @@
                             <asp:BoundField DataField="SeasonType" HeaderText="Sæsonplads" SortExpression="SeasonType" />
                             <asp:BoundField DataField="YesOrNoCleaning" HeaderText="Rengøring" SortExpression="YesOrNoCleaning" />
                             <asp:BoundField DataField="OverallPrice" HeaderText="Samlet pris" SortExpression="OverallPrice" />
-                            <asp:BoundField DataField="SenesteFaktura" HeaderText="Tid på bestilling" SortExpression="SenesteFaktura" />
+                            <asp:BoundField DataField="Faktura" HeaderText="Tid på bestilling" SortExpression="Faktura" />
                         </Fields>
                         <FooterStyle BackColor="White" ForeColor="#000066" />
                         <HeaderStyle BackColor="#006699" Font-Bold="True" ForeColor="White" />
                         <PagerStyle BackColor="White" ForeColor="#000066" HorizontalAlign="Left" />
                         <RowStyle ForeColor="#000066" />
                     </asp:DetailsView>
-                    <asp:SqlDataSource ID="Faktura" runat="server" ConnectionString="<%$ ConnectionStrings:Reservation %>" SelectCommand="FakturaLookUp" SelectCommandType="StoredProcedure"></asp:SqlDataSource>
-                    <asp:SqlDataSource ID="FakturaVisning" runat="server" ConnectionString="<%$ ConnectionStrings:Reservation %>" SelectCommand="FakturaLookUp" SelectCommandType="StoredProcedure"></asp:SqlDataSource>
+                    </p>
+                    <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:Reservation %>" SelectCommand="FakturaLookUp" SelectCommandType="StoredProcedure"></asp:SqlDataSource>
                     <%-- Invoice --%>
                     
                     <%-- Reviews --%>
