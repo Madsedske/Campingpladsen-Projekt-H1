@@ -1,6 +1,111 @@
+USE [master]
+GO
+/****** Object:  Database [MidtCampingDatabase]    Script Date: 14-10-2021 08:21:34 ******/
+CREATE DATABASE [MidtCampingDatabase]
+ CONTAINMENT = NONE
+ ON  PRIMARY 
+( NAME = N'MidtCampingDatabase', FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL15.MSSQLSERVER\MSSQL\DATA\MidtCampingDatabase.mdf' , SIZE = 8192KB , MAXSIZE = UNLIMITED, FILEGROWTH = 65536KB )
+ LOG ON 
+( NAME = N'MidtCampingDatabase_log', FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL15.MSSQLSERVER\MSSQL\DATA\MidtCampingDatabase_log.ldf' , SIZE = 8192KB , MAXSIZE = 2048GB , FILEGROWTH = 65536KB )
+ WITH CATALOG_COLLATION = DATABASE_DEFAULT
+GO
+ALTER DATABASE [MidtCampingDatabase] SET COMPATIBILITY_LEVEL = 150
+GO
+IF (1 = FULLTEXTSERVICEPROPERTY('IsFullTextInstalled'))
+begin
+EXEC [MidtCampingDatabase].[dbo].[sp_fulltext_database] @action = 'enable'
+end
+GO
+ALTER DATABASE [MidtCampingDatabase] SET ANSI_NULL_DEFAULT OFF 
+GO
+ALTER DATABASE [MidtCampingDatabase] SET ANSI_NULLS OFF 
+GO
+ALTER DATABASE [MidtCampingDatabase] SET ANSI_PADDING OFF 
+GO
+ALTER DATABASE [MidtCampingDatabase] SET ANSI_WARNINGS OFF 
+GO
+ALTER DATABASE [MidtCampingDatabase] SET ARITHABORT OFF 
+GO
+ALTER DATABASE [MidtCampingDatabase] SET AUTO_CLOSE OFF 
+GO
+ALTER DATABASE [MidtCampingDatabase] SET AUTO_SHRINK OFF 
+GO
+ALTER DATABASE [MidtCampingDatabase] SET AUTO_UPDATE_STATISTICS ON 
+GO
+ALTER DATABASE [MidtCampingDatabase] SET CURSOR_CLOSE_ON_COMMIT OFF 
+GO
+ALTER DATABASE [MidtCampingDatabase] SET CURSOR_DEFAULT  GLOBAL 
+GO
+ALTER DATABASE [MidtCampingDatabase] SET CONCAT_NULL_YIELDS_NULL OFF 
+GO
+ALTER DATABASE [MidtCampingDatabase] SET NUMERIC_ROUNDABORT OFF 
+GO
+ALTER DATABASE [MidtCampingDatabase] SET QUOTED_IDENTIFIER OFF 
+GO
+ALTER DATABASE [MidtCampingDatabase] SET RECURSIVE_TRIGGERS OFF 
+GO
+ALTER DATABASE [MidtCampingDatabase] SET  DISABLE_BROKER 
+GO
+ALTER DATABASE [MidtCampingDatabase] SET AUTO_UPDATE_STATISTICS_ASYNC OFF 
+GO
+ALTER DATABASE [MidtCampingDatabase] SET DATE_CORRELATION_OPTIMIZATION OFF 
+GO
+ALTER DATABASE [MidtCampingDatabase] SET TRUSTWORTHY OFF 
+GO
+ALTER DATABASE [MidtCampingDatabase] SET ALLOW_SNAPSHOT_ISOLATION OFF 
+GO
+ALTER DATABASE [MidtCampingDatabase] SET PARAMETERIZATION SIMPLE 
+GO
+ALTER DATABASE [MidtCampingDatabase] SET READ_COMMITTED_SNAPSHOT OFF 
+GO
+ALTER DATABASE [MidtCampingDatabase] SET HONOR_BROKER_PRIORITY OFF 
+GO
+ALTER DATABASE [MidtCampingDatabase] SET RECOVERY FULL 
+GO
+ALTER DATABASE [MidtCampingDatabase] SET  MULTI_USER 
+GO
+ALTER DATABASE [MidtCampingDatabase] SET PAGE_VERIFY CHECKSUM  
+GO
+ALTER DATABASE [MidtCampingDatabase] SET DB_CHAINING OFF 
+GO
+ALTER DATABASE [MidtCampingDatabase] SET FILESTREAM( NON_TRANSACTED_ACCESS = OFF ) 
+GO
+ALTER DATABASE [MidtCampingDatabase] SET TARGET_RECOVERY_TIME = 60 SECONDS 
+GO
+ALTER DATABASE [MidtCampingDatabase] SET DELAYED_DURABILITY = DISABLED 
+GO
+ALTER DATABASE [MidtCampingDatabase] SET ACCELERATED_DATABASE_RECOVERY = OFF  
+GO
+EXEC sys.sp_db_vardecimal_storage_format N'MidtCampingDatabase', N'ON'
+GO
+ALTER DATABASE [MidtCampingDatabase] SET QUERY_STORE = OFF
+GO
 USE [MidtCampingDatabase]
 GO
-/****** Object:  Table [dbo].[CampingSite]    Script Date: 08-10-2021 09:05:13 ******/
+/****** Object:  User [LIN]    Script Date: 14-10-2021 08:21:34 ******/
+CREATE USER [LIN] FOR LOGIN [LIN] WITH DEFAULT_SCHEMA=[dbo]
+GO
+/****** Object:  User [MR]    Script Date: 14-10-2021 08:21:34 ******/
+CREATE USER [MR] FOR LOGIN [MR] WITH DEFAULT_SCHEMA=[dbo]
+GO
+/****** Object:  User [Only_read]    Script Date: 14-10-2021 08:21:34 ******/
+CREATE USER [Only_read] FOR LOGIN [Only_read] WITH DEFAULT_SCHEMA=[dbo]
+GO
+ALTER ROLE [db_owner] ADD MEMBER [LIN]
+GO
+ALTER ROLE [db_datareader] ADD MEMBER [LIN]
+GO
+ALTER ROLE [db_datawriter] ADD MEMBER [LIN]
+GO
+ALTER ROLE [db_owner] ADD MEMBER [MR]
+GO
+ALTER ROLE [db_datareader] ADD MEMBER [MR]
+GO
+ALTER ROLE [db_datawriter] ADD MEMBER [MR]
+GO
+ALTER ROLE [db_datareader] ADD MEMBER [Only_read]
+GO
+/****** Object:  Table [dbo].[CampingSite]    Script Date: 14-10-2021 08:21:34 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -14,7 +119,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Reservation]    Script Date: 08-10-2021 09:05:13 ******/
+/****** Object:  Table [dbo].[Reservation]    Script Date: 14-10-2021 08:21:34 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -29,10 +134,11 @@ CREATE TABLE [dbo].[Reservation](
 	[FirstName] [varchar](255) NULL,
 	[Email] [varchar](255) NULL,
 	[PhoneNumber] [varchar](255) NULL,
-	[YesOrNoCleaning] [nchar](10) NULL
+	[YesOrNoCleaning] [nchar](10) NULL,
+	[SenesteFaktura] [datetime] NULL
 ) ON [PRIMARY]
 GO
-/****** Object:  View [dbo].[Rengøring af hytter]    Script Date: 08-10-2021 09:05:13 ******/
+/****** Object:  View [dbo].[Rengøring af hytter]    Script Date: 14-10-2021 08:21:34 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -44,7 +150,7 @@ FROM            dbo.Reservation INNER JOIN
                          dbo.CampingSite ON dbo.Reservation.SiteNumber = dbo.CampingSite.SiteNumber
 WHERE        (dbo.Reservation.YesOrNoCleaning = 'Yes') AND (dbo.Reservation.ReservationEndDate = CONVERT(varchar(10), GETDATE(), 120))
 GO
-/****** Object:  Table [dbo].[Customers]    Script Date: 08-10-2021 09:05:13 ******/
+/****** Object:  Table [dbo].[Customers]    Script Date: 14-10-2021 08:21:34 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -66,7 +172,7 @@ CREATE TABLE [dbo].[Customers](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  View [dbo].[Kunder der kommer i dag]    Script Date: 08-10-2021 09:05:13 ******/
+/****** Object:  View [dbo].[Kunder der kommer i dag]    Script Date: 14-10-2021 08:21:34 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -78,7 +184,7 @@ FROM            dbo.Customers INNER JOIN
                          dbo.Reservation ON dbo.Customers.FirstName = dbo.Reservation.FirstName AND dbo.Customers.Email = dbo.Reservation.Email AND dbo.Customers.PhoneNumber = dbo.Reservation.PhoneNumber
 WHERE        (dbo.Reservation.ReservationStartDate = CONVERT(varchar(10), GETDATE(), 120))
 GO
-/****** Object:  View [dbo].[Oversigt over reservationer]    Script Date: 08-10-2021 09:05:13 ******/
+/****** Object:  View [dbo].[Oversigt over reservationer]    Script Date: 14-10-2021 08:21:34 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -88,7 +194,7 @@ AS
 SELECT        dbo.Reservation.*
 FROM            dbo.Reservation
 GO
-/****** Object:  View [dbo].[Oversigt over kunder]    Script Date: 08-10-2021 09:05:13 ******/
+/****** Object:  View [dbo].[Oversigt over kunder]    Script Date: 14-10-2021 08:21:34 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -98,7 +204,7 @@ AS
 SELECT        dbo.Customers.*
 FROM            dbo.Customers
 GO
-/****** Object:  View [dbo].[Oversigt over booket pladser]    Script Date: 08-10-2021 09:05:13 ******/
+/****** Object:  View [dbo].[Oversigt over booket pladser]    Script Date: 14-10-2021 08:21:34 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -110,7 +216,7 @@ FROM            dbo.CampingSite INNER JOIN
                          dbo.Reservation ON dbo.CampingSite.SiteNumber = dbo.Reservation.SiteNumber INNER JOIN
                          dbo.Customers ON dbo.Reservation.FirstName = dbo.Customers.FirstName AND dbo.Reservation.Email = dbo.Customers.Email AND dbo.Reservation.PhoneNumber = dbo.Customers.PhoneNumber
 GO
-/****** Object:  Table [dbo].[Additions]    Script Date: 08-10-2021 09:05:13 ******/
+/****** Object:  Table [dbo].[Additions]    Script Date: 14-10-2021 08:21:34 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -121,7 +227,7 @@ CREATE TABLE [dbo].[Additions](
 	[Pris] [int] NULL
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[FinalCleaning]    Script Date: 08-10-2021 09:05:13 ******/
+/****** Object:  Table [dbo].[FinalCleaning]    Script Date: 14-10-2021 08:21:34 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -135,7 +241,31 @@ CREATE TABLE [dbo].[FinalCleaning](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[PeoplePrice]    Script Date: 08-10-2021 09:05:13 ******/
+/****** Object:  Table [dbo].[MidlertidigFaktura]    Script Date: 14-10-2021 08:21:34 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[MidlertidigFaktura](
+	[ReservationsNumber] [varchar](255) NULL,
+	[ReservationStartDate] [datetime] NULL,
+	[ReservationEndDate] [datetime] NULL,
+	[FirstName] [varchar](255) NULL,
+	[LastName] [varchar](255) NULL,
+	[Address] [varchar](255) NULL,
+	[Email] [varchar](255) NULL,
+	[PhoneNumber] [varchar](255) NULL,
+	[Adult] [int] NULL,
+	[Children] [int] NULL,
+	[Dog] [int] NULL,
+	[SiteNumber] [int] NULL,
+	[SeasonType] [varchar](255) NULL,
+	[YesOrNoCleaning] [nchar](10) NULL,
+	[OverallPrice] [int] NULL,
+	[SenesteFaktura] [datetime] NULL
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[PeoplePrice]    Script Date: 14-10-2021 08:21:34 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -150,7 +280,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[SeasonSite]    Script Date: 08-10-2021 09:05:13 ******/
+/****** Object:  Table [dbo].[SeasonSite]    Script Date: 14-10-2021 08:21:34 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -166,7 +296,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[SitePrice]    Script Date: 08-10-2021 09:05:13 ******/
+/****** Object:  Table [dbo].[SitePrice]    Script Date: 14-10-2021 08:21:34 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -829,7 +959,93 @@ INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (323, N'Luksus hytt
 GO
 INSERT [dbo].[CampingSite] ([SiteNumber], [SiteType]) VALUES (324, N'Luksus hytte')
 GO
-INSERT [dbo].[Customers] ([FirstName], [LastName], [Address], [Email], [PhoneNumber], [Adult], [Children], [Dog]) VALUES (N'Mads', N'Rasmussen', N'Jernbanegade', N'mail2mads.rasmussen@gmail.com', N'51151051', 2, 1, 1)
+INSERT [dbo].[Customers] ([FirstName], [LastName], [Address], [Email], [PhoneNumber], [Adult], [Children], [Dog]) VALUES (N'abe', N'Abe', N'abe', N'abe@gmail.com', N'987654321', 15, 15, 7)
+GO
+INSERT [dbo].[Customers] ([FirstName], [LastName], [Address], [Email], [PhoneNumber], [Adult], [Children], [Dog]) VALUES (N'Andreas', N'Larsen', N'Højbrogade 15B, 1. Th', N'Andreas@gmail.com', N'948284838', 7, 0, 0)
+GO
+INSERT [dbo].[Customers] ([FirstName], [LastName], [Address], [Email], [PhoneNumber], [Adult], [Children], [Dog]) VALUES (N'asdasd', N'asdasd', N'123123qweqweqweqweqwe', N'qqweqweqwe@asdasd.dk', N'1231231232', 1, 15, 0)
+GO
+INSERT [dbo].[Customers] ([FirstName], [LastName], [Address], [Email], [PhoneNumber], [Adult], [Children], [Dog]) VALUES (N'bhnj', N'ghbjn', N'hrt', N'bjhn', N'890', 1, 0, 0)
+GO
+INSERT [dbo].[Customers] ([FirstName], [LastName], [Address], [Email], [PhoneNumber], [Adult], [Children], [Dog]) VALUES (N'dwa', N'er', N'rgt', N'get', N'456', 2, 1, 1)
+GO
+INSERT [dbo].[Customers] ([FirstName], [LastName], [Address], [Email], [PhoneNumber], [Adult], [Children], [Dog]) VALUES (N'efw', N'ge', N'rge', N'rwr', N'3453434', 2, 1, 1)
+GO
+INSERT [dbo].[Customers] ([FirstName], [LastName], [Address], [Email], [PhoneNumber], [Adult], [Children], [Dog]) VALUES (N'few', N'fer', N'bhj', N'bjh', N'34', 1, 0, 0)
+GO
+INSERT [dbo].[Customers] ([FirstName], [LastName], [Address], [Email], [PhoneNumber], [Adult], [Children], [Dog]) VALUES (N'few', N'rge', N'rge', N'treg', N'34567', 2, 0, 1)
+GO
+INSERT [dbo].[Customers] ([FirstName], [LastName], [Address], [Email], [PhoneNumber], [Adult], [Children], [Dog]) VALUES (N'final', N'final', N'finalvej', N'finalvej@gmail.com', N'123456789', 5, 5, 5)
+GO
+INSERT [dbo].[Customers] ([FirstName], [LastName], [Address], [Email], [PhoneNumber], [Adult], [Children], [Dog]) VALUES (N'Find', N'Hansen', N'Findsenvej 34', N'find@gmail.com', N'49503974', 3, 5, 1)
+GO
+INSERT [dbo].[Customers] ([FirstName], [LastName], [Address], [Email], [PhoneNumber], [Adult], [Children], [Dog]) VALUES (N'fwe', N'dw', N'wdw', N'dw', N'345', 2, 1, 0)
+GO
+INSERT [dbo].[Customers] ([FirstName], [LastName], [Address], [Email], [PhoneNumber], [Adult], [Children], [Dog]) VALUES (N'fwefwe', N'yub', N'yuguhji', N'vgbhjn', N'5784930', 1, 0, 0)
+GO
+INSERT [dbo].[Customers] ([FirstName], [LastName], [Address], [Email], [PhoneNumber], [Adult], [Children], [Dog]) VALUES (N'hahaha', N'hahah', N'ahahah', N'ahahah', N'48395', 1, 0, 0)
+GO
+INSERT [dbo].[Customers] ([FirstName], [LastName], [Address], [Email], [PhoneNumber], [Adult], [Children], [Dog]) VALUES (N'Hej', N'Hej', N'Hen', N'He', N'51151848', 1, 0, 0)
+GO
+INSERT [dbo].[Customers] ([FirstName], [LastName], [Address], [Email], [PhoneNumber], [Adult], [Children], [Dog]) VALUES (N'hey', N'hey', N'hey', N'hey', N'3456', 1, 0, 0)
+GO
+INSERT [dbo].[Customers] ([FirstName], [LastName], [Address], [Email], [PhoneNumber], [Adult], [Children], [Dog]) VALUES (N'hihihih', N'hihihihi', N'hihihihih', N'hihihihihi', N'34567', 1, 0, 0)
+GO
+INSERT [dbo].[Customers] ([FirstName], [LastName], [Address], [Email], [PhoneNumber], [Adult], [Children], [Dog]) VALUES (N'hohohohoho', N'hohohohoho', N'ohohohohoho', N'ohohohohoho', N'7656', 1, 0, 0)
+GO
+INSERT [dbo].[Customers] ([FirstName], [LastName], [Address], [Email], [PhoneNumber], [Adult], [Children], [Dog]) VALUES (N'haahahahahah', N'ahahahahahaah', N'ahahahahahaha', N'ahahahahahahaha', N'349534', 1, 0, 0)
+GO
+INSERT [dbo].[Customers] ([FirstName], [LastName], [Address], [Email], [PhoneNumber], [Adult], [Children], [Dog]) VALUES (N'ja', N'ja', N'ja', N'ja', N'394043', 1, 0, 0)
+GO
+INSERT [dbo].[Customers] ([FirstName], [LastName], [Address], [Email], [PhoneNumber], [Adult], [Children], [Dog]) VALUES (N'Jens', N'Thomsen', N'Tjærevej', N'J.thomsen@gmail.com', N'92847310', 1, 3, 0)
+GO
+INSERT [dbo].[Customers] ([FirstName], [LastName], [Address], [Email], [PhoneNumber], [Adult], [Children], [Dog]) VALUES (N'jopk', N'jpkol', N'jiopkl', N'jiokp', N'7689', 1, 0, 0)
+GO
+INSERT [dbo].[Customers] ([FirstName], [LastName], [Address], [Email], [PhoneNumber], [Adult], [Children], [Dog]) VALUES (N'Knud', N'Hansen', N'Hansenvej 1', N'hansen@gmail.com', N'38490583', 3, 5, 1)
+GO
+INSERT [dbo].[Customers] ([FirstName], [LastName], [Address], [Email], [PhoneNumber], [Adult], [Children], [Dog]) VALUES (N'Knud', N'Hansen', N'Hansenvej 1', N'hansen@gmail.com', N'84958419', 6, 3, 2)
+GO
+INSERT [dbo].[Customers] ([FirstName], [LastName], [Address], [Email], [PhoneNumber], [Adult], [Children], [Dog]) VALUES (N'Linus', N'linus', N'qwe', N'asd@asd.sd', N'123122', 1, 0, 0)
+GO
+INSERT [dbo].[Customers] ([FirstName], [LastName], [Address], [Email], [PhoneNumber], [Adult], [Children], [Dog]) VALUES (N'Linus', N'Test', N'EnVej 2a', N'email@enemail.com', N'41414141', 1, 0, 1)
+GO
+INSERT [dbo].[Customers] ([FirstName], [LastName], [Address], [Email], [PhoneNumber], [Adult], [Children], [Dog]) VALUES (N'Mads', N'Rasmussen', N'Højbrogade 16, 1. Th', N'Mads2@gmail.com', N'74738264', 10, 2, 0)
+GO
+INSERT [dbo].[Customers] ([FirstName], [LastName], [Address], [Email], [PhoneNumber], [Adult], [Children], [Dog]) VALUES (N'Mads', N'Rasmussen', N'Højbrogade 15B, 1. Th', N'mail2mads.rasmussen@gmail.com', N'51151051', 6, 8, 1)
+GO
+INSERT [dbo].[Customers] ([FirstName], [LastName], [Address], [Email], [PhoneNumber], [Adult], [Children], [Dog]) VALUES (N'Mikkel', N'Hansen', N'Hansensvej 2345', N'hans@gmail.com', N'39495864', 3, 4, 1)
+GO
+INSERT [dbo].[Customers] ([FirstName], [LastName], [Address], [Email], [PhoneNumber], [Adult], [Children], [Dog]) VALUES (N'nej', N'nej', N'nej', N'nej', N'3904', 1, 0, 0)
+GO
+INSERT [dbo].[Customers] ([FirstName], [LastName], [Address], [Email], [PhoneNumber], [Adult], [Children], [Dog]) VALUES (N'ok', N'ko', N'ok', N'ko', N'33453433', 1, 0, 0)
+GO
+INSERT [dbo].[Customers] ([FirstName], [LastName], [Address], [Email], [PhoneNumber], [Adult], [Children], [Dog]) VALUES (N'Ole', N'Simonsen', N'tvegade 324', N'ole@gmail.com', N'3456742', 1, 0, 0)
+GO
+INSERT [dbo].[Customers] ([FirstName], [LastName], [Address], [Email], [PhoneNumber], [Adult], [Children], [Dog]) VALUES (N'Pernille', N'Hansen', N'Nyvej', N'pernille@gmail.com', N'29485738', 2, 2, 1)
+GO
+INSERT [dbo].[Customers] ([FirstName], [LastName], [Address], [Email], [PhoneNumber], [Adult], [Children], [Dog]) VALUES (N'sdvrg', N'frgb', N'gre', N'refe', N'2345', 15, 15, 7)
+GO
+INSERT [dbo].[Customers] ([FirstName], [LastName], [Address], [Email], [PhoneNumber], [Adult], [Children], [Dog]) VALUES (N'Svend', N'Mikkelsen', N'Ryttervej', N'Svend.ketchup@gmail.com', N'39403910', 4, 9, 2)
+GO
+INSERT [dbo].[Customers] ([FirstName], [LastName], [Address], [Email], [PhoneNumber], [Adult], [Children], [Dog]) VALUES (N'taber', N'taber', N'taber', N'taber', N'456804593', 1, 0, 0)
+GO
+INSERT [dbo].[Customers] ([FirstName], [LastName], [Address], [Email], [PhoneNumber], [Adult], [Children], [Dog]) VALUES (N'Tak', N'Takker', N'Takvej 3', N'tak@gmail.com', N'345663', 1, 0, 0)
+GO
+INSERT [dbo].[Customers] ([FirstName], [LastName], [Address], [Email], [PhoneNumber], [Adult], [Children], [Dog]) VALUES (N'Tina', N'Artursen', N'Frederiksberg Alle', N'Tina.A@gmail.com', N'20392849', 3, 3, 0)
+GO
+INSERT [dbo].[Customers] ([FirstName], [LastName], [Address], [Email], [PhoneNumber], [Adult], [Children], [Dog]) VALUES (N'tyren', N'tyren', N'tyrenvej', N'tyren@gmail.com', N'243563', 3, 3, 2)
+GO
+INSERT [dbo].[Customers] ([FirstName], [LastName], [Address], [Email], [PhoneNumber], [Adult], [Children], [Dog]) VALUES (N'wadi', N'rg', N'efw', N'fre', N'4567', 2, 1, 1)
+GO
+INSERT [dbo].[Customers] ([FirstName], [LastName], [Address], [Email], [PhoneNumber], [Adult], [Children], [Dog]) VALUES (N'wd', N'r', N'hu', N'hu', N'345', 1, 0, 0)
+GO
+INSERT [dbo].[Customers] ([FirstName], [LastName], [Address], [Email], [PhoneNumber], [Adult], [Children], [Dog]) VALUES (N'wda', N're', N'rge', N'rwe', N'345', 1, 0, 0)
+GO
+INSERT [dbo].[MidlertidigFaktura] ([ReservationsNumber], [ReservationStartDate], [ReservationEndDate], [FirstName], [LastName], [Address], [Email], [PhoneNumber], [Adult], [Children], [Dog], [SiteNumber], [SeasonType], [YesOrNoCleaning], [OverallPrice], [SenesteFaktura]) VALUES (N'482', CAST(N'2021-10-14T00:00:00.000' AS DateTime), CAST(N'2021-10-21T00:00:00.000' AS DateTime), N'haahahahahah', N'ahahahahahaah', N'ahahahahahaha', N'ahahahahahahaha', N'349534', 1, 0, 0, 20, N'(Intet)', N'No        ', 402, CAST(N'2021-10-13T10:30:24.910' AS DateTime))
+GO
+INSERT [dbo].[MidlertidigFaktura] ([ReservationsNumber], [ReservationStartDate], [ReservationEndDate], [FirstName], [LastName], [Address], [Email], [PhoneNumber], [Adult], [Children], [Dog], [SiteNumber], [SeasonType], [YesOrNoCleaning], [OverallPrice], [SenesteFaktura]) VALUES (N'866', CAST(N'2021-10-15T00:00:00.000' AS DateTime), CAST(N'2021-10-21T00:00:00.000' AS DateTime), N'hihihih', N'hihihihi', N'hihihihih', N'hihihihihi', N'34567', 1, 0, 0, 21, N'(Intet)', N'No        ', 357, CAST(N'2021-10-13T10:31:12.853' AS DateTime))
+GO
+INSERT [dbo].[MidlertidigFaktura] ([ReservationsNumber], [ReservationStartDate], [ReservationEndDate], [FirstName], [LastName], [Address], [Email], [PhoneNumber], [Adult], [Children], [Dog], [SiteNumber], [SeasonType], [YesOrNoCleaning], [OverallPrice], [SenesteFaktura]) VALUES (N'2', CAST(N'2021-10-15T00:00:00.000' AS DateTime), CAST(N'2021-10-22T00:00:00.000' AS DateTime), N'hohohohoho', N'hohohohoho', N'ohohohohoho', N'ohohohohoho', N'7656', 1, 0, 0, 22, N'(Intet)', N'No        ', 402, CAST(N'2021-10-13T10:32:47.460' AS DateTime))
 GO
 INSERT [dbo].[PeoplePrice] ([PersonType], [HighSeasonPeoplePrice], [LowSeasonPeoplePrice]) VALUES (N'Børn', 42, 49)
 GO
@@ -837,7 +1053,85 @@ INSERT [dbo].[PeoplePrice] ([PersonType], [HighSeasonPeoplePrice], [LowSeasonPeo
 GO
 INSERT [dbo].[PeoplePrice] ([PersonType], [HighSeasonPeoplePrice], [LowSeasonPeoplePrice]) VALUES (N'Voksen', 82, 87)
 GO
-INSERT [dbo].[Reservation] ([ReservationNumber], [ReservationStartDate], [ReservationEndDate], [OverallPrice], [SiteNumber], [SeasonType], [FirstName], [Email], [PhoneNumber], [YesOrNoCleaning]) VALUES (40, CAST(N'2021-10-08' AS Date), CAST(N'2021-10-15' AS Date), 10283, 222, N'Sommer', N'Mads', N'mail2mads.rasmussen@gmail.com', N'51151051', N'No        ')
+INSERT [dbo].[Reservation] ([ReservationNumber], [ReservationStartDate], [ReservationEndDate], [OverallPrice], [SiteNumber], [SeasonType], [FirstName], [Email], [PhoneNumber], [YesOrNoCleaning], [SenesteFaktura]) VALUES (648, CAST(N'2021-10-16' AS Date), CAST(N'2021-10-23' AS Date), 402, 1, N'(Intet)', N'Hej', N'He', N'51151848', N'No        ', NULL)
+GO
+INSERT [dbo].[Reservation] ([ReservationNumber], [ReservationStartDate], [ReservationEndDate], [OverallPrice], [SiteNumber], [SeasonType], [FirstName], [Email], [PhoneNumber], [YesOrNoCleaning], [SenesteFaktura]) VALUES (84, CAST(N'2021-10-15' AS Date), CAST(N'2021-10-22' AS Date), 10242, 93, N'Sommer', N'Pernille', N'pernille@gmail.com', N'29485738', N'No        ', NULL)
+GO
+INSERT [dbo].[Reservation] ([ReservationNumber], [ReservationStartDate], [ReservationEndDate], [OverallPrice], [SiteNumber], [SeasonType], [FirstName], [Email], [PhoneNumber], [YesOrNoCleaning], [SenesteFaktura]) VALUES (790, CAST(N'2021-10-15' AS Date), CAST(N'2021-10-22' AS Date), 734, 244, N'(Intet)', N'Jens', N'J.thomsen@gmail.com', N'92847310', N'No        ', NULL)
+GO
+INSERT [dbo].[Reservation] ([ReservationNumber], [ReservationStartDate], [ReservationEndDate], [OverallPrice], [SiteNumber], [SeasonType], [FirstName], [Email], [PhoneNumber], [YesOrNoCleaning], [SenesteFaktura]) VALUES (587, CAST(N'2021-10-15' AS Date), CAST(N'2021-10-29' AS Date), 1954, 263, N'(Intet)', N'Svend', N'Svend.ketchup@gmail.com', N'39403910', N'No        ', NULL)
+GO
+INSERT [dbo].[Reservation] ([ReservationNumber], [ReservationStartDate], [ReservationEndDate], [OverallPrice], [SiteNumber], [SeasonType], [FirstName], [Email], [PhoneNumber], [YesOrNoCleaning], [SenesteFaktura]) VALUES (436, CAST(N'2021-10-16' AS Date), CAST(N'2021-10-30' AS Date), 10373, 319, N'(Intet)', N'Tina', N'Tina.A@gmail.com', N'20392849', N'Yes       ', NULL)
+GO
+INSERT [dbo].[Reservation] ([ReservationNumber], [ReservationStartDate], [ReservationEndDate], [OverallPrice], [SiteNumber], [SeasonType], [FirstName], [Email], [PhoneNumber], [YesOrNoCleaning], [SenesteFaktura]) VALUES (644, CAST(N'2021-10-15' AS Date), CAST(N'2021-10-27' AS Date), 793, 2, N'(Intet)', N'efw', N'rwr', N'3453434', N'No        ', NULL)
+GO
+INSERT [dbo].[Reservation] ([ReservationNumber], [ReservationStartDate], [ReservationEndDate], [OverallPrice], [SiteNumber], [SeasonType], [FirstName], [Email], [PhoneNumber], [YesOrNoCleaning], [SenesteFaktura]) VALUES (159, CAST(N'2021-10-14' AS Date), CAST(N'2021-10-28' AS Date), 883, 3, N'(Intet)', N'wadi', N'fre', N'4567', N'No        ', NULL)
+GO
+INSERT [dbo].[Reservation] ([ReservationNumber], [ReservationStartDate], [ReservationEndDate], [OverallPrice], [SiteNumber], [SeasonType], [FirstName], [Email], [PhoneNumber], [YesOrNoCleaning], [SenesteFaktura]) VALUES (542, CAST(N'2021-10-13' AS Date), CAST(N'2021-10-19' AS Date), 523, 5, N'(Intet)', N'dwa', N'get', N'456', N'No        ', NULL)
+GO
+INSERT [dbo].[Reservation] ([ReservationNumber], [ReservationStartDate], [ReservationEndDate], [OverallPrice], [SiteNumber], [SeasonType], [FirstName], [Email], [PhoneNumber], [YesOrNoCleaning], [SenesteFaktura]) VALUES (944, CAST(N'2021-10-13' AS Date), CAST(N'2021-10-27' AS Date), 717, 4, N'(Intet)', N'wda', N'rwe', N'345', N'No        ', NULL)
+GO
+INSERT [dbo].[Reservation] ([ReservationNumber], [ReservationStartDate], [ReservationEndDate], [OverallPrice], [SiteNumber], [SeasonType], [FirstName], [Email], [PhoneNumber], [YesOrNoCleaning], [SenesteFaktura]) VALUES (122, CAST(N'2021-10-14' AS Date), CAST(N'2021-10-28' AS Date), 717, 9, N'(Intet)', N'wd', N'hu', N'345', N'No        ', NULL)
+GO
+INSERT [dbo].[Reservation] ([ReservationNumber], [ReservationStartDate], [ReservationEndDate], [OverallPrice], [SiteNumber], [SeasonType], [FirstName], [Email], [PhoneNumber], [YesOrNoCleaning], [SenesteFaktura]) VALUES (462, CAST(N'2021-10-14' AS Date), CAST(N'2021-10-21' AS Date), 402, 10, N'(Intet)', N'jopk', N'jiokp', N'7689', N'No        ', NULL)
+GO
+INSERT [dbo].[Reservation] ([ReservationNumber], [ReservationStartDate], [ReservationEndDate], [OverallPrice], [SiteNumber], [SeasonType], [FirstName], [Email], [PhoneNumber], [YesOrNoCleaning], [SenesteFaktura]) VALUES (432, CAST(N'2021-10-16' AS Date), CAST(N'2021-10-28' AS Date), 3663, 12, N'Efterår', N'fwe', N'dw', N'345', N'No        ', NULL)
+GO
+INSERT [dbo].[Reservation] ([ReservationNumber], [ReservationStartDate], [ReservationEndDate], [OverallPrice], [SiteNumber], [SeasonType], [FirstName], [Email], [PhoneNumber], [YesOrNoCleaning], [SenesteFaktura]) VALUES (306, CAST(N'2021-10-14' AS Date), CAST(N'2021-10-21' AS Date), 402, 15, N'(Intet)', N'ja', N'ja', N'394043', N'No        ', NULL)
+GO
+INSERT [dbo].[Reservation] ([ReservationNumber], [ReservationStartDate], [ReservationEndDate], [OverallPrice], [SiteNumber], [SeasonType], [FirstName], [Email], [PhoneNumber], [YesOrNoCleaning], [SenesteFaktura]) VALUES (960, CAST(N'2021-10-15' AS Date), CAST(N'2021-10-28' AS Date), 672, 19, N'(Intet)', N'hahaha', N'ahahah', N'48395', N'No        ', NULL)
+GO
+INSERT [dbo].[Reservation] ([ReservationNumber], [ReservationStartDate], [ReservationEndDate], [OverallPrice], [SiteNumber], [SeasonType], [FirstName], [Email], [PhoneNumber], [YesOrNoCleaning], [SenesteFaktura]) VALUES (754, CAST(N'2021-10-15' AS Date), CAST(N'2021-10-22' AS Date), 8338, 321, N'Efterår', N'Mads', N'Mads2@gmail.com', N'74738264', N'Yes       ', CAST(N'2021-10-13T11:38:35.957' AS DateTime))
+GO
+INSERT [dbo].[Reservation] ([ReservationNumber], [ReservationStartDate], [ReservationEndDate], [OverallPrice], [SiteNumber], [SeasonType], [FirstName], [Email], [PhoneNumber], [YesOrNoCleaning], [SenesteFaktura]) VALUES (583, CAST(N'2021-10-15' AS Date), CAST(N'2021-10-22' AS Date), 2074, 215, N'(Intet)', N'Mads', N'mail2mads.rasmussen@gmail.com', N'51151051', N'No        ', NULL)
+GO
+INSERT [dbo].[Reservation] ([ReservationNumber], [ReservationStartDate], [ReservationEndDate], [OverallPrice], [SiteNumber], [SeasonType], [FirstName], [Email], [PhoneNumber], [YesOrNoCleaning], [SenesteFaktura]) VALUES (618, CAST(N'2021-10-13' AS Date), CAST(N'2021-10-20' AS Date), 959, 142, N'(Intet)', N'Andreas', N'Andreas@gmail.com', N'948284838', N'No        ', NULL)
+GO
+INSERT [dbo].[Reservation] ([ReservationNumber], [ReservationStartDate], [ReservationEndDate], [OverallPrice], [SiteNumber], [SeasonType], [FirstName], [Email], [PhoneNumber], [YesOrNoCleaning], [SenesteFaktura]) VALUES (723, CAST(N'2021-10-15' AS Date), CAST(N'2021-10-29' AS Date), 1168, 69, N'(Intet)', N'tyren', N'tyren@gmail.com', N'243563', N'No        ', NULL)
+GO
+INSERT [dbo].[Reservation] ([ReservationNumber], [ReservationStartDate], [ReservationEndDate], [OverallPrice], [SiteNumber], [SeasonType], [FirstName], [Email], [PhoneNumber], [YesOrNoCleaning], [SenesteFaktura]) VALUES (82, CAST(N'2021-10-14' AS Date), CAST(N'2021-10-29' AS Date), 3912, 30, N'(Intet)', N'Linus', N'asd@asd.sd', N'123122', N'Yes       ', NULL)
+GO
+INSERT [dbo].[Reservation] ([ReservationNumber], [ReservationStartDate], [ReservationEndDate], [OverallPrice], [SiteNumber], [SeasonType], [FirstName], [Email], [PhoneNumber], [YesOrNoCleaning], [SenesteFaktura]) VALUES (486, CAST(N'2021-10-14' AS Date), CAST(N'2021-10-28' AS Date), 834, 13, N'(Intet)', N'few', N'treg', N'34567', N'No        ', NULL)
+GO
+INSERT [dbo].[Reservation] ([ReservationNumber], [ReservationStartDate], [ReservationEndDate], [OverallPrice], [SiteNumber], [SeasonType], [FirstName], [Email], [PhoneNumber], [YesOrNoCleaning], [SenesteFaktura]) VALUES (944, CAST(N'2021-10-14' AS Date), CAST(N'2021-10-21' AS Date), 402, 14, N'(Intet)', N'hey', N'hey', N'3456', N'No        ', NULL)
+GO
+INSERT [dbo].[Reservation] ([ReservationNumber], [ReservationStartDate], [ReservationEndDate], [OverallPrice], [SiteNumber], [SeasonType], [FirstName], [Email], [PhoneNumber], [YesOrNoCleaning], [SenesteFaktura]) VALUES (243, CAST(N'2021-10-16' AS Date), CAST(N'2021-10-27' AS Date), 1086, 125, N'(Intet)', N'Knud', N'hansen@gmail.com', N'38490583', N'No        ', NULL)
+GO
+INSERT [dbo].[Reservation] ([ReservationNumber], [ReservationStartDate], [ReservationEndDate], [OverallPrice], [SiteNumber], [SeasonType], [FirstName], [Email], [PhoneNumber], [YesOrNoCleaning], [SenesteFaktura]) VALUES (590, CAST(N'2021-10-14' AS Date), CAST(N'2021-10-27' AS Date), 1186, 139, N'(Intet)', N'Find', N'find@gmail.com', N'49503974', N'No        ', NULL)
+GO
+INSERT [dbo].[Reservation] ([ReservationNumber], [ReservationStartDate], [ReservationEndDate], [OverallPrice], [SiteNumber], [SeasonType], [FirstName], [Email], [PhoneNumber], [YesOrNoCleaning], [SenesteFaktura]) VALUES (162, CAST(N'2021-10-14' AS Date), CAST(N'2021-10-14' AS Date), 487, 87, N'(Intet)', N'Mikkel', N'hans@gmail.com', N'39495864', N'No        ', NULL)
+GO
+INSERT [dbo].[Reservation] ([ReservationNumber], [ReservationStartDate], [ReservationEndDate], [OverallPrice], [SiteNumber], [SeasonType], [FirstName], [Email], [PhoneNumber], [YesOrNoCleaning], [SenesteFaktura]) VALUES (789, CAST(N'2021-10-15' AS Date), CAST(N'2021-10-21' AS Date), 357, 16, N'(Intet)', N'nej', N'nej', N'3904', N'No        ', NULL)
+GO
+INSERT [dbo].[Reservation] ([ReservationNumber], [ReservationStartDate], [ReservationEndDate], [OverallPrice], [SiteNumber], [SeasonType], [FirstName], [Email], [PhoneNumber], [YesOrNoCleaning], [SenesteFaktura]) VALUES (8, CAST(N'2021-10-15' AS Date), CAST(N'2021-10-29' AS Date), 717, 17, N'(Intet)', N'taber', N'taber', N'456804593', N'No        ', NULL)
+GO
+INSERT [dbo].[Reservation] ([ReservationNumber], [ReservationStartDate], [ReservationEndDate], [OverallPrice], [SiteNumber], [SeasonType], [FirstName], [Email], [PhoneNumber], [YesOrNoCleaning], [SenesteFaktura]) VALUES (841, CAST(N'2021-10-14' AS Date), CAST(N'2021-10-29' AS Date), 762, 18, N'(Intet)', N'ok', N'ko', N'33453433', N'No        ', NULL)
+GO
+INSERT [dbo].[Reservation] ([ReservationNumber], [ReservationStartDate], [ReservationEndDate], [OverallPrice], [SiteNumber], [SeasonType], [FirstName], [Email], [PhoneNumber], [YesOrNoCleaning], [SenesteFaktura]) VALUES (482, CAST(N'2021-10-14' AS Date), CAST(N'2021-10-21' AS Date), 402, 20, N'(Intet)', N'haahahahahah', N'ahahahahahahaha', N'349534', N'No        ', NULL)
+GO
+INSERT [dbo].[Reservation] ([ReservationNumber], [ReservationStartDate], [ReservationEndDate], [OverallPrice], [SiteNumber], [SeasonType], [FirstName], [Email], [PhoneNumber], [YesOrNoCleaning], [SenesteFaktura]) VALUES (866, CAST(N'2021-10-15' AS Date), CAST(N'2021-10-21' AS Date), 357, 21, N'(Intet)', N'hihihih', N'hihihihihi', N'34567', N'No        ', NULL)
+GO
+INSERT [dbo].[Reservation] ([ReservationNumber], [ReservationStartDate], [ReservationEndDate], [OverallPrice], [SiteNumber], [SeasonType], [FirstName], [Email], [PhoneNumber], [YesOrNoCleaning], [SenesteFaktura]) VALUES (44, CAST(N'2021-10-17' AS Date), CAST(N'2021-10-28' AS Date), 582, 23, N'(Intet)', N'Tak', N'tak@gmail.com', N'345663', N'No        ', CAST(N'2021-10-13T10:49:56.223' AS DateTime))
+GO
+INSERT [dbo].[Reservation] ([ReservationNumber], [ReservationStartDate], [ReservationEndDate], [OverallPrice], [SiteNumber], [SeasonType], [FirstName], [Email], [PhoneNumber], [YesOrNoCleaning], [SenesteFaktura]) VALUES (732, CAST(N'2021-10-16' AS Date), CAST(N'2021-10-29' AS Date), 2900, 100, N'(Intet)', N'abe', N'abe@gmail.com', N'987654321', N'No        ', CAST(N'2021-10-13T10:55:05.923' AS DateTime))
+GO
+INSERT [dbo].[Reservation] ([ReservationNumber], [ReservationStartDate], [ReservationEndDate], [OverallPrice], [SiteNumber], [SeasonType], [FirstName], [Email], [PhoneNumber], [YesOrNoCleaning], [SenesteFaktura]) VALUES (620, CAST(N'2021-10-15' AS Date), CAST(N'2021-10-28' AS Date), 1415, 50, N'(Intet)', N'final', N'finalvej@gmail.com', N'123456789', N'No        ', CAST(N'2021-10-13T10:59:24.543' AS DateTime))
+GO
+INSERT [dbo].[Reservation] ([ReservationNumber], [ReservationStartDate], [ReservationEndDate], [OverallPrice], [SiteNumber], [SeasonType], [FirstName], [Email], [PhoneNumber], [YesOrNoCleaning], [SenesteFaktura]) VALUES (966, CAST(N'2021-10-15' AS Date), CAST(N'2021-10-29' AS Date), 23655, 320, N'Sommer', N'sdvrg', N'refe', N'2345', N'Yes       ', NULL)
+GO
+INSERT [dbo].[Reservation] ([ReservationNumber], [ReservationStartDate], [ReservationEndDate], [OverallPrice], [SiteNumber], [SeasonType], [FirstName], [Email], [PhoneNumber], [YesOrNoCleaning], [SenesteFaktura]) VALUES (389, CAST(N'2021-10-13' AS Date), CAST(N'2021-10-31' AS Date), 4917, 6, N'(Intet)', N'asdasd', N'qqweqweqwe@asdasd.dk', N'1231231232', N'Yes       ', NULL)
+GO
+INSERT [dbo].[Reservation] ([ReservationNumber], [ReservationStartDate], [ReservationEndDate], [OverallPrice], [SiteNumber], [SeasonType], [FirstName], [Email], [PhoneNumber], [YesOrNoCleaning], [SenesteFaktura]) VALUES (3, CAST(N'2021-10-14' AS Date), CAST(N'2021-10-20' AS Date), 357, 8, N'(Intet)', N'fwefwe', N'vgbhjn', N'5784930', N'No        ', NULL)
+GO
+INSERT [dbo].[Reservation] ([ReservationNumber], [ReservationStartDate], [ReservationEndDate], [OverallPrice], [SiteNumber], [SeasonType], [FirstName], [Email], [PhoneNumber], [YesOrNoCleaning], [SenesteFaktura]) VALUES (529, CAST(N'2021-10-14' AS Date), CAST(N'2021-10-26' AS Date), 627, 11, N'(Intet)', N'bhnj', N'bjhn', N'890', N'No        ', NULL)
+GO
+INSERT [dbo].[Reservation] ([ReservationNumber], [ReservationStartDate], [ReservationEndDate], [OverallPrice], [SiteNumber], [SeasonType], [FirstName], [Email], [PhoneNumber], [YesOrNoCleaning], [SenesteFaktura]) VALUES (997, CAST(N'2021-10-15' AS Date), CAST(N'2021-10-31' AS Date), 1267, 24, N'(Intet)', N'Linus', N'email@enemail.com', N'41414141', N'No        ', CAST(N'2021-10-14T08:09:25.130' AS DateTime))
+GO
+INSERT [dbo].[Reservation] ([ReservationNumber], [ReservationStartDate], [ReservationEndDate], [OverallPrice], [SiteNumber], [SeasonType], [FirstName], [Email], [PhoneNumber], [YesOrNoCleaning], [SenesteFaktura]) VALUES (743, CAST(N'2021-10-13' AS Date), CAST(N'2021-10-20' AS Date), 402, 7, N'(Intet)', N'few', N'bjh', N'34', N'No        ', NULL)
+GO
+INSERT [dbo].[Reservation] ([ReservationNumber], [ReservationStartDate], [ReservationEndDate], [OverallPrice], [SiteNumber], [SeasonType], [FirstName], [Email], [PhoneNumber], [YesOrNoCleaning], [SenesteFaktura]) VALUES (254, CAST(N'2021-10-14' AS Date), CAST(N'2021-10-27' AS Date), 1379, 132, N'(Intet)', N'Knud', N'hansen@gmail.com', N'84958419', N'No        ', NULL)
+GO
+INSERT [dbo].[Reservation] ([ReservationNumber], [ReservationStartDate], [ReservationEndDate], [OverallPrice], [SiteNumber], [SeasonType], [FirstName], [Email], [PhoneNumber], [YesOrNoCleaning], [SenesteFaktura]) VALUES (2, CAST(N'2021-10-15' AS Date), CAST(N'2021-10-22' AS Date), 402, 22, N'(Intet)', N'hohohohoho', N'ohohohohoho', N'7656', N'No        ', NULL)
 GO
 INSERT [dbo].[SeasonSite] ([SeasonType], [SeasonPrice], [StartDate], [EndDate]) VALUES (N'(Intet)', 0, NULL, NULL)
 GO
@@ -873,7 +1167,7 @@ REFERENCES [dbo].[Customers] ([FirstName], [Email], [PhoneNumber])
 GO
 ALTER TABLE [dbo].[Reservation] CHECK CONSTRAINT [FK_Reservation_Customers]
 GO
-/****** Object:  StoredProcedure [dbo].[Automatic_Reservation_delete]    Script Date: 08-10-2021 09:05:14 ******/
+/****** Object:  StoredProcedure [dbo].[Automatic_Reservation_delete]    Script Date: 14-10-2021 08:21:34 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -882,7 +1176,21 @@ CREATE PROCEDURE [dbo].[Automatic_Reservation_delete]
 AS
 Delete from Reservation where ReservationEndDate < CONVERT(varchar(255), GETDATE(), 120);
 GO
-/****** Object:  StoredProcedure [dbo].[Insert_Customers]    Script Date: 08-10-2021 09:05:14 ******/
+/****** Object:  StoredProcedure [dbo].[FakturaLookUp]    Script Date: 14-10-2021 08:21:34 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[FakturaLookUp]	
+AS
+SELECT        TOP (1) dbo.Reservation.ReservationNumber, dbo.Reservation.ReservationStartDate, dbo.Reservation.ReservationEndDate, dbo.Reservation.OverallPrice, dbo.Reservation.SiteNumber, dbo.Reservation.SeasonType, 
+                         dbo.Reservation.FirstName, dbo.Reservation.Email, dbo.Reservation.PhoneNumber, dbo.Reservation.YesOrNoCleaning, dbo.Reservation.SenesteFaktura, dbo.Customers.LastName, dbo.Customers.Address, 
+                         dbo.Customers.Adult, dbo.Customers.Children, dbo.Customers.Dog
+FROM            dbo.Reservation INNER JOIN
+                         dbo.Customers ON dbo.Reservation.FirstName = dbo.Customers.FirstName AND dbo.Reservation.Email = dbo.Customers.Email AND dbo.Reservation.PhoneNumber = dbo.Customers.PhoneNumber
+ORDER BY dbo.Reservation.SenesteFaktura DESC
+GO
+/****** Object:  StoredProcedure [dbo].[Insert_Customers]    Script Date: 14-10-2021 08:21:34 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -910,7 +1218,52 @@ VALUES (
     @Dog)
 END
 GO
-/****** Object:  StoredProcedure [dbo].[Insert_Reservation]    Script Date: 08-10-2021 09:05:14 ******/
+/****** Object:  StoredProcedure [dbo].[Insert_Faktura]    Script Date: 14-10-2021 08:21:34 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[Insert_Faktura] (@ReservationNumber varchar(255), @ReservationStartDate datetime, @ReservationEndDate datetime, 
+@FirstName varchar(255), @LastName text, @Address text, @Email varchar(255), 
+@PhoneNumber varchar(255), @Adult integer, @Children integer, @Dog integer, @SiteNumber integer, @SeasonType varchar(255), @YesOrNoCleaning nchar(10), 
+@OverallPrice integer, @SenesteFaktura datetime)
+AS
+INSERT INTO  dbo.MidlertidigFaktura (
+ReservationsNumber, 
+ReservationStartDate, 
+ReservationEndDate, 
+FirstName, 
+LastName, 
+Address, 
+Email, 
+PhoneNumber, 
+Adult, 
+Children, 
+Dog, 
+SiteNumber, 
+SeasonType, 
+YesOrNoCleaning, 
+OverallPrice,
+SenesteFaktura) 
+VALUES (
+    @ReservationNumber,
+	@ReservationStartDate , 
+	@ReservationEndDate, 
+	@FirstName , 
+	@LastName  ,
+	@Address , 
+	@Email , 
+	@PhoneNumber , 
+	@Adult, 
+	@Children, 
+	@Dog , 
+	@SiteNumber , 
+	@SeasonType , 
+	@YesOrNoCleaning, 
+	@OverallPrice,
+	@SenesteFaktura)
+GO
+/****** Object:  StoredProcedure [dbo].[Insert_Reservation]    Script Date: 14-10-2021 08:21:34 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -925,7 +1278,8 @@ CREATE PROCEDURE [dbo].[Insert_Reservation](
 					@FirstName varchar(255),
 					@Email varchar(255),
 					@PhoneNumber varchar(255),
-					@YesOrNoCleaning nchar(10))
+					@YesOrNoCleaning nchar(10),
+					@SenesteFaktura datetime)
 AS
 BEGIN
 INSERT INTO Reservation(
@@ -938,7 +1292,8 @@ INSERT INTO Reservation(
     FirstName,
     Email,
 	PhoneNumber,
-	YesOrNoCleaning)
+	YesOrNoCleaning,
+	SenesteFaktura)
 VALUES (
     @ReservationNumber,
     @ReservationStartDate,
@@ -949,8 +1304,21 @@ VALUES (
     @FirstName,
     @Email,
 	@PhoneNumber,
-	@YesOrNoCleaning)
+	@YesOrNoCleaning,
+	@SenesteFaktura)
 END
+GO
+/****** Object:  StoredProcedure [dbo].[Sites_Not_Taken]    Script Date: 14-10-2021 08:21:34 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[Sites_Not_Taken]
+as
+select       dbo.CampingSite.SiteNumber
+FROM            dbo.CampingSite LEFT OUTER JOIN
+                         dbo.Reservation ON dbo.Reservation.SiteNumber = dbo.CampingSite.SiteNumber
+WHERE        (dbo.Reservation.SiteNumber IS NULL);
 GO
 EXEC sys.sp_addextendedproperty @name=N'MS_DiagramPane1', @value=N'[0E232FF0-B466-11cf-A24F-00AA00A3EFFF, 1.00]
 Begin DesignProperties = 
@@ -1607,4 +1975,8 @@ End
 ' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'VIEW',@level1name=N'Rengøring af hytter'
 GO
 EXEC sys.sp_addextendedproperty @name=N'MS_DiagramPaneCount', @value=1 , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'VIEW',@level1name=N'Rengøring af hytter'
+GO
+USE [master]
+GO
+ALTER DATABASE [MidtCampingDatabase] SET  READ_WRITE 
 GO
